@@ -8,5 +8,6 @@ void setup() {
 }
 
 void draw() {
+  background(200);
   mainLogic.Update();
 }
