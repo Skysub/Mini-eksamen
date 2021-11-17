@@ -1,7 +1,12 @@
-public class GameStateManager
+public static class GameStateManager
 {
-  public void Update()
+  GameState currentGameState = null;
+  
+  void Update()
   {
+  }
 
+  public void SkiftGameState(String name) {
+    
   }
 }
