@@ -17,14 +17,18 @@ class Button {
     textColor = tc;
   }
   void run() {
-    update();
     draw();
+    update();
   }
 
   void update() {
-    if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) cursor(HAND);
-    else cursor(ARROW);
-    
+    if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || counter < 20) {
+      cursor(HAND);
+      fill(0, 0, 0, 70);
+      noStroke();
+      rect(x, y, width, height, 15);
+    } else cursor(ARROW);
+
     if (mousePressed && mouseButton == LEFT && pressed == false) {
       pressed = true;
       if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
@@ -42,7 +46,6 @@ class Button {
     if (counter > 20) currentColor = buttonColor;
   }
 
-
   void draw() {
     fill(currentColor);
     noStroke();
@@ -59,15 +62,15 @@ class Button {
   }
 }
 /* 
-Når en knap skal instantieres:
-Button btn1;
-
-btn1 = new Button(xPos, yPos, længde, højde, "evt. tekst", farven af selv knappen (eks color(200, 50, 50), farven når knappen klikkes, teksstørelsen, farven af teksten);
-
-Når knappen skal bruges (i update-funktion i en klasse for eksempel:
-  btn1.run();
-  if(btn1.isClicked()){
-    //Det der skal ske når man trykke på knappen 
-  }
-
-*/
+ Når en knap skal instantieres:
+ Button btn1;
+ 
+ btn1 = new Button(xPos, yPos, længde, højde, "evt. tekst", farven af selv knappen (eks color(200, 50, 50), farven når knappen klikkes, teksstørelsen, farven af teksten);
+ 
+ Når knappen skal bruges (i update-funktion i en klasse for eksempel:
+ btn1.run();
+ if(btn1.isClicked()){
+ //Det der skal ske når man trykke på knappen 
+ }
+ 
+ */
