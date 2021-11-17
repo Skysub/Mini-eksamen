@@ -16,12 +16,12 @@ class Button {
     textSize = ts;
     textColor = tc;
   }
-  void run() {
-    draw();
-    update();
+  void Run() {
+    Draw();
+    Update();
   }
 
-  void update() {
+  void Update() {
     if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || counter < 20) {
       cursor(HAND);
       fill(0, 0, 0, 70);
@@ -46,7 +46,7 @@ class Button {
     if (counter > 20) currentColor = buttonColor;
   }
 
-  void draw() {
+  void Draw() {
     fill(currentColor);
     noStroke();
     rect(x, y, width, height, 15);
