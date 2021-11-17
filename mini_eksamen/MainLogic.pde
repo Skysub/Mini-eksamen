@@ -1,4 +1,4 @@
-public static GameStateManager gameStateManager;
+public GameStateManager gameStateManager;
 
 public class MainLogic {
 
