@@ -14,8 +14,7 @@ public class MainLogic {
 
   void InitializeScreens() {
     gameStateManager.AddGameState("start", new StartScreen());
-    
-    
+    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen());
     
     
     gameStateManager.SkiftGameState("start");
