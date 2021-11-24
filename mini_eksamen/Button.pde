@@ -4,6 +4,7 @@ class Button {
   String buttonText;
   color currentColor, buttonColor, clickColor, textColor;
 
+  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
   Button(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc) {
     x = posX;
     y = posY;
