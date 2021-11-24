@@ -7,7 +7,7 @@ MainLogic mainLogic;
 void setup() {
   size(1920, 1080);
   frameRate(144);
-  XMLHandler.SetUp();
+  FileHandler.SetUp();
   mainLogic = new MainLogic();
 }
 

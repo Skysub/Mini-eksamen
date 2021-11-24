@@ -1,4 +1,4 @@
-public static class XMLHandler {
+public static class FileHandler {
 
   static String dataFolder = System.getenv("LOCALAPPDATA");
   static String Path = dataFolder+"\\QuizTool";
@@ -27,9 +27,5 @@ public static class XMLHandler {
       println("Error: "+e);
       e.printStackTrace();
     }
-  }
-
-  public String[][] ReadXMLFile() {
-    return new String[0][0];
   }
 }
