@@ -1,3 +1,4 @@
+import controlP5.*;
 import de.bezier.data.sql.*;
 import de.bezier.data.sql.mapper.*;
 
@@ -8,7 +9,7 @@ void setup() {
   size(1920, 1080);
   frameRate(144);
   FileHandler.SetUp();
-  mainLogic = new MainLogic();
+  mainLogic = new MainLogic(this);
 }
 
 void draw() {

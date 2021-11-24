@@ -2,9 +2,9 @@ public GameStateManager gameStateManager;
 
 public class MainLogic {
 
-  MainLogic() {
+  MainLogic(PApplet thePApplet) {
     gameStateManager = new GameStateManager();
-    InitializeScreens();
+    InitializeScreens(thePApplet);
   }
 
   void Update() {
@@ -12,10 +12,9 @@ public class MainLogic {
   }
 
 
-  void InitializeScreens() {
+  void InitializeScreens(PApplet thePApplet) {
     gameStateManager.AddGameState("start", new StartScreen());
-    
-    
+    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));
     
     
     gameStateManager.SkiftGameState("start");

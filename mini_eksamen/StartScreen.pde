@@ -1,13 +1,16 @@
 class StartScreen extends GameState {
 
-  Button knap;
-  
-  
+  Button laererKnap;
+
   StartScreen() {
-    knap = new Button(500,500,500,500,"AMONG US!", color(200,150,150),color(100,200,100),20,color(0));
+    laererKnap = new Button((width/2)-(width/4), 200, 100, 50, "Lærer", color(200, 150, 150), color(100, 200, 100), 30, color(0));
   }
 
   void Update() {
-    knap.Run();
+    laererKnap.Run();
+
+    if (laererKnap.isClicked()) {
+      gameStateManager.SkiftGameState("opretOpgave");
+    }
   }
 }
