@@ -54,6 +54,20 @@ class Character {
   }
 
   void drawCharacter(PVector pos) {
+    translate(pos.x, pos.y);
+    stroke(4);
+    
+    //krop og hoved
+    line(0,70,0,-50);
+    circle(0,70,20);
+    
+    //ben
+    line(0,-50,30,-100);
+    line(0,-50,-30,-100);
+    
+    //arme
+    line(0,40,30,-50);
+    line(0,40,-30,-50);
     
   }
 
@@ -81,7 +95,7 @@ class Character {
 
   void drawBubble(PVector characterPos) {
 
-    translate(characterPos.x, characterPos.y);
+    //translate(characterPos.x, characterPos.y);
     strokeWeight(5);
     fill(255, 255, 255);
     triangle(90, -120, 140, -120, 50, -50);

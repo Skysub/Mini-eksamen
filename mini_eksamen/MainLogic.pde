@@ -10,6 +10,7 @@ public class MainLogic {
   }
 
   void Update() {
+    character.drawCharacter(test);
     character.drawBubble(test);
   }
 
