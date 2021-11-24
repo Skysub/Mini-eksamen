@@ -4,7 +4,7 @@ public static class FileHandler {
   static String Path = dataFolder+"\\QuizTool";
 
   ///Returns the path to the data folder in appdata
-  static public String GetFolder(){
+  static public String GetFolder() {
     return Path;
   }
 
