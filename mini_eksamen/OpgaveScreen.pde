@@ -2,10 +2,12 @@ class OpgaveScreen extends GameState {
 
   Button gemSpgKnap, nytSpgKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg;
-  String spg, r, f1, f2, f3;
-  boolean canSave, clickedGem, nyOpgaveKlar = true;
+  String spg, r, f1, f2, f3, fT, pPS;
+  boolean canSave, clickedGem, nyOpgaveKlar = true, nySpg = false;
   int opgaveNummer = 1, opgaveSaetNummer = 1;
-  //String[][][] opgaveSaet;
+
+  String[] opgave = new String[6];
+  ArrayList<String[]> opgavesaet = new ArrayList<String[]>();
 
   OpgaveScreen(PApplet thePApplet) {
     //Knapper
@@ -40,8 +42,10 @@ class OpgaveScreen extends GameState {
     f1 = f1TF.Input(false, 0, 0);
     f2 = f2TF.Input(false, 0, 0);
     f3 = f3TF.Input(false, 0, 0);
+    fT = fTekst.Input(false, 0, 0);
+    pPS = pointPerSpg.Input(true, 0, 1);
 
-    if (spgTF.tooShort || rTF.tooShort || f1TF.tooShort || f2TF.tooShort || f3TF.tooShort) {
+    if (spgTF.tooShort || rTF.tooShort || f1TF.tooShort || f2TF.tooShort || f3TF.tooShort || pointPerSpg.tooShort) {
       canSave = false;
     } else canSave = true;
 
@@ -56,21 +60,32 @@ class OpgaveScreen extends GameState {
     if (!canSave && clickedGem) {
       text("Du skal udfylde alle felter", 520, 850);
     }
+    if (nySpg && !clickedGem) {
+      text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
+    }
 
     if (nytSpgKnap.isClicked()) {
       if (clickedGem) {
         if (nyOpgaveKlar) {
-          /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
-           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
-           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
-           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
-           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
-           
-           print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
-           */
+          opgave[0] = spg;
+          opgave[1] = fT;
+          opgave[2] = pPS;
+          opgave[3] = r;
+          opgave[4] = f1;
+          opgave[5] = f2;
+          opgave[6] = f3;
+          opgavesaet.add(opgave);
+
           opgaveNummer++;
+          spgTF.RemoveText();
+          rTF.RemoveText();
+          f1TF.RemoveText();
+          f2TF.RemoveText();
+          f3TF.RemoveText();
+          fTekst.RemoveText();
+          pointPerSpg.RemoveText();
         }
-      } else text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
+      } else nySpg = true;
       nyOpgaveKlar = false;
     } else nyOpgaveKlar = true;
   }
@@ -88,7 +103,10 @@ class OpgaveScreen extends GameState {
     text("Spørgsmål:", 520, 120);
 
     textSize(25);
+    text("Forklarende tekst:", 1120, 120);
+    text("Antal point for rigtigt svar (1-9):", 1120, 270);
     text("Rigtig svarmulighed:", 520, 270);
+    text("Forklarende tekst:", 1120, 120);
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);

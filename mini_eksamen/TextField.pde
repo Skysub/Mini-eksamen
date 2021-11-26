@@ -40,4 +40,10 @@ class TextField {
   void openRemoveText() {
     cp5.get(Textfield.class, stringTextfield).setText("");
   }
+  
+  void RemoveText(){
+    
+    textfield.setText("");
+    enteredString = "";
+  }
 }
