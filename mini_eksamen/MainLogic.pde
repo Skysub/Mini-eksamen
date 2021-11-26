@@ -14,9 +14,11 @@ public class MainLogic {
 
   void InitializeScreens(PApplet thePApplet) {
     gameStateManager.AddGameState("start", new StartScreen());
-    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));
-    
-    
+    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));    
+    gameStateManager.AddGameState("map", new MapScreen());
+    gameStateManager.AddGameState("questionScreen", new QuestionScreen());
+
+
     gameStateManager.SkiftGameState("start");
   }
 }

@@ -1,5 +1,6 @@
 class OpgaveScreen extends GameState {
 
+  ExitButton exitButton;
   Button gemSpgKnap, nytSpgKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF;
   String spg, r, f1, f2, f3;
@@ -11,6 +12,7 @@ class OpgaveScreen extends GameState {
     //Knapper
     gemSpgKnap = new Button(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nytSpgKnap = new Button(820, 920, 250, 50, "Ny opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
     //Tekstfelter
     spgTF = new TextField(thePApplet, "", new PVector(520, 180));
@@ -22,6 +24,7 @@ class OpgaveScreen extends GameState {
 
   void Update() {
     draw();
+    UpdateButtons();
     gemSpgKnap.Run();
     nytSpgKnap.Run();
 
@@ -54,16 +57,15 @@ class OpgaveScreen extends GameState {
 
     if (nytSpgKnap.isClicked() && clickedGem && nyOpgaveKlar) {
       /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
-      
-      print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
-      */
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
+       
+       print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
+       */
       opgaveNummer++;
       nyOpgaveKlar = false;
-      
     } else nyOpgaveKlar = true;
   }
 
@@ -74,7 +76,7 @@ class OpgaveScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opret opgavesæt", 20, 20);
+    text("Opret opgavesæt", 125, 20);
 
     textSize(35);
     text("Spørgsmål:", 520, 120);
@@ -84,5 +86,12 @@ class OpgaveScreen extends GameState {
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);
+  }
+
+  void UpdateButtons() {
+    exitButton.Run();
+    if (exitButton.isClicked()) {
+      gameStateManager.SkiftGameState("start");
+    }
   }
 }
