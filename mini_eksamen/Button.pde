@@ -1,9 +1,10 @@
 class Button {
-  Boolean pressed = false, clicked = false; //pressed er om selve mussen klikkes på, clicked er om knappen klikkes på
-  int x, y, width, height, textSize, counter = 50;
+  Boolean pressed = false, clicked = false, mouseOver = false; //pressed er om selve mussen klikkes på, clicked er om knappen klikkes på
+  int x, y, width, height, textSize;
   String buttonText;
   color currentColor, buttonColor, clickColor, textColor;
 
+  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
   Button(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc) {
     x = posX;
     y = posY;
@@ -16,38 +17,35 @@ class Button {
     textSize = ts;
     textColor = tc;
   }
-  void run() {
-    draw();
-    update();
+  void Run() {
+    Draw();
+    Update();
   }
 
-  void update() {
-    if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height || counter < 20) {
+  void Update() {
+    if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
       cursor(HAND);
-      fill(0, 0, 0, 70);
-      noStroke();
-      rect(x, y, width, height, 15);
-    } else cursor(ARROW);
-
-    if (mousePressed && mouseButton == LEFT && pressed == false) {
-      pressed = true;
-      if (mouseX >= x && mouseX <= x + width && mouseY >= y && mouseY <= y + height) {
+      mouseOver = true;
+      if (mousePressed && mouseButton == LEFT  && pressed == false) {
         clicked = true;
-        counter = 0;
         currentColor = clickColor;
+      } else {
+        currentColor = buttonColor;
       }
     } else { 
+      cursor(ARROW);
+      mouseOver = false;
       clicked = false;
+      currentColor = buttonColor;
     }
 
     if (!mousePressed) pressed = false;
-
-    counter++;
-    if (counter > 20) currentColor = buttonColor;
   }
 
-  void draw() {
+  void Draw() {
     fill(currentColor);
+    if (mouseOver)fill(color(red(currentColor)*0.8f, green(currentColor)*0.8f, blue(currentColor)*0.8f)); 
+
     noStroke();
     rect(x, y, width, height, 15);
 
