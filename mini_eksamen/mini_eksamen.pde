@@ -17,5 +17,5 @@ void setup() {
 void draw() {
   background(220);
   mainLogic.Update();
-  mainLogic.draw();
+  mainLogic.draw(this);
 }
