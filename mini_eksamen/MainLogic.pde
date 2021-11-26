@@ -1,11 +1,12 @@
 public static GameStateManager gameStateManager;
 Character character;
 PVector test = new PVector(500, 640);
-float characterSize = 1.5;
-Boolean speakLine = true;
+Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
+
+int characterState = 0; //denne int eksisterer kun som en midlertidig erstatning af Gamestate. 
 
 //this int is only for testing, as the gamestate manager isnt in my build
-int characterState = 0;
+//int characterState = 0;
 
 public class MainLogic {
 
@@ -15,8 +16,14 @@ public class MainLogic {
   }
 
   void Update() {
+    //needs to be given an int that represents the gameState. See the switch under the Character class
     character.Update(characterState);
-    character.drawCharacter(test, characterSize, speakLine);
+
+  }
+
+  void draw() {
+    character.drawCharacter(speakLine);
+    speakLine = character.speakCheck();
   }
 
 
