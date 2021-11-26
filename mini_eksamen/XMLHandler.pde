@@ -42,6 +42,6 @@ class XMLHandler {
     }
 
     //println(output);
-    saveXML(output, "opgavesæt_"+set[0][3]+".xml");
+    saveXML(output, "opgavesæt_"+set[0][2]+".xml");
   }
 }
