@@ -1,5 +1,7 @@
 class OpgaveScreen extends GameState {
 
+
+  ExitButton exitButton;
   Button gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
@@ -8,11 +10,14 @@ class OpgaveScreen extends GameState {
 
   String[][] opgave;
 
+
   OpgaveScreen(PApplet thePApplet) {
     //Knapper
     gemSpgKnap = new Button(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nytSpgKnap = new Button(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     startSaetKnap = new Button(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
+
 
     //Tekstfelter
     spgTF = new TextField(thePApplet, "", new PVector(520, 180), 550);
@@ -31,8 +36,10 @@ class OpgaveScreen extends GameState {
   void Update() {
     draw();
 
+UpdateButtons();
     gemSpgKnap.Run(saetIgang);
     nytSpgKnap.Run(saetIgang);
+
 
     spgTF.Update(false, 0, 0);
     rTF.Update(false, 0, 0);
@@ -136,6 +143,7 @@ class OpgaveScreen extends GameState {
       text("Du skal have indtastet før du kan lave opgaverne", 20, 530);
     }
 
+
     if (opgaveNummer == int(antalSpg)+1) {
       opgave[0][1] = str(maxPoint);
       opgIgang = true;
@@ -143,6 +151,20 @@ class OpgaveScreen extends GameState {
       
       //Kode så man kan begynde at oprette det næste opgavesæt, og som tager det ind på en arrayliste. 
     }
+    /*
+    if (nytSpgKnap.isClicked() && clickedGem && nyOpgaveKlar) {
+      /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
+       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
+       
+       print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
+       */
+      opgaveNummer++;
+      nyOpgaveKlar = false;
+    } else nyOpgaveKlar = true;
+    */
   }
 
   void draw() {
@@ -152,7 +174,7 @@ class OpgaveScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opret opgavesæt", 20, 20);
+    text("Opret opgavesæt", 125, 20);
 
     textSize(35);
     text("Spørgsmål:", 520, 120);
@@ -171,5 +193,12 @@ class OpgaveScreen extends GameState {
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 80);
+  }
+
+  void UpdateButtons() {
+    exitButton.Run();
+    if (exitButton.isClicked()) {
+      gameStateManager.SkiftGameState("start");
+    }
   }
 }
