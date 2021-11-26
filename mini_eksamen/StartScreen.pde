@@ -11,11 +11,12 @@ class StartScreen extends GameState {
   }
 
   void Update() {
-    UpdateButtons();
-  }
+
+  UpdateButtons();
+} 
 
   void UpdateButtons() {
-        laererKnap.Run();
+        laererKnap.Run(false);
     if (laererKnap.isClicked()) {
       gameStateManager.SkiftGameState("opretOpgave");
     }
