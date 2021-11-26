@@ -4,13 +4,12 @@ class XMLHandler {
 
   XMLHandler() {
     test[0][0] = "1";
-    test[0][1] = "10";
-    test[0][2] = "0";
-    test[0][3] = "Frederik";
+    test[0][1] = "0";
+    test[0][2] = "Frederik";
     test[1][0] = "Hvad er det bedste show?";
     test[1][1] = "";
     test[1][2] = "3";
-    test[1][3] = "2";
+    test[1][3] = "10";
     test[1][4] = "Thee Flash";
     test[1][5] = "Ninjago";
     test[1][6] = "JoJo";
@@ -26,9 +25,8 @@ class XMLHandler {
     XML info = set1.addChild("info");
 
     info.addChild("number_of_questions").setContent(set[0][0]);
-    info.addChild("max_points").setContent(set[0][1]);
-    info.addChild("max_mistakees").setContent(set[0][2]);
-    info.addChild("teachers_name").setContent(set[0][3]);
+    info.addChild("max_mistakees").setContent(set[0][1]);
+    info.addChild("teachers_name").setContent(set[0][2]);
 
 
     for (int i = 0; i < int(set[0][0]); i++) {
@@ -36,14 +34,14 @@ class XMLHandler {
       spm.addChild("question").setContent(set[1][0]);
       spm.addChild("extra_text").setContent(set[1][1]);
       spm.addChild("number_of_answers").setContent(set[1][2]);
-      spm.addChild("correct_answer").setContent(set[1][3]);
+      spm.addChild("max_points").setContent(set[1][3]);
 
       for (int j = 0; j < int(set[1][2]); j++) { //<>//
         spm.addChild("answer"+str(j+1)).setContent(set[1][j + 4]);
       }
     }
 
-    println(output);
+    //println(output);
     saveXML(output, "opgavesæt_"+set[0][3]+".xml");
   }
 }
