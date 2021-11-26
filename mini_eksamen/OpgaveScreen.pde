@@ -1,7 +1,7 @@
 class OpgaveScreen extends GameState {
 
   Button gemSpgKnap, nytSpgKnap;
-  TextField spgTF, rTF, f1TF, f2TF, f3TF;
+  TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg;
   String spg, r, f1, f2, f3;
   boolean canSave, clickedGem, nyOpgaveKlar = true;
   int opgaveNummer = 1, opgaveSaetNummer = 1;
@@ -18,6 +18,8 @@ class OpgaveScreen extends GameState {
     f1TF = new TextField(thePApplet, "", new PVector(520, 480));
     f2TF = new TextField(thePApplet, "", new PVector(520, 630));
     f3TF = new TextField(thePApplet, "", new PVector(520, 780));
+    fTekst = new TextField(thePApplet, "", new PVector(1120, 180));
+    pointPerSpg = new TextField(thePApplet, "", new PVector(1120, 330));
   }
 
   void Update() {
@@ -30,6 +32,8 @@ class OpgaveScreen extends GameState {
     f1TF.Update(false, 0, 0);
     f2TF.Update(false, 0, 0);
     f3TF.Update(false, 0, 0);
+    fTekst.Update(false, 0, 0);
+    pointPerSpg.Update(true, 0, 1);
 
     spg = spgTF.Input(false, 0, 0);
     r = rTF.Input(false, 0, 0);
