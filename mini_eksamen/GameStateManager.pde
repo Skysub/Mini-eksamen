@@ -4,23 +4,23 @@ public static class GameStateManager //<>// //<>// //<>// //<>// //<>// //<>//
   HashMap<String, GameState> gameStates;  
 
   GameStateManager() {
-    currentGameState = null;
+    currentGameState = null; //<>//
     gameStates = new HashMap<String, GameState>();
   }
 
   void Update()
   {
-    if (currentGameState != null)
+    if (currentGameState != null) //<>//
       currentGameState.Update();
   }
 
   public void AddGameState(String name, GameState state)
   {
-    gameStates.put(name, state);   // gamestat tilføjes via string som Key, hvor state er værdien
+    gameStates.put(name, state);   // gamestat tilføjes via string som Key, hvor state er værdien //<>//
   }
 
   public void SkiftGameState(String name) {
-    if (currentGameState != null)
+    if (currentGameState != null) //<>//
       currentGameState.Reset();
     if (gameStates.containsKey(name))
     {
@@ -30,13 +30,13 @@ public static class GameStateManager //<>// //<>// //<>// //<>// //<>// //<>//
 
   public void SkiftGameStateQuestion(String name, String[][] set) {
     if (currentGameState != null)
-      currentGameState.Reset();
+      currentGameState.Reset(); //<>//
     if (gameStates.containsKey(name))
     {
       currentGameState = gameStates.get(name);
       currentGameState.InjectSet(set);
     }
-  }
+  } //<>//
 
   public void Reset()
   {
@@ -58,6 +58,6 @@ public static class GameStateManager //<>// //<>// //<>// //<>// //<>// //<>//
         return x;
       }
     }
-    return "":
+    return "";
   }
 }

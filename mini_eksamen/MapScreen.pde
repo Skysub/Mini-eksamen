@@ -1,5 +1,7 @@
 class MapScreen extends GameState {
 
+  Boolean greetingMessageSaid = false;
+  
   ExitButton exitButton;
   Button spm1;
 
@@ -10,6 +12,12 @@ class MapScreen extends GameState {
   }
 
   void Update() {
+    
+    if (greetingMessageSaid == false){
+      speakLine = true;
+      greetingMessageSaid = true;
+    }
+    
     exitButton.Run();
     if (exitButton.isClicked()) {
       gameStateManager.SkiftGameState("start");
