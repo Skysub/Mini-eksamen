@@ -1,5 +1,3 @@
-
-public static GameStateManager gameStateManager;
 Character character;
 PVector test = new PVector(500, 640);
 Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
@@ -26,7 +24,7 @@ public class MainLogic {
 
   }
 
-  void draw() {
+  void draw(PApplet thePApplet) {
     character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
     InitializeScreens(thePApplet);
