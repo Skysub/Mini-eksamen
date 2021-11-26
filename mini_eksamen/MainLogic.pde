@@ -1,9 +1,9 @@
-Character character;
-public Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
-
-public GameStateManager gameStateManager;
-
 public class MainLogic {
+
+  Character character;
+  public Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
+
+  public GameStateManager gameStateManager;
 
   MainLogic(PApplet thePApplet) {
     gameStateManager = new GameStateManager();
@@ -13,17 +13,11 @@ public class MainLogic {
 
   void Update() {
     gameStateManager.Update();
-    
-    //needs to be given an int that represents the gameState. See the switch under the Character class
+
     character.Update(gameStateManager.GetCurrentGameStateName());
-
-  }
-  void draw(PApplet thePApplet) {
-    character.drawCharacter(speakLine);
+        character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
-    InitializeScreens(thePApplet);
   }
-
 
   void InitializeScreens(PApplet thePApplet) {
     gameStateManager.AddGameState("start", new StartScreen());

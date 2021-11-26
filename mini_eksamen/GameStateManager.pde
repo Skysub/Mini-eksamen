@@ -1,4 +1,4 @@
-public static class GameStateManager //<>// //<>// //<>// //<>// //<>// //<>//
+public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
 {
   GameState currentGameState;
   HashMap<String, GameState> gameStates;  
@@ -24,7 +24,7 @@ public static class GameStateManager //<>// //<>// //<>// //<>// //<>// //<>//
       currentGameState.Reset();
     if (gameStates.containsKey(name))
     {
-      currentGameState = gameStates.get(name);
+      currentGameState = gameStates.get(name);      
     }
   }
 

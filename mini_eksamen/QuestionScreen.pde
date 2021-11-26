@@ -11,7 +11,7 @@ class QuestionScreen extends GameState {
   void Update() {
     exitButton.Run();
     if (exitButton.isClicked()) {
-      gameStateManager.SkiftGameState("start");
+      ChangeScreen("start");
     }
   }
 

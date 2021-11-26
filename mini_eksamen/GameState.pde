@@ -10,7 +10,7 @@ public class GameState
 
   void ChangeScreen(String name)
   {
-    gameStateManager.SkiftGameState(name);
+    mainLogic.gameStateManager.SkiftGameState(name);
   }
 
   void InjectSet(String[][] a) {

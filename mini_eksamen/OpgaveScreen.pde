@@ -183,7 +183,7 @@ UpdateButtons();
     text("Forklarende tekst:", 1120, 120);
     text("Antal point for rigtigt svar (1-9):", 1120, 270);
     text("Rigtig svarmulighed:", 520, 270);
-    text("Dit navn:", 20, 120);
+    text("Dit navn:", 20, 130);
     text("Antal opgaver i sættet:", 20, 270);
     text("Antal rigtige for at klare opgavesættet:", 20, 420);
     text("Forklarende tekst:", 1120, 120);
@@ -192,13 +192,13 @@ UpdateButtons();
     text("Forkert svarmulighed 3:", 520, 720);
 
     textSize(20);
-    text("Før du opretter opgaverne skal du angive dette:", 20, 80);
+    text("Før du opretter opgaverne skal du angive dette:", 20, 100);
   }
 
   void UpdateButtons() {
     exitButton.Run();
     if (exitButton.isClicked()) {
-      gameStateManager.SkiftGameState("start");
+      ChangeScreen("start");
     }
   }
 }
