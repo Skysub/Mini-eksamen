@@ -2,7 +2,7 @@ class OpgaveScreen extends GameState {
 
 
   ExitButton exitButton;
-  Button gemSpgKnap, nytSpgKnap, startSaetKnap;
+  ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
   boolean canSave, clickedGem, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true;
@@ -13,9 +13,9 @@ class OpgaveScreen extends GameState {
 
   OpgaveScreen(PApplet thePApplet) {
     //Knapper
-    gemSpgKnap = new Button(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    nytSpgKnap = new Button(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    startSaetKnap = new Button(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    gemSpgKnap = new ButtonWPause(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    nytSpgKnap = new ButtonWPause(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    startSaetKnap = new ButtonWPause(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
 
@@ -153,14 +153,14 @@ UpdateButtons();
     }
     /*
     if (nytSpgKnap.isClicked() && clickedGem && nyOpgaveKlar) {
-      /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
+      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
        opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
        opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
        opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
        opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
        
        print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
-       */
+       
       opgaveNummer++;
       nyOpgaveKlar = false;
     } else nyOpgaveKlar = true;

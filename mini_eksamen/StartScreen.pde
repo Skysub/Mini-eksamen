@@ -16,7 +16,7 @@ class StartScreen extends GameState {
 } 
 
   void UpdateButtons() {
-        laererKnap.Run(false);
+        laererKnap.Run();
     if (laererKnap.isClicked()) {
       gameStateManager.SkiftGameState("opretOpgave");
     }
