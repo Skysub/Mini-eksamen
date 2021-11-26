@@ -16,9 +16,12 @@ class Button {
     textSize = ts;
     textColor = tc;
   }
-  void Run() {
+  void Run(boolean pause) {
     Draw();
-    Update();
+    if (!pause) {
+      Update();
+      currentColor = buttonColor;
+    }
   }
 
   void Update() {

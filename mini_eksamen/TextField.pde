@@ -6,7 +6,7 @@ class TextField {
 
   //konstruktør hvor tesktfeltet sættes op. Se http://www.sojamo.de/libraries/controlP5/reference/controlP5/Textfield.html for dokumentation
   //PApplet er en reference til selve sketchen og fåes helt tilbage fra RacerSpil ved at blive trukket igennem konstruktører hertil
-  TextField(PApplet thePApplet, String s, PVector pos) {
+  TextField(PApplet thePApplet, String s, PVector pos, int l) {
     stringTextfield = "StringTextField";
     enteredString = s;
     cp5 = new ControlP5(thePApplet);
@@ -14,7 +14,7 @@ class TextField {
     PFont p = createFont("Verdana", 20);
     ControlFont font = new ControlFont(p);
     cp5.setFont(font);
-    textfield = cp5.addTextfield("StringTextField").setPosition(pos.x, pos.y).setSize(550, 50).setAutoClear(false).setText(s).setCaptionLabel("").keepFocus(false);
+    textfield = cp5.addTextfield("StringTextField").setPosition(pos.x, pos.y).setSize(l, 50).setAutoClear(false).setText(s).setCaptionLabel("").keepFocus(false);
   }
 
   void Update(boolean maxMin, int min, int max) {
