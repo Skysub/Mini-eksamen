@@ -1,6 +1,11 @@
 public static GameStateManager gameStateManager;
 Character character;
 PVector test = new PVector(500, 640);
+float characterSize = 1.5;
+Boolean speakLine = true;
+
+//this int is only for testing, as the gamestate manager isnt in my build
+int characterState = 0;
 
 public class MainLogic {
 
@@ -10,8 +15,8 @@ public class MainLogic {
   }
 
   void Update() {
-    character.drawCharacter(test);
-    character.drawBubble(test);
+    character.Update(characterState);
+    character.drawCharacter(test, characterSize, speakLine);
   }
 
 
