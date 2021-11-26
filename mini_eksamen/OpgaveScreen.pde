@@ -45,25 +45,29 @@ class OpgaveScreen extends GameState {
       clickedGem = true;
     }
 
+    textAlign(CORNER, TOP);
+    fill(200, 50, 50);
+    textSize(25);
+
     if (!canSave && clickedGem) {
-      textAlign(CORNER, TOP);
-      fill(200, 50, 50);
-      textSize(25);
       text("Du skal udfylde alle felter", 520, 850);
     }
 
-    if (nytSpgKnap.isClicked() && clickedGem && nyOpgaveKlar) {
-      /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
-      
-      print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
-      */
-      opgaveNummer++;
+    if (nytSpgKnap.isClicked()) {
+      if (clickedGem) {
+        if (nyOpgaveKlar) {
+          /*opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
+           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
+           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
+           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
+           opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
+           
+           print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
+           */
+          opgaveNummer++;
+        }
+      } else text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
       nyOpgaveKlar = false;
-      
     } else nyOpgaveKlar = true;
   }
 
