@@ -1,7 +1,7 @@
-class Character {
+class Character { //<>// //<>// //<>//
 
-  Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false;
-  PVector fsPos, asPos, coPos, pos;
+  Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false, characterOnScreen = false;
+  PVector fsPos, asPos, pos;
   int dialoguePick;
   float speakTimeSec, speakTimeMillis, speakTimeFrameStart, evaluateMillis, sizeMod = 2;
 
@@ -14,66 +14,61 @@ class Character {
     //hvor på skærmen karakteren tegnes
     fsPos = new PVector(500, 640);
     asPos = new PVector(500, 640);
-    coPos = new PVector(500, 640);
     speakTimeSec = 3;
     speakTimeMillis = speakTimeSec*1000;
   }
 
-  void Update(int characterState) {
+  void Update(String characterState) {
 
     //tjek af gamestate, der passes til klassen gennem update metoden som en int
-    switch(characterState) {
-    case 0:
+    if (characterState == "map") {
       frontScreen = true;
       assignment = false;
       costumize = false;
       pos = fsPos;
-      break;
-    case 1: 
+      characterOnScreen = true;
+    } else if (characterState == "questionScreen") {
       frontScreen = false;
       assignment = true;
       costumize = false;
       pos = asPos;
-      break;
-    case 2:
-      frontScreen = false;
-      assignment = false;
-      costumize = true;
-      pos = coPos;
-      break;
-    default:
-      println("characterState out of bounds");
-      break;
+      characterOnScreen = true;
+    } else {
+      characterOnScreen = false;
     }
   }
 
+
   void drawCharacter(Boolean speak) {
-    translate(pos.x, pos.y);
-    stroke(4);
-    strokeWeight(5);
-    fill(255,255,255);
 
-    //krop og hoved
-    line(0, 40*sizeMod, 0, -50*sizeMod);
-    circle(0, -50*sizeMod, 30*sizeMod);
+    if (characterOnScreen == true) {
+      translate(pos.x, pos.y);
+      stroke(4);
+      strokeWeight(5);
+      fill(255, 255, 255);
 
-    //ben
-    line(0, 40*sizeMod, 20*sizeMod, 100*sizeMod);
-    line(0, 40*sizeMod, -20*sizeMod, 100*sizeMod);
+      //krop og hoved
+      line(0, 40*sizeMod, 0, -50*sizeMod);
+      circle(0, -50*sizeMod, 30*sizeMod);
 
-    //arme
-    line(0, -30*sizeMod, 25*sizeMod, 30*sizeMod);
-    line(0, -30*sizeMod, -25*sizeMod, 30*sizeMod);
+      //ben
+      line(0, 40*sizeMod, 20*sizeMod, 100*sizeMod);
+      line(0, 40*sizeMod, -20*sizeMod, 100*sizeMod);
+
+      //arme
+      line(0, -30*sizeMod, 25*sizeMod, 30*sizeMod);
+      line(0, -30*sizeMod, -25*sizeMod, 30*sizeMod);
+    }
 
     if (speak) {
       speak();
     }
   }
 
-  void speak() { //<>//
+  void speak() {
 
     if (speaking == false) {
-      dialoguePick = round(random(0, 9)); //<>//
+      dialoguePick = round(random(0, 9));
       speakTimeFrameStart = millis();
 
       if (lineDetermined == false) {
@@ -93,13 +88,13 @@ class Character {
       speaking = false;
       //println("no longer speaking");
     }
- //<>//
-//println (millis() + "///////" + (speakTimeFrameStart+speakTimeMillis));
+
+    //println (millis() + "///////" + (speakTimeFrameStart+speakTimeMillis));
 
     if (frontScreen && speaking) {
       drawBubble();
       textAlign(CENTER);
-      fill(0,0,0);
+      fill(0, 0, 0);
       textSize(25);
       text(spokenLine, 230, -220);
     }
@@ -107,7 +102,7 @@ class Character {
     if (assignment && speaking) {
       drawBubble();
       textAlign(CENTER);
-      fill(0,0,0);
+      fill(0, 0, 0);
       textSize(25);
       text(spokenLine, 230, -220);
     }
@@ -120,7 +115,7 @@ class Character {
     ellipse(230, -230, 430, 200);
     noStroke();
   }
-  
+
   Boolean speakCheck() {
     if (speaking) return true;
     return false;
