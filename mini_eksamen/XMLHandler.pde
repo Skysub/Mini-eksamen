@@ -4,7 +4,7 @@ class XMLHandler {
 
   XMLHandler() {
     test[0][0] = "1";
-    test[0][1] = "0";
+    test[0][1] = "1";
     test[0][2] = "Frederik";
     test[1][0] = "Hvad er det bedste show?";
     test[1][1] = "";
@@ -25,7 +25,7 @@ class XMLHandler {
     XML info = set1.addChild("info");
 
     info.addChild("number_of_questions").setContent(set[0][0]);
-    info.addChild("max_mistakees").setContent(set[0][1]);
+    info.addChild("fewest_correct_to_clear").setContent(set[0][1]);
     info.addChild("teachers_name").setContent(set[0][2]);
 
 
