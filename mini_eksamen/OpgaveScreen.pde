@@ -73,7 +73,7 @@ UpdateButtons();
         opgave = new String[int(antalSpg)+1][7];
         opgave[0][0] = antalSpg;
         opgave[0][1] = "Placeholder";
-        opgave[0][2] = antalSpgKlare;
+        opgave[0][2] = antalSpgKlare; //Tjek skemaet i repositoriet, nogle ting er ændrede
         opgave[0][3] = navn;
       }
       array = false;
