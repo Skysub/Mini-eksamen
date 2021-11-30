@@ -5,8 +5,8 @@ class ItemButton extends BaseButton {
   int price;
   Boolean purchased;
   
-  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, 
-  ItemButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc) {
+  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName 
+  ItemButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc, int p, Boolean pur, String tn) {
     x = posX;
     y = posY;
     widthB = w;
@@ -18,9 +18,12 @@ class ItemButton extends BaseButton {
     textSize = ts;
     textColor = tc;
     mouseOverColor = moc;
+    price = p;
+    purchased = pur;
+    textureName = tn;
   }
   
-    void Draw() {
+    void draw() {
     fill(currentColor);
     if (mouseOver)fill(mouseOverColor); 
 
