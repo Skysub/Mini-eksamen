@@ -19,8 +19,8 @@ public class MainLogic {
 
   }
   void draw(PApplet thePApplet) {
+     speakLine = character.speakCheck();
     character.drawCharacter(speakLine);
-    speakLine = character.speakCheck();
     InitializeScreens(thePApplet);
   }
 

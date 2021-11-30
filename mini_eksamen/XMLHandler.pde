@@ -36,7 +36,7 @@ class XMLHandler {
       spm.addChild("number_of_answers").setContent(set[1][2]);
       spm.addChild("max_points").setContent(set[1][3]);
 
-      for (int j = 0; j < int(set[1][2]); j++) { //<>//
+      for (int j = 0; j < int(set[1][2]); j++) {
         spm.addChild("answer"+str(j+1)).setContent(set[1][j + 4]);
       }
     }
