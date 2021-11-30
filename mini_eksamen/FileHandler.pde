@@ -5,6 +5,7 @@ public static class FileHandler {
 
   ///Returns the path to the data folder in appdata
   static public String GetFolder() {
+    //Selve SQLite filen hedder data.sqlite
     return Path;
   }
 
