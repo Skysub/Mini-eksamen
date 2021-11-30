@@ -5,10 +5,12 @@ class OpgaveScreen extends GameState {
   ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
-  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true;
-  int opgaveNummer, opgaveSaetNummer = 1, opacity = 180, maxPoint = 0;
+  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true;
+  int opgaveNummer = 1, opgaveSaetNummer = 1, opacity = 180, maxPoint = 0;
 
   String[][] opgave;
+
+  ArrayList<String[][]> opgaveSaet = new ArrayList<String[][]>();
 
 
   OpgaveScreen(PApplet thePApplet) {
@@ -20,17 +22,17 @@ class OpgaveScreen extends GameState {
 
 
     //Tekstfelter
-    spgTF = new TextField(thePApplet, "", new PVector(520, 180), 550);
-    rTF = new TextField(thePApplet, "", new PVector(520, 330), 550);
-    f1TF = new TextField(thePApplet, "", new PVector(520, 480), 550);
-    f2TF = new TextField(thePApplet, "", new PVector(520, 630), 550);
-    f3TF = new TextField(thePApplet, "", new PVector(520, 780), 550);
-    fTekst = new TextField(thePApplet, "", new PVector(1120, 180), 550);
-    pointPerSpg = new TextField(thePApplet, "", new PVector(1120, 330), 550);
+    spgTF = new TextField(thePApplet, "", new PVector(520, 180), 550, false);
+    rTF = new TextField(thePApplet, "", new PVector(520, 330), 550, false);
+    f1TF = new TextField(thePApplet, "", new PVector(520, 480), 550, false);
+    f2TF = new TextField(thePApplet, "", new PVector(520, 630), 550, false);
+    f3TF = new TextField(thePApplet, "", new PVector(520, 780), 550, false);
+    fTekst = new TextField(thePApplet, "", new PVector(1120, 180), 550, false);
+    pointPerSpg = new TextField(thePApplet, "", new PVector(1120, 330), 550, true);
 
-    antalSpgTF = new TextField(thePApplet, "", new PVector(20, 330), 460);
-    antalSpgKlareTF = new TextField(thePApplet, "", new PVector(20, 480), 460);
-    navnTF = new TextField(thePApplet, "", new PVector(20, 180), 460);
+    antalSpgTF = new TextField(thePApplet, "", new PVector(20, 330), 460, true);
+    antalSpgKlareTF = new TextField(thePApplet, "", new PVector(20, 480), 460, true);
+    navnTF = new TextField(thePApplet, "", new PVector(20, 180), 460, false);
   }
 
   void Update() {
@@ -78,6 +80,7 @@ class OpgaveScreen extends GameState {
       }
       array = false;
 
+
       opretOpgave = true;
       opgIgang = true;
       saetIgang = false;
@@ -100,7 +103,7 @@ class OpgaveScreen extends GameState {
         text("Du skal udfylde alle felter", 520, 850);
         clickedgemTrue = false;
       } else if (canSave && clickedGem) clickedgemTrue = true;
-      
+
       if (nySpg && !clickedgemTrue) {
         text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
       }
@@ -125,7 +128,7 @@ class OpgaveScreen extends GameState {
             f3TF.RemoveText();
             fTekst.RemoveText();
             pointPerSpg.RemoveText();
-            
+
             clickedGem = false;
             clickedgemTrue = false;
           }
@@ -146,15 +149,18 @@ class OpgaveScreen extends GameState {
       fill(200, 50, 50);
       textSize(20);
       text("Du skal have indtastet før du kan lave opgaverne", 20, 530);
-    }
+    } 
 
-
-    if (opgaveNummer == int(antalSpg)+1) {
+    if (opgaveNummer - 1 == int(antalSpg) && !array) {
       opgave[0][1] = str(maxPoint);
       opgIgang = true;
       saetIgang = true;
 
-      //Kode så man kan begynde at oprette det næste opgavesæt, og som tager det ind på en arrayliste.
+      if (add) {
+        opgaveSaet.add(opgave);
+        print(opgave[0][0], opgave[0][1], opgave[0][2], opgave[0][3], opgave[1][0], opgave[1][1], opgave[1][2], opgave[1][3], opgave[1][4], opgave[1][5], opgave[1][6], opgave[2][0], opgave[2][1], opgave[2][2], opgave[2][3], opgave[2][4], opgave[2][5], opgave[2][6]);
+      }
+      add = false;
     }
   }
 
@@ -181,7 +187,7 @@ class OpgaveScreen extends GameState {
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);
-    text("Opgave: " + opgaveNummer + "/" + antalSpg, width - 240, 120);
+    text("Opgave: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 240, 120);
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 100);
