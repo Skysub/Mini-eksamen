@@ -1,24 +1,26 @@
 class OpgaveScreen extends GameState {
 
 
+  OpgaveSaetMenu opgaveSaetMenu;
   ExitButton exitButton;
   ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
   boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true;
-  int opgaveNummer = 1, opgaveSaetNummer = 1, opacity = 180, maxPoint = 0;
+  int opgaveNummer = 1, opgaveSaetNummer = 0, opacity = 180, maxPoint = 0;
 
   String[][] opgave;
 
-  ArrayList<String[][]> opgaveSaet = new ArrayList<String[][]>();
 
 
   OpgaveScreen(PApplet thePApplet) {
+    opgaveSaetMenu = new OpgaveSaetMenu();
+
     //Knapper
     gemSpgKnap = new ButtonWPause(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nytSpgKnap = new ButtonWPause(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     startSaetKnap = new ButtonWPause(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
+    exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
 
     //Tekstfelter
@@ -79,7 +81,6 @@ class OpgaveScreen extends GameState {
         opgave[0][3] = navn;
       }
       array = false;
-
 
       opretOpgave = true;
       opgIgang = true;
@@ -157,10 +158,26 @@ class OpgaveScreen extends GameState {
       saetIgang = true;
 
       if (add) {
-        opgaveSaet.add(opgave);
-        print(opgave[0][0], opgave[0][1], opgave[0][2], opgave[0][3], opgave[1][0], opgave[1][1], opgave[1][2], opgave[1][3], opgave[1][4], opgave[1][5], opgave[1][6], opgave[2][0], opgave[2][1], opgave[2][2], opgave[2][3], opgave[2][4], opgave[2][5], opgave[2][6]);
+        opgaveSaetNummer++;
       }
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add);
       add = false;
+    }
+
+    if (opgaveSaetMenu.ny) {
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add);
+      clickedgemTrue = false;
+      nyOpgaveKlar = true;
+      nySpg = false;
+      opretOpgave = false;
+      saetIgang = true;
+      opgIgang = false;
+      startSaetKnapClicked = false;
+      array = true;
+      add = true;
+
+      opgaveNummer = 1;
+      maxPoint = 0;
     }
   }
 
@@ -171,7 +188,7 @@ class OpgaveScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opret opgavesæt", 125, 20);
+    text("Opret opgavesæt", 20, 20);
 
     textSize(35);
     text("Spørgsmål:", 520, 120);
@@ -191,6 +208,7 @@ class OpgaveScreen extends GameState {
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 100);
+    text("Opgavesættene du opretter bliver tilføjet til elevernes kort i den rækkkefølge du opretter dem i", 500, 50);
   }
 
   void UpdateButtons() {
