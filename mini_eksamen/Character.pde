@@ -3,7 +3,7 @@ class Character { //<>// //<>// //<>//
   Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
   int dialoguePick;
-  float speakTimeSec, speakTimeMillis, speakTimeFrameStart, evaluateMillis, sizeMod = 2;
+  float speakTimeSec, speakTimeMillis, speakTimeFrameStart, evaluateMillis, sizeMod = 2.5;
 
   String spokenLine;
 
