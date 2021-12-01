@@ -19,7 +19,7 @@ class OpgaveSaetMenu {
 
     if (doneKnap.clicked) {
       if (listTilArray) {
-        opgaveSaet = new String[oN+1][99][7];
+        opgaveSaet = new String[oN][99][7];
 
         for (int i = 0; i < opgaveSaetAL.size(); i++) {
           String[][] thisOpgaveSaet = opgaveSaetAL.get(i);

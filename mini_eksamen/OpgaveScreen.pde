@@ -11,8 +11,6 @@ class OpgaveScreen extends GameState {
 
   String[][] opgave;
 
-
-
   OpgaveScreen(PApplet thePApplet) {
     opgaveSaetMenu = new OpgaveSaetMenu();
 
@@ -39,41 +37,12 @@ class OpgaveScreen extends GameState {
 
   void Update() {
     Draw();
+    UpdateBtnsTextfields();
 
-    UpdateButtons();
-    gemSpgKnap.Run(saetIgang);
-    nytSpgKnap.Run(saetIgang);
-
-
-    spgTF.Update(false, 0, 0);
-    rTF.Update(false, 0, 0);
-    f1TF.Update(false, 0, 0);
-    f2TF.Update(false, 0, 0);
-    f3TF.Update(false, 0, 0);
-    fTekst.Update(false, 0, 0);
-    pointPerSpg.Update(true, 0, 1);
-
-    spg = spgTF.Input(false, 0, 0);
-    r = rTF.Input(false, 0, 0);
-    f1 = f1TF.Input(false, 0, 0);
-    f2 = f2TF.Input(false, 0, 0);
-    f3 = f3TF.Input(false, 0, 0);
-    fT = fTekst.Input(false, 0, 0);
-    pPS = pointPerSpg.Input(true, 0, 1);
-
-    startSaetKnap.Run(opgIgang);
-
-    antalSpgTF.Update(true, 0, 2);
-    antalSpgKlareTF.Update(true, 0, 2);
-    navnTF.Update(false, 0, 0);
-
-    antalSpg = antalSpgTF.Input(true, 0, 2);
-    antalSpgKlare = antalSpgKlareTF.Input(true, 0, 2);
-    navn = navnTF.Input(false, 0, 0);
-
-
+    //Sørger for at opgaverne kan oprettes når alt info om opgavesættet er givet
     if (startSaetKnap.isClicked() && !antalSpgTF.tooShort && !antalSpgKlareTF.tooShort || opretOpgave) {
       if (array) {
+        //Tikføjer infor om opgavesættet på arrayets første plads
         opgave = new String[int(antalSpg)+1][7];
         opgave[0][0] = antalSpg;
         opgave[0][1] = "Placeholder";
@@ -89,6 +58,7 @@ class OpgaveScreen extends GameState {
       fill(200, 200, 200, opacity);
       rect(0, 100, 500, height);
 
+      //
       if (spgTF.tooShort || rTF.tooShort || f1TF.tooShort || f2TF.tooShort || f3TF.tooShort || pointPerSpg.tooShort) {
         canSave = false;
       } else canSave = true;
@@ -229,5 +199,38 @@ class OpgaveScreen extends GameState {
     if (exitButton.isClicked()) {
       ChangeScreen("start");
     }
+  }
+
+  void UpdateBtnsTextfields() {
+    UpdateButtons();
+    gemSpgKnap.Run(saetIgang);
+    nytSpgKnap.Run(saetIgang);
+
+
+    spgTF.Update(false, 0, 0);
+    rTF.Update(false, 0, 0);
+    f1TF.Update(false, 0, 0);
+    f2TF.Update(false, 0, 0);
+    f3TF.Update(false, 0, 0);
+    fTekst.Update(false, 0, 0);
+    pointPerSpg.Update(true, 0, 1);
+
+    spg = spgTF.Input(false, 0, 0);
+    r = rTF.Input(false, 0, 0);
+    f1 = f1TF.Input(false, 0, 0);
+    f2 = f2TF.Input(false, 0, 0);
+    f3 = f3TF.Input(false, 0, 0);
+    fT = fTekst.Input(false, 0, 0);
+    pPS = pointPerSpg.Input(true, 0, 1);
+
+    startSaetKnap.Run(opgIgang);
+
+    antalSpgTF.Update(true, 0, 2);
+    antalSpgKlareTF.Update(true, 0, 2);
+    navnTF.Update(false, 0, 0);
+
+    antalSpg = antalSpgTF.Input(true, 0, 2);
+    antalSpgKlare = antalSpgKlareTF.Input(true, 0, 2);
+    navn = navnTF.Input(false, 0, 0);
   }
 }
