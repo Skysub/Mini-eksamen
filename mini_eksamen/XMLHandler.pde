@@ -20,7 +20,7 @@ class XMLHandler {
   ///Tager arrayet hvis layout er bestemt via skemaet fundet i repo'et og laver det til en xml fil.
   public void WriteToXML(String[][][] set) {
     XML output;
-    println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
+    //println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
 
     output = parseXML("<data></data>");
 
@@ -47,6 +47,6 @@ class XMLHandler {
     }
     //println(output);
     saveXML(output, "opgavesæt_"+set[0][0][3]+".xml");
-    println("done");
+    //println("done");
   }
 }

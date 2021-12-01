@@ -1,6 +1,7 @@
 class LoadFileScreen extends GameState {
 
-  Boolean greetingMessageSaid = false, speakLine;
+  Boolean greetingMessageSaid = false, speakLine, fresh = true;
+  String path = null;
 
   ExitButton exitButton;
   Button load;
@@ -15,22 +16,44 @@ class LoadFileScreen extends GameState {
     if (greetingMessageSaid == false) {
       speakLine = true;
       greetingMessageSaid = true;
+    }
+    DrawText();
 
-      DrawText();
+
+
+    load.Run();
+    if (load.isClicked()) {
+      if (fresh) {
+        fresh = false;
+        selectInput("Vælg XML opgavesæt fil:", "fileSelected");
+        if (path != null) {
+          fresh = true;
+          mainLogic.gameStateManager.SkiftGameState("map");
+        }
+      }
     }
 
     exitButton.Run();
     if (exitButton.isClicked()) {
+      fresh = true;
       ChangeScreen("start");
-    }
-
-    load.Run();
-    if (load.isClicked()) {
-      mainLogic.gameStateManager.SkiftGameState("map");
     }
   }
 
   void DrawText() {
-    
+    fill(0);
+    textAlign(CORNER, TOP);
+    textSize(50);
+    text("Du har ikke en save file, load en opgave fil", 150, 20);
+  }
+
+  void fileSelected(File selection) {
+    if (selection == null) {
+      println("Window was closed or the user hit cancel.");
+      fresh = true;
+    } else {
+      println("User selected " + selection.getAbsolutePath());
+      path = selection.getAbsolutePath();
+    }
   }
 }
