@@ -23,7 +23,7 @@ class ItemButton extends BaseButton {
     textureName = tn;
   }
   
-    void draw() {
+    void Draw() {
     fill(currentColor);
     if (mouseOver)fill(mouseOverColor); 
 

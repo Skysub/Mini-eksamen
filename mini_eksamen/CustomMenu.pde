@@ -33,13 +33,13 @@ class CustomMenu {
       for(int i = 0; i < itemButtons.size(); i++){
         ItemButton itemButton = itemButtons.get(i);
         itemButton.Update();
-        itemButton.draw();
+        itemButton.Draw();
         
       }
     }
   }
 
-  void draw(Boolean Menu) {
+  void Draw(Boolean Menu) {
     if (Menu) {
       fill(180, 200, 220); //<>//
       rect(700, 300, menuWidth, menuHeight+200, 10);

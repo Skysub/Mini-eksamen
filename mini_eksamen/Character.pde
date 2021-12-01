@@ -12,7 +12,7 @@ class Character { //<>// //<>// //<>//
 
   Character() {
     //hvor på skærmen karakteren tegnes
-    fsPos = new PVector(500, 640);
+    fsPos = new PVector(round(width/6), round(height/2));
     asPos = new PVector(500, 640);
     speakTimeSec = 3;
     speakTimeMillis = speakTimeSec*1000;
@@ -20,7 +20,7 @@ class Character { //<>// //<>// //<>//
 
   void Update(String characterState) {
 
-    //tjek af gamestate, der passes til klassen gennem update metoden som en int
+    //tjek af gamestate
     if (characterState == "map") {
       frontScreen = true;
       assignment = false;
@@ -58,15 +58,17 @@ class Character { //<>// //<>// //<>//
       //arme
       line(0, -30*sizeMod, 25*sizeMod, 30*sizeMod);
       line(0, -30*sizeMod, -25*sizeMod, 30*sizeMod);
+      
+      drawCosmetics();
     }
 
-    if (speak) {
+    //println(speak);
+    if (speak) { //<>//
       speak();
     }
   }
 
   void speak() {
-
     if (speaking == false) {
       dialoguePick = round(random(0, 9));
       speakTimeFrameStart = millis();
@@ -114,6 +116,9 @@ class Character { //<>// //<>// //<>//
     triangle(90, -170, 140, -170, 50, -100);
     ellipse(230, -230, 430, 200);
     noStroke();
+  }
+  
+  void drawCosmetics() {
   }
 
   Boolean speakCheck() {

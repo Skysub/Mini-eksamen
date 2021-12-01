@@ -167,7 +167,7 @@ UpdateButtons();
     */
   }
 
-  void draw() {
+  void Draw() {
     fill(175);
     rect(500, 100, width - 550, height - 150);
 
