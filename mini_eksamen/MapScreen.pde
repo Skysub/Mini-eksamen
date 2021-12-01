@@ -19,6 +19,7 @@ class MapScreen extends GameState {
   }
 
   void Update() {
+
     if (greetingMessageSaid == false) {
       mainLogic.speakLine = true;
       greetingMessageSaid = true;

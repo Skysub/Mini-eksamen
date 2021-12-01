@@ -13,10 +13,12 @@ public class MainLogic {
 
   void Update() {
     gameStateManager.Update();
+
     character.Update(gameStateManager.GetCurrentGameStateName());
     character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
   }
+  
 
 
   void InitializeScreens(PApplet thePApplet) {
@@ -25,6 +27,7 @@ public class MainLogic {
     gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));   
     gameStateManager.AddGameState("map", new MapScreen());
     gameStateManager.AddGameState("questionScreen", new QuestionScreen());
+    gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen());
 
     gameStateManager.SkiftGameState("start");
   }

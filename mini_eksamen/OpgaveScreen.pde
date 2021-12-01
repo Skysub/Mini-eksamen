@@ -1,42 +1,46 @@
 class OpgaveScreen extends GameState {
 
 
+  OpgaveSaetMenu opgaveSaetMenu;
   ExitButton exitButton;
   ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
-  boolean canSave, clickedGem, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true;
-  int opgaveNummer, opgaveSaetNummer = 1, opacity = 180, maxPoint = 0;
+  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true, ny = true;
+  int opgaveNummer = 1, opgaveSaetNummer = 0, opacity = 180, maxPoint = 0;
 
   String[][] opgave;
 
 
+
   OpgaveScreen(PApplet thePApplet) {
+    opgaveSaetMenu = new OpgaveSaetMenu();
+
     //Knapper
     gemSpgKnap = new ButtonWPause(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nytSpgKnap = new ButtonWPause(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     startSaetKnap = new ButtonWPause(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
+    exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
 
     //Tekstfelter
-    spgTF = new TextField(thePApplet, "", new PVector(520, 180), 550);
-    rTF = new TextField(thePApplet, "", new PVector(520, 330), 550);
-    f1TF = new TextField(thePApplet, "", new PVector(520, 480), 550);
-    f2TF = new TextField(thePApplet, "", new PVector(520, 630), 550);
-    f3TF = new TextField(thePApplet, "", new PVector(520, 780), 550);
-    fTekst = new TextField(thePApplet, "", new PVector(1120, 180), 550);
-    pointPerSpg = new TextField(thePApplet, "", new PVector(1120, 330), 550);
+    spgTF = new TextField(thePApplet, "", new PVector(520, 180), 550, false);
+    rTF = new TextField(thePApplet, "", new PVector(520, 330), 550, false);
+    f1TF = new TextField(thePApplet, "", new PVector(520, 480), 550, false);
+    f2TF = new TextField(thePApplet, "", new PVector(520, 630), 550, false);
+    f3TF = new TextField(thePApplet, "", new PVector(520, 780), 550, false);
+    fTekst = new TextField(thePApplet, "", new PVector(1120, 180), 550, false);
+    pointPerSpg = new TextField(thePApplet, "", new PVector(1120, 330), 550, true);
 
-    antalSpgTF = new TextField(thePApplet, "", new PVector(20, 330), 460);
-    antalSpgKlareTF = new TextField(thePApplet, "", new PVector(20, 480), 460);
-    navnTF = new TextField(thePApplet, "", new PVector(20, 180), 460);
+    antalSpgTF = new TextField(thePApplet, "", new PVector(20, 330), 460, true);
+    antalSpgKlareTF = new TextField(thePApplet, "", new PVector(20, 480), 460, true);
+    navnTF = new TextField(thePApplet, "", new PVector(20, 180), 460, false);
   }
 
   void Update() {
-    draw();
+    Draw();
 
-UpdateButtons();
+    UpdateButtons();
     gemSpgKnap.Run(saetIgang);
     nytSpgKnap.Run(saetIgang);
 
@@ -77,6 +81,7 @@ UpdateButtons();
         opgave[0][3] = navn;
       }
       array = false;
+      ny = true;
 
       opretOpgave = true;
       opgIgang = true;
@@ -90,21 +95,23 @@ UpdateButtons();
 
       if (gemSpgKnap.isClicked()) {
         clickedGem = true;
-      }
+      } else clickedGem = false;
 
       textAlign(CORNER, TOP);
       fill(200, 50, 50);
       textSize(25);
 
-      if (!canSave && clickedGem) {
+      if (!canSave && clickedgemTrue) {
         text("Du skal udfylde alle felter", 520, 850);
-      }
-      if (nySpg && !clickedGem) {
+        clickedgemTrue = false;
+      } else if (canSave && clickedGem) clickedgemTrue = true;
+
+      if (nySpg && !clickedgemTrue) {
         text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
       }
 
       if (nytSpgKnap.isClicked()) {
-        if (clickedGem) {
+        if (clickedgemTrue) {
           if (nyOpgaveKlar) {
             opgave[opgaveNummer][0] = spg;
             opgave[opgaveNummer][1] = fT;
@@ -123,10 +130,13 @@ UpdateButtons();
             f3TF.RemoveText();
             fTekst.RemoveText();
             pointPerSpg.RemoveText();
+
+            clickedGem = false;
+            clickedgemTrue = false;
           }
         } else nySpg = true;
         nyOpgaveKlar = false;
-      } else nyOpgaveKlar = true;
+      } else nyOpgaveKlar = true; 
       //Når der ikke oprettes opgaver
     } else {
       opgIgang = false;
@@ -141,30 +151,47 @@ UpdateButtons();
       fill(200, 50, 50);
       textSize(20);
       text("Du skal have indtastet før du kan lave opgaverne", 20, 530);
-    }
+    } 
 
-
-    if (opgaveNummer == int(antalSpg)+1) {
+    if (opgaveNummer - 1 == int(antalSpg) && !array) {
       opgave[0][1] = str(maxPoint);
       opgIgang = true;
       saetIgang = true;
-      
-      //Kode så man kan begynde at oprette det næste opgavesæt, og som tager det ind på en arrayliste. 
+
+      if (add) {
+        opgaveSaetNummer++;
+      }
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true, this);
+      opgaveSaetMenu.Draw(opgaveSaetNummer);
+      add = false;
     }
-    /*
-    if (nytSpgKnap.isClicked() && clickedGem && nyOpgaveKlar) {
-      opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][0] = spg;
-       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1] = r;
-       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][2] = f1;
-       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][3] = f2;
-       opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][4] = f3;
-       
-       print(opgaveSaet[opgaveSaetNummer -1][opgaveNummer-1][1]);
-       
-      opgaveNummer++;
-      nyOpgaveKlar = false;
-    } else nyOpgaveKlar = true;
-    */
+
+    if (opgaveSaetMenu.ny && ny) {
+      opgaveNummer = 1;
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
+
+      for (int i = 0; i < opgaveNummer; i++) {
+        opgave[i][0] = null;
+        opgave[i][1] = null;
+        opgave[i][2] = null;
+        opgave[i][3] = null;
+        opgave[i][4] = null;
+        opgave[i][5] = null;
+        opgave[i][6] = null;
+      }
+
+      clickedgemTrue = false;
+      nyOpgaveKlar = true;
+      nySpg = false;
+      opretOpgave = false;
+      saetIgang = true;
+      opgIgang = false;
+      startSaetKnapClicked = false;
+      array = true;
+      add = true;
+      ny = false;
+      maxPoint = 0;
+    }
   }
 
   void Draw() {
@@ -174,7 +201,7 @@ UpdateButtons();
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opret opgavesæt", 125, 20);
+    text("Opret opgavesæt", 20, 20);
 
     textSize(35);
     text("Spørgsmål:", 520, 120);
@@ -190,9 +217,11 @@ UpdateButtons();
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);
+    text("Opgave: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 240, 120);
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 100);
+    text("Opgavesættene du opretter bliver tilføjet til elevernes kort i den rækkkefølge du opretter dem i", 500, 50);
   }
 
   void UpdateButtons() {

@@ -1,20 +1,19 @@
 String array to-dimensionelt
 S: opgavesæt S
   0: info om spørgsmålssættet
-    0: antal opgavesæt
-    1: antal spørgsmål
+    0: antal spørgsmål
+    1: maks opnåelige point for hele sættet
     2: Maks fejl før opgavesættet fejles
     3: Lærers navn
 
   N: Spørgsmål N
     0: Spørgsmålet
     1: Eventuelt forklarende tekst
-    2: Hvor mange svar der er
-    3: Point for spørgsmålet
-    4: Svar 1
-    5: Svar 2
-    ...
-    n: Svar n
+    2: Point for spørgsmålet
+    3: Rigtigt svar
+    4: Forkert svar
+    5: Forkert svar
+    6: Forkert svar
 
 ---------------------------------------------------------
 Alting skal være strings, også tallene.
@@ -23,18 +22,18 @@ Et eksempel på et spørgsmålssæt med 1 spørgsmål er som følger:
 0:
   0:
     0: "1"
-    1: "1"
+    1: "10"
     2: "0"
     3: "Frederik"
 
   1:
     0: "Hvad er det bedste show?"
     1: ""
-    2: "3"
-    3: "10"
+    2: "10"
+    3: "JoJo"
     4: "The Flash"
     5: "Ninjago"
-    6: "JoJo"
+    6: ""
 
 
 set[0][1][5] ville derfor være "Ninjago"
