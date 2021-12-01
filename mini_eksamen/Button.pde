@@ -13,6 +13,4 @@ class Button extends BaseButton {
     textSize = ts;
     textColor = tc;
   }
-  
-  
 }

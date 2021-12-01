@@ -1,6 +1,6 @@
 public class GameState
 {
-  String[][] set;
+  String[][][] set;
 
   public void Update() {
   }
@@ -10,10 +10,10 @@ public class GameState
 
   void ChangeScreen(String name)
   {
-    gameStateManager.SkiftGameState(name);
+    mainLogic.gameStateManager.SkiftGameState(name);
   }
 
-  void InjectSet(String[][] a) {
+  void InjectSet(String[][][] a) {
     set = a;
   }
 }
