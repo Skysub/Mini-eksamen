@@ -3,18 +3,19 @@ S: opgavesæt S
   0: info om spørgsmålssættet
     0: antal opgavesæt
     1: antal spørgsmål
-    2: Maks fejl før opgavesættet fejles
-    3: Lærers navn
+    2: Maks opnåelig point for hele sættet
+    3: Maks fejl før opgavesættet fejles
+    4: Lærers navn
 
   N: Spørgsmål N
     0: Spørgsmålet
     1: Eventuelt forklarende tekst
-    2: Hvor mange svar der er
-    3: Point for spørgsmålet
-    4: Svar 1
-    5: Svar 2
-    ...
-    n: Svar n
+    2: point man får for spørgsmålet
+    3: Rigtigt svar
+    4: forkert svar
+    5: forkert svar
+    6: forkert svar
+    
 
 ---------------------------------------------------------
 Alting skal være strings, også tallene.
@@ -24,17 +25,18 @@ Et eksempel på et spørgsmålssæt med 1 spørgsmål er som følger:
   0:
     0: "1"
     1: "1"
-    2: "0"
-    3: "Frederik"
+    2: "5"
+    3: "0"
+    4: "Frederik"
 
   1:
     0: "Hvad er det bedste show?"
     1: ""
-    2: "3"
-    3: "10"
-    4: "The Flash"
-    5: "Ninjago"
-    6: "JoJo"
+    2: "5"
+    3: "The Flash"
+    4: "Ninjago"
+    5: "JoJo"
+    6: ""
 
 
-set[0][1][5] ville derfor være "Ninjago"
+set[0][1][5] ville derfor være "JoJo"
