@@ -23,6 +23,7 @@ class XMLHandler {
     XML output;
 
     output = parseXML("<data></data>");
+
     for (int s = 0; s < int(set[0][0][0]); s++) {
       XML set1 = output.addChild("set"+str(s+1));
       XML info = set1.addChild("info");

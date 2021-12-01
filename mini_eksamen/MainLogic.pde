@@ -14,8 +14,8 @@ public class MainLogic {
   void Update() {
     gameStateManager.Update();
 
-    character.Update(gameStateManager.GetCurrentGameStateName());
-        character.drawCharacter(speakLine);
+  }
+    character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
   }
 
