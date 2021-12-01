@@ -1,4 +1,3 @@
- //<>//
 class XMLHandler {
 
   String[][][] test = new String[1][2][7];
@@ -21,32 +20,33 @@ class XMLHandler {
   ///Tager arrayet hvis layout er bestemt via skemaet fundet i repo'et og laver det til en xml fil.
   public void WriteToXML(String[][][] set) {
     XML output;
+    println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
 
     output = parseXML("<data></data>");
 
-    for (int s = 0; s < int(set[0][0][0]); s++) {
+    for (int s = 0; s < int(set.length); s++) {
       XML set1 = output.addChild("set"+str(s+1));
       XML info = set1.addChild("info");
 
-      info.addChild("number_of_sets").setContent(set[s][0][0]);
-      info.addChild("number_of_questions").setContent(set[s][0][1]);
-      info.addChild("fewest_correct_to_clear").setContent(set[s][0][2]);
+      info.addChild("number_of_questions").setContent(set[s][0][0]);
+      info.addChild("max_points").setContent(set[s][0][1]);
+      info.addChild("max_mistakes").setContent(set[s][0][2]);
       info.addChild("teachers_name").setContent(set[s][0][3]);
 
 
-      for (int i = 0; i < int(set[s][0][1]); i++) {
+      for (int i = 0; i < int(set[s][0][0]); i++) {
         XML spm = set1.addChild("question"+str(i));
         spm.addChild("question").setContent(set[s][1][0]);
         spm.addChild("extra_text").setContent(set[s][1][1]);
-        spm.addChild("number_of_answers").setContent(set[s][1][2]);
-        spm.addChild("max_points").setContent(set[s][1][3]);
-
-        for (int j = 0; j < int(set[s][1][2]); j++) {
-          spm.addChild("answer"+str(j+1)).setContent(set[s][1][j + 4]);
-        }
+        spm.addChild("points").setContent(set[s][1][2]);
+        spm.addChild("answer1_correct").setContent(set[s][1][3]);
+        spm.addChild("answer2").setContent(set[s][1][4]);
+        spm.addChild("answer3").setContent(set[s][1][5]);
+        spm.addChild("answer4").setContent(set[s][1][6]);
       }
     }
     //println(output);
     saveXML(output, "opgavesæt_"+set[0][0][3]+".xml");
+    println("done");
   }
 }

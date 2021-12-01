@@ -1,5 +1,6 @@
 class OpgaveSaetMenu {
-
+  
+  XMLHandler xmlHandler;
   Button doneKnap, nyKnap;
   boolean ny, listTilArray = true;
 
@@ -7,11 +8,12 @@ class OpgaveSaetMenu {
   String[][][] opgaveSaet;
 
   OpgaveSaetMenu() {
+    xmlHandler = new XMLHandler();
     doneKnap = new Button(width/2+100, height/2, 250, 50, "Afslut opretning", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nyKnap = new Button(width/2-355, height/2, 250, 50, "Nyt opgavesæt", color(200, 150, 150), color(100, 200, 100), 25, color(0));
   }
 
-  void Update(int oN, String[][] nyOpgave, boolean add, boolean sure) {
+  void Update(int oN, String[][] nyOpgave, boolean add, boolean sure, GameState parent) {
     doneKnap.Run();
     nyKnap.Run();
 
@@ -19,15 +21,14 @@ class OpgaveSaetMenu {
 
     if (doneKnap.clicked) {
       if (listTilArray) {
-        opgaveSaet = new String[oN+1][99][7];
+        opgaveSaet = new String[oN][99][7];
 
         for (int i = 0; i < opgaveSaetAL.size(); i++) {
           String[][] thisOpgaveSaet = opgaveSaetAL.get(i);
           opgaveSaet[i] = thisOpgaveSaet;
         }
-        
-        //LAV SAMARBEJDE MED XML-DIMS LIGE HER, det er opgaveSaet[][][] der er det tre-dimensionelle array
-                                                                                                                                   
+        xmlHandler.WriteToXML(opgaveSaet); //Her bliver String arrayet sendt til xml klassen og lavet om til en xml fil.
+        parent.ChangeScreen("start");
       }
       listTilArray = false;
     }

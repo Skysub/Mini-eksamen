@@ -161,14 +161,14 @@ class OpgaveScreen extends GameState {
       if (add) {
         opgaveSaetNummer++;
       }
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true);
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true, this);
       opgaveSaetMenu.Draw(opgaveSaetNummer);
       add = false;
     }
 
     if (opgaveSaetMenu.ny && ny) {
       opgaveNummer = 1;
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false);
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
 
       for (int i = 0; i < opgaveNummer; i++) {
         opgave[i][0] = null;
