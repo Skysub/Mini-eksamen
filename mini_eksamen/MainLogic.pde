@@ -14,10 +14,11 @@ public class MainLogic {
   void Update() {
     gameStateManager.Update();
 
-  }
+  
     character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
   }
+  
 
   void InitializeScreens(PApplet thePApplet) {
     gameStateManager.AddGameState("start", new StartScreen());

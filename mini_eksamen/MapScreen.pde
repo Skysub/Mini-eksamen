@@ -12,7 +12,6 @@ class MapScreen extends GameState {
   }
 
   void Update() {
-    println("Oy!");
     if (greetingMessageSaid == false){
       speakLine = true; //<>//
       greetingMessageSaid = true;
