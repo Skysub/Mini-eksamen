@@ -6,7 +6,7 @@ class OpgaveScreen extends GameState {
   ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
-  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true;
+  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true, ny = true;
   int opgaveNummer = 1, opgaveSaetNummer = 0, opacity = 180, maxPoint = 0;
 
   String[][] opgave;
@@ -38,7 +38,7 @@ class OpgaveScreen extends GameState {
   }
 
   void Update() {
-    draw();
+    Draw();
 
     UpdateButtons();
     gemSpgKnap.Run(saetIgang);
@@ -81,6 +81,7 @@ class OpgaveScreen extends GameState {
         opgave[0][3] = navn;
       }
       array = false;
+      ny = true;
 
       opretOpgave = true;
       opgIgang = true;
@@ -135,7 +136,7 @@ class OpgaveScreen extends GameState {
           }
         } else nySpg = true;
         nyOpgaveKlar = false;
-      } else nyOpgaveKlar = true;
+      } else nyOpgaveKlar = true; 
       //Når der ikke oprettes opgaver
     } else {
       opgIgang = false;
@@ -160,12 +161,25 @@ class OpgaveScreen extends GameState {
       if (add) {
         opgaveSaetNummer++;
       }
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add);
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true);
+      opgaveSaetMenu.Draw(opgaveSaetNummer);
       add = false;
     }
 
-    if (opgaveSaetMenu.ny) {
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add);
+    if (opgaveSaetMenu.ny && ny) {
+      opgaveNummer = 1;
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false);
+
+      for (int i = 0; i < opgaveNummer; i++) {
+        opgave[i][0] = null;
+        opgave[i][1] = null;
+        opgave[i][2] = null;
+        opgave[i][3] = null;
+        opgave[i][4] = null;
+        opgave[i][5] = null;
+        opgave[i][6] = null;
+      }
+
       clickedgemTrue = false;
       nyOpgaveKlar = true;
       nySpg = false;
@@ -175,13 +189,12 @@ class OpgaveScreen extends GameState {
       startSaetKnapClicked = false;
       array = true;
       add = true;
-
-      opgaveNummer = 1;
+      ny = false;
       maxPoint = 0;
     }
   }
 
-  void draw() {
+  void Draw() {
     fill(175);
     rect(500, 100, width - 550, height - 150);
 
