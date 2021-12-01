@@ -25,7 +25,9 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
       currentGameState.Reset();
     if (gameStates.containsKey(name))
     {
-      currentGameState = gameStates.get(name);      
+      currentGameState = gameStates.get(name);
+    } else {
+      println("'"+name+"' er ikke en gyldig gameState");
     }
   }
 
