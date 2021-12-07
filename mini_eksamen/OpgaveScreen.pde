@@ -41,6 +41,7 @@ class OpgaveScreen extends GameState {
 
     //Sørger for at opgaverne kan oprettes når alt info om opgavesættet er givet
     if (startSaetKnap.isClicked() && !antalSpgTF.tooShort && !antalSpgKlareTF.tooShort || opretOpgave) {
+
       if (array) {
         //Tikføjer infor om opgavesættet på arrayets første plads
         opgave = new String[int(antalSpg)+1][7];
@@ -49,8 +50,9 @@ class OpgaveScreen extends GameState {
         opgave[0][2] = antalSpgKlare;
         opgave[0][3] = navn;
       }
-      array = false;
+
       ny = true;
+      array = false;
 
       opretOpgave = true;
       opgIgang = true;
@@ -128,27 +130,17 @@ class OpgaveScreen extends GameState {
       opgIgang = true;
       saetIgang = true;
 
-      if (add) {
-        opgaveSaetNummer++;
-      }
+      if (add) opgaveSaetNummer++;
+      
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true);
       opgaveSaetMenu.Draw(opgaveSaetNummer);
       add = false;
     }
 
     if (opgaveSaetMenu.ny && ny) {
-      opgaveNummer = 1;
+      
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false);
-
-      for (int i = 0; i < opgaveNummer; i++) {
-        opgave[i][0] = null;
-        opgave[i][1] = null;
-        opgave[i][2] = null;
-        opgave[i][3] = null;
-        opgave[i][4] = null;
-        opgave[i][5] = null;
-        opgave[i][6] = null;
-      }
+      opgaveNummer = 1;
 
       clickedgemTrue = false;
       nyOpgaveKlar = true;
@@ -162,6 +154,7 @@ class OpgaveScreen extends GameState {
       ny = false;
       maxPoint = 0;
     }
+    ny = false;
   }
 
   void Draw() {
@@ -187,7 +180,7 @@ class OpgaveScreen extends GameState {
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);
-    text("Opgave: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 240, 120);
+    text("Opgaver oprettet: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 340, 120);
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 100);

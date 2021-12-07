@@ -12,8 +12,13 @@ class OpgaveSaetMenu {
   }
 
   void Update(int oN, String[][] nyOpgave, boolean add, boolean sure) {
-    doneKnap.Run();
-    nyKnap.Run();
+    doneKnap.Update();
+    nyKnap.Update();
+
+    if (sure) {
+      doneKnap.Draw();
+      nyKnap.Draw();
+    }
 
     if (add && sure) opgaveSaetAL.add(nyOpgave);
 
@@ -25,13 +30,14 @@ class OpgaveSaetMenu {
           String[][] thisOpgaveSaet = opgaveSaetAL.get(i);
           opgaveSaet[i] = thisOpgaveSaet;
         }
-        
+
         //LAV SAMARBEJDE MED XML-DIMS LIGE HER, det er opgaveSaet[][][] der er det tre-dimensionelle array
-                                                                                                                                   
       }
+
       listTilArray = false;
     }
 
+    ny = false;
     if (nyKnap.clicked) ny = true;
     else ny = false;
   }
