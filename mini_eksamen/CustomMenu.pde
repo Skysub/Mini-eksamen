@@ -20,7 +20,7 @@ class CustomMenu { //<>//
 
   void Update(Boolean Menu) {
     if (Menu) {
-      
+
       //for creating the arraylist of itembuttons and reading SQL player data first time
       if (ItemsInitialized == false) {
         itemButtons.clear();
@@ -31,7 +31,7 @@ class CustomMenu { //<>//
         //character.currentShoes = SQL currentShoes
         //character.currentShirt = SQL currentShirt
       }
-      
+
       //loops through the item buttons
       for (int i = 0; i < itemButtons.size(); i++) {
         itemButton = itemButtons.get(i);
@@ -56,15 +56,16 @@ class CustomMenu { //<>//
                 itemButton.wearing = false;
               }
             }
-            //equips the new item
+            //actually equips the new item
             itemButton = itemButtons.get(i);
             itemButton.wearing = true;
             mainLogic.character.changeSpecificCosmetic(itemButton.textureName, itemButton.itemType);
           }
-          
+
           //unequip worn item
           if (itemButton.purchased == true && itemButton.wearing == true) {
             itemButton.wearing = false;
+            mainLogic.character.unequipItem(itemButton.itemType);
           }
         }
       }
