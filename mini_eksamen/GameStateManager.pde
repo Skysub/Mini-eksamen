@@ -33,7 +33,7 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
     }
   }
 
-  public void SkiftGameStateQuestion(String name, String[][][] set) {
+  public void SkiftGameStateQuestion(String name, String[][] set) {
     if (currentGameState != null)
 
       currentGameState.Reset();
