@@ -18,9 +18,11 @@ class XMLHandler {
   }
 
   String[][][] ReadFromXML(String path) {
-    XML input = loadXML(path).getChild(0);
+    XML input = loadXML(path); //<>//
     String [][][] output;
-
+  
+    //println(input.getContent().toString());
+    
     output = new String[input.getChildCount()][99][7];
 
     XML[] sets = input.getChildren();
@@ -37,7 +39,7 @@ class XMLHandler {
         }
       }
     }
-    //WriteToXML(output);
+    println(output.toString());
     return output;
   }
 
