@@ -6,12 +6,10 @@ class OpgaveScreen extends GameState {
   ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
-  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true, ny = true;
-  int opgaveNummer = 1, opgaveSaetNummer = 0, opacity = 180, maxPoint = 0;
+  boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true, ny = true, gemTekst = false, openSaetSkaerm = true;
+  int opgaveNummer = 1, opgaveSaetNummer = 0, opacity = 200, maxPoint = 0;
 
   String[][] opgave;
-
-
 
   OpgaveScreen(PApplet thePApplet) {
     opgaveSaetMenu = new OpgaveSaetMenu();
@@ -39,49 +37,26 @@ class OpgaveScreen extends GameState {
 
   void Update() {
     Draw();
+    UpdateBtnsTextfields();
 
-    UpdateButtons();
-    gemSpgKnap.Run(saetIgang);
-    nytSpgKnap.Run(saetIgang);
-
-
-    spgTF.Update(false, 0, 0);
-    rTF.Update(false, 0, 0);
-    f1TF.Update(false, 0, 0);
-    f2TF.Update(false, 0, 0);
-    f3TF.Update(false, 0, 0);
-    fTekst.Update(false, 0, 0);
-    pointPerSpg.Update(true, 0, 1);
-
-    spg = spgTF.Input(false, 0, 0);
-    r = rTF.Input(false, 0, 0);
-    f1 = f1TF.Input(false, 0, 0);
-    f2 = f2TF.Input(false, 0, 0);
-    f3 = f3TF.Input(false, 0, 0);
-    fT = fTekst.Input(false, 0, 0);
-    pPS = pointPerSpg.Input(true, 0, 1);
-
-    startSaetKnap.Run(opgIgang);
-
-    antalSpgTF.Update(true, 0, 2);
-    antalSpgKlareTF.Update(true, 0, 2);
-    navnTF.Update(false, 0, 0);
-
-    antalSpg = antalSpgTF.Input(true, 0, 2);
-    antalSpgKlare = antalSpgKlareTF.Input(true, 0, 2);
-    navn = navnTF.Input(false, 0, 0);
-
-
+    //Sørger for at opgaverne kan oprettes når alt info om opgavesættet er givet
     if (startSaetKnap.isClicked() && !antalSpgTF.tooShort && !antalSpgKlareTF.tooShort || opretOpgave) {
+
       if (array) {
+        //Tilføjer info om opgavesættet på arrayets første plads
+        opgaveNummer = 1;
         opgave = new String[int(antalSpg)+1][7];
         opgave[0][0] = antalSpg;
         opgave[0][1] = "Placeholder";
         opgave[0][2] = antalSpgKlare; //Tjek skemaet i repositoriet, nogle ting er ændrede
         opgave[0][3] = navn;
+        
+        if(opgave[0][0] == null || opgave[0][0] == "0") antalSpg = "1";
+        openSaetSkaerm = true;
       }
-      array = false;
+
       ny = true;
+      array = false;
 
       opretOpgave = true;
       opgIgang = true;
@@ -91,7 +66,10 @@ class OpgaveScreen extends GameState {
 
       if (spgTF.tooShort || rTF.tooShort || f1TF.tooShort || f2TF.tooShort || f3TF.tooShort || pointPerSpg.tooShort) {
         canSave = false;
-      } else canSave = true;
+      } else{
+        canSave = true;
+        gemTekst = false;
+      }
 
       if (gemSpgKnap.isClicked()) {
         clickedGem = true;
@@ -101,13 +79,17 @@ class OpgaveScreen extends GameState {
       fill(200, 50, 50);
       textSize(25);
 
-      if (!canSave && clickedgemTrue) {
+      if (!canSave && clickedGem || gemTekst) {
         text("Du skal udfylde alle felter", 520, 850);
+        gemTekst = true;
+      }
+
+      if (!canSave && clickedgemTrue) {
         clickedgemTrue = false;
       } else if (canSave && clickedGem) clickedgemTrue = true;
 
       if (nySpg && !clickedgemTrue) {
-        text("Du skal gemme opgaven før du kan lave en ny", 520, 850);
+        text("Du skal udfylde alle felter og gemme opgaven før du kan lave en ny", 520, 850);
       }
 
       if (nytSpgKnap.isClicked()) {
@@ -133,10 +115,12 @@ class OpgaveScreen extends GameState {
 
             clickedGem = false;
             clickedgemTrue = false;
+            nySpg = false;
           }
         } else nySpg = true;
         nyOpgaveKlar = false;
       } else nyOpgaveKlar = true; 
+
       //Når der ikke oprettes opgaver
     } else {
       opgIgang = false;
@@ -146,7 +130,7 @@ class OpgaveScreen extends GameState {
     } 
     if (startSaetKnap.isClicked()) startSaetKnapClicked = true;
 
-    if (startSaetKnapClicked && antalSpgTF.tooShort ||startSaetKnapClicked && antalSpgKlareTF.tooShort) {
+    if (startSaetKnapClicked && antalSpgTF.tooShort || startSaetKnapClicked && antalSpgKlareTF.tooShort) {
       textAlign(CORNER, TOP);
       fill(200, 50, 50);
       textSize(20);
@@ -154,6 +138,9 @@ class OpgaveScreen extends GameState {
     } 
 
     if (opgaveNummer - 1 == int(antalSpg) && !array) {
+      fill(175, 175, 175, opacity);
+      rect(500, 100, width - 550, height - 150);
+
       opgave[0][1] = str(maxPoint);
       opgIgang = true;
       saetIgang = true;
@@ -162,23 +149,20 @@ class OpgaveScreen extends GameState {
         opgaveSaetNummer++;
       }
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true, this);
+
       opgaveSaetMenu.Draw(opgaveSaetNummer);
       add = false;
+      nySpg = false;
     }
 
     if (opgaveSaetMenu.ny && ny) {
+
       opgaveNummer = 1;
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
 
-      for (int i = 0; i < opgaveNummer; i++) {
-        opgave[i][0] = null;
-        opgave[i][1] = null;
-        opgave[i][2] = null;
-        opgave[i][3] = null;
-        opgave[i][4] = null;
-        opgave[i][5] = null;
-        opgave[i][6] = null;
-      }
+
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
+      opgaveNummer = 1;
 
       clickedgemTrue = false;
       nyOpgaveKlar = true;
@@ -192,6 +176,20 @@ class OpgaveScreen extends GameState {
       ny = false;
       maxPoint = 0;
     }
+    ny = false;
+    
+    if(opgaveSaetMenu.reset && openSaetSkaerm){
+      opgaveSaetNummer = 0;
+      array = true;
+      opgaveSaetMenu.ResetNow();
+      opgaveSaetMenu.listTilArray = true;
+      openSaetSkaerm = false;
+      saetIgang = true;
+      opgIgang = false;
+      
+      ChangeScreen("start");
+    }
+    
   }
 
   void Draw() {
@@ -217,11 +215,11 @@ class OpgaveScreen extends GameState {
     text("Forkert svarmulighed 1:", 520, 420);
     text("Forkert svarmulighed 2:", 520, 570);
     text("Forkert svarmulighed 3:", 520, 720);
-    text("Opgave: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 240, 120);
+    text("Opgaver oprettet: " + str(int(opgaveNummer) - 1) + "/" + antalSpg, width - 340, 120);
 
     textSize(20);
     text("Før du opretter opgaverne skal du angive dette:", 20, 100);
-    text("Opgavesættene du opretter bliver tilføjet til elevernes kort i den rækkkefølge du opretter dem i", 500, 50);
+    text("Opgavesættene du opretter bliver tilføjet til elevernes kort i den rækkefølge du opretter dem i", 500, 50);
   }
 
   void UpdateButtons() {
@@ -230,4 +228,38 @@ class OpgaveScreen extends GameState {
       ChangeScreen("start");
     }
   }
+
+  void UpdateBtnsTextfields() {
+    UpdateButtons();
+    gemSpgKnap.Run(saetIgang);
+    nytSpgKnap.Run(saetIgang);
+
+
+    spgTF.Update(false, 0, 0, saetIgang);
+    rTF.Update(false, 0, 0, saetIgang);
+    f1TF.Update(false, 0, 0, saetIgang);
+    f2TF.Update(false, 0, 0, saetIgang);
+    f3TF.Update(false, 0, 0, saetIgang);
+    fTekst.Update(false, 0, 0, saetIgang);
+    pointPerSpg.Update(true, 0, 1, saetIgang);
+
+    spg = spgTF.Input(false, 0, 0);
+    r = rTF.Input(false, 0, 0);
+    f1 = f1TF.Input(false, 0, 0);
+    f2 = f2TF.Input(false, 0, 0);
+    f3 = f3TF.Input(false, 0, 0);
+    fT = fTekst.Input(false, 0, 0);
+    pPS = pointPerSpg.Input(true, 0, 1);
+
+    startSaetKnap.Run(opgIgang);
+
+    antalSpgTF.Update(true, 0, 2, opgIgang);
+    antalSpgKlareTF.Update(true, 0, 2, opgIgang);
+    navnTF.Update(false, 0, 0, opgIgang);
+
+    antalSpg = antalSpgTF.Input(true, 0, 2);
+    antalSpgKlare = antalSpgKlareTF.Input(true, 0, 2);
+    navn = navnTF.Input(false, 0, 0);
+  }
+  
 }

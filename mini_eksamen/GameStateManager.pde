@@ -1,4 +1,4 @@
-public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
+public static class GameStateManager  //<>// //<>// //<>// //<>// //<>// //<>//
 
 {
   GameState currentGameState;
@@ -17,11 +17,13 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
 
   public void AddGameState(String name, GameState state)
   {
+
     gameStates.put(name, state);   // gamestat tilføjes via string som Key, hvor state er værdien
   }
 
   public void SkiftGameState(String name) {
     if (currentGameState != null)
+
       currentGameState.Reset();
     if (gameStates.containsKey(name))
     {
@@ -31,9 +33,11 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>//
     }
   }
 
-  public void SkiftGameStateQuestion(String name, String[][][] set) {
+  public void SkiftGameStateQuestion(String name, String[][] set) {
     if (currentGameState != null)
+
       currentGameState.Reset();
+
     if (gameStates.containsKey(name))
     {
       currentGameState = gameStates.get(name);

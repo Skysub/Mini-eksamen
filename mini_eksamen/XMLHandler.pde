@@ -17,12 +17,37 @@ class XMLHandler {
     WriteToXML(test);
   }
 
+  String[][][] ReadFromXML(String path) {
+    XML input = loadXML(path).getChild(0);
+    String [][][] output;
+
+    output = new String[input.getChildCount()][99][7];
+
+    XML[] sets = input.getChildren();
+    for (int i = 0; i< input.getChildCount(); i++) {
+      XML[] info = sets[i].getChild("info").getChildren();
+      for (int j = 0; j < 4; j++) {
+        output[i][0][j] = info[j].getContent();
+      }
+      XML[] questions = sets[i].getChildren();
+      for (int j = 1; j < int(output[i][0][0]); j++) {
+        XML[] stuff = questions[j].getChildren();
+        for (int s = 0; s < 7; s++) {
+          output[i][j][s] = stuff[s].getContent();
+        }
+      }
+    }
+    //WriteToXML(output);
+    return output;
+  }
+
   ///Tager arrayet hvis layout er bestemt via skemaet fundet i repo'et og laver det til en xml fil.
   public void WriteToXML(String[][][] set) {
     XML output;
     //println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
 
     output = parseXML("<data></data>");
+
 
     for (int s = 0; s < int(set.length); s++) {
       XML set1 = output.addChild("set"+str(s+1));

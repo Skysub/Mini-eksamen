@@ -13,7 +13,7 @@ class BaseButton {
     if (mouseX >= x && mouseX <= x + widthB && mouseY >= y && mouseY <= y + heightB) {
       cursor(HAND);
       mouseOver = true;
-      if (mousePressed && mouseButton == LEFT  && pressed == false) {
+      if (mousePressed && mouseButton == LEFT && pressed == false) {
         clicked = true;
         currentColor = clickColor;
       } else {

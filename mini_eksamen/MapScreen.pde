@@ -1,6 +1,8 @@
 class MapScreen extends GameState {
 
   Boolean greetingMessageSaid = false, Menu = false;
+  
+
 
   ExitButton exitButton;
   Button spm1;
@@ -32,7 +34,7 @@ class MapScreen extends GameState {
 
     spm1.Run();
     if (spm1.isClicked()) {
-      mainLogic.gameStateManager.SkiftGameStateQuestion("questionScreen", null);
+      mainLogic.gameStateManager.SkiftGameStateQuestion("questionScreen", map[0]);
     }
 
 
