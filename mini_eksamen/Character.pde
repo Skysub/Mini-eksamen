@@ -1,4 +1,4 @@
-class Character { //<>// //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>// //<>//
 
   Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
@@ -63,7 +63,7 @@ class Character { //<>// //<>// //<>// //<>//
     }
 
     //println(speak);
-    if (speak) { //<>//
+    if (speak) {
       speak();
     }
   }
