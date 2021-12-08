@@ -24,6 +24,7 @@ class XMLHandler {
 
     output = parseXML("<data></data>");
 
+
     for (int s = 0; s < int(set.length); s++) {
       XML set1 = output.addChild("set"+str(s+1));
       XML info = set1.addChild("info");
@@ -43,6 +44,7 @@ class XMLHandler {
         spm.addChild("answer2").setContent(set[s][1][4]);
         spm.addChild("answer3").setContent(set[s][1][5]);
         spm.addChild("answer4").setContent(set[s][1][6]);
+
       }
     }
     //println(output);
