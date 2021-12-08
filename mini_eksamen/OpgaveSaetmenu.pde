@@ -1,7 +1,7 @@
 
 class OpgaveSaetMenu extends GameState {
   XMLHandler xmlHandler;
-  
+
   Button doneKnap, nyKnap;
   ExitButton exitBTN;
   boolean ny, listTilArray = true, exitP = false, reset = false;
@@ -39,9 +39,6 @@ class OpgaveSaetMenu extends GameState {
 
         xmlHandler.WriteToXML(opgaveSaet); //Her bliver String arrayet sendt til xml klassen og lavet om til en xml fil.
         parent.ChangeScreen("start");
-      }
-      listTilArray = false;
-    }
 
         //TINGENE HERUNDER SKAL SKE EFTER ALT XML-DIMS ER FÆRDIGGJORT :)
         for (int i = opgaveSaetAL.size() - 1; i >= 0; i--) {
@@ -50,7 +47,7 @@ class OpgaveSaetMenu extends GameState {
         opgaveSaet = null;
         reset = true;
         listTilArray = false;
-      } 
+      }
       oN = 0;
       ChangeScreen("opretOpgave");
     } else reset = false;

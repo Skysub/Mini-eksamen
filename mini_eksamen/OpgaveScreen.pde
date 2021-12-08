@@ -161,7 +161,7 @@ class OpgaveScreen extends GameState {
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
 
 
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false);
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
       opgaveNummer = 1;
 
       clickedgemTrue = false;
