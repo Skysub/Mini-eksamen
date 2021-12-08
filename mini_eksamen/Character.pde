@@ -1,4 +1,4 @@
-class Character { //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>//
 
   Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
@@ -6,6 +6,12 @@ class Character { //<>// //<>// //<>//
   float speakTimeSec, speakTimeMillis, speakTimeFrameStart, evaluateMillis, sizeMod = 2.5;
 
   String spokenLine;
+
+  String currentHead = "none", currentShoes = "none", currentShirt = "none";
+  PImage headTexture, shoeTexture, shirtTexture;
+  Boolean head = false, shoes = false, shirt = false;
+  
+  PVector headItemPos, shirtItemPos, shoeItemPosLeft, shoeItemPosRight;
 
   String[] fsLines = {"Jeg har glædet mig til matematik!", "Hej! Er du klar til at regne?", "Velkommen tilbage!", "Så skal der regnes!", "Heyo!", "Yes! du er tilbage", "Er du frisk på lidt matematik?", "Skal vi spare sammen til noget nyt?\nSå lad os regne!", "Lad os komme i gang!", "Hej! Så er det tid til matematik"};
   String[] asLines = {"Godt klaret!", "Den var lidt svær syntes jeg", "Wow, den var du god til!", "Nice! Godt gjort", "Alright, lad os tage den næste", "Det er godt med noget udfordring", "Vi skal nok tjene en masse mønter!", "Wow, den løste du hurtigt", "Ej, den var sjov", "Det tror jeg også er svaret"};
@@ -58,12 +64,12 @@ class Character { //<>// //<>// //<>//
       //arme
       line(0, -30*sizeMod, 25*sizeMod, 30*sizeMod);
       line(0, -30*sizeMod, -25*sizeMod, 30*sizeMod);
-      
+
       drawCosmetics();
     }
 
     //println(speak);
-    if (speak) { //<>//
+    if (speak) {
       speak();
     }
   }
@@ -117,8 +123,81 @@ class Character { //<>// //<>// //<>//
     ellipse(230, -230, 430, 200);
     noStroke();
   }
-  
+
   void drawCosmetics() {
+    imageMode(CENTER);
+    
+    if (head) {
+      image(headTexture, headItemPos.x, headItemPos.y);
+    }
+    
+    if (shirt) {
+      image(shirtTexture, shirtItemPos.x, shirtItemPos.y);
+    }
+    
+    if (shoes) {
+      image(shoeTexture, shoeItemPosLeft.x, shoeItemPosLeft.y);
+      image(shoeTexture, shoeItemPosRight.x, shoeItemPosRight.y);
+    }
+    
+  }
+
+  //Metode, der lader en skifte hvad en karakter har på. Denne skifter alting
+  void loadWearingCosmetics(String wItem1, String wItem2, String wItem3) {
+    if (wItem1 != "none") {
+      currentHead = wItem1;
+      headTexture = loadImage(currentHead);
+      head = true;
+    } else if (wItem1 == "none") {
+      head = false;
+    }
+    if (wItem2 != "none") {
+      currentShoes = wItem2;
+      shoeTexture = loadImage(currentShoes);
+      shoes = true;
+    } else if (wItem2 == "none") {
+      shoes = false;
+    }
+    if (wItem3 != "none") {
+      currentShirt = wItem3;
+      shirtTexture = loadImage(currentShirt);
+      shirt = true;
+    } else if (wItem3 == "none") {
+      shirt = false;
+    }
+  }
+  
+  //til at skifte enkelt cosmetic ad gangen
+  void changeSpecificCosmetic(String wItem, String itemType) {
+    if (itemType == "head") {
+      currentHead = wItem;
+      headTexture = loadImage(currentHead);
+      head = true;
+    } else if (itemType == "shoes") {
+      currentShoes = wItem;
+      shoeTexture = loadImage(currentShoes);
+      shoes = true;
+    }else if (itemType == "shirt") {
+      currentShirt = wItem;
+      shirtTexture = loadImage(currentShirt);
+      shirt = true;
+    }
+  }
+  
+  void unequipItem(String itemType) {
+    if (itemType == "head") {
+      currentHead = "none";
+      headTexture = null;
+      head = false;
+    } else if (itemType == "shoes") {
+      currentShoes = "none";
+      shoeTexture = null;
+      shoes = false;
+    }else if (itemType == "shirt") {
+      currentShirt = "none";
+      shirtTexture = null;
+      shirt = false;
+    }
   }
 
   Boolean speakCheck() {

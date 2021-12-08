@@ -2,6 +2,8 @@ public class MainLogic {
 
   Character character;
   public Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
+  
+  int coins;
 
   public GameStateManager gameStateManager;
 
@@ -18,8 +20,6 @@ public class MainLogic {
     character.drawCharacter(speakLine);
     speakLine = character.speakCheck();
   }
-  
-
 
   void InitializeScreens(PApplet thePApplet) {
     gameStateManager.AddGameState("start", new StartScreen());
@@ -30,5 +30,13 @@ public class MainLogic {
     gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen());
 
     gameStateManager.SkiftGameState("start");
+  }
+  
+  void addCoins(int change) {
+    coins = coins + change;
+  }
+  
+  int coinAmount(){
+    return coins;
   }
 }
