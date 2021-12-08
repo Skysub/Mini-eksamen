@@ -48,7 +48,7 @@ class OpgaveScreen extends GameState {
         opgave = new String[int(antalSpg)+1][7];
         opgave[0][0] = antalSpg;
         opgave[0][1] = "Placeholder";
-        opgave[0][2] = antalSpgKlare;
+        opgave[0][2] = antalSpgKlare; //Tjek skemaet i repositoriet, nogle ting er ændrede
         opgave[0][3] = navn;
         
         if(opgave[0][0] == null || opgave[0][0] == "0") antalSpg = "1";
@@ -145,15 +145,21 @@ class OpgaveScreen extends GameState {
       opgIgang = true;
       saetIgang = true;
 
-      if (add) opgaveSaetNummer++;
+      if (add) {
+        opgaveSaetNummer++;
+      }
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true, this);
 
-      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, true);
       opgaveSaetMenu.Draw(opgaveSaetNummer);
       add = false;
       nySpg = false;
     }
 
     if (opgaveSaetMenu.ny && ny) {
+
+      opgaveNummer = 1;
+      opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false, this);
+
 
       opgaveSaetMenu.Update(opgaveSaetNummer, opgave, add, false);
       opgaveNummer = 1;

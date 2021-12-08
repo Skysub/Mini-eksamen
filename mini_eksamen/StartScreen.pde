@@ -23,7 +23,7 @@ class StartScreen extends GameState {
 
     elevKnap.Run();
     if (elevKnap.isClicked()) {
-      ChangeScreen("map");
+      ChangeScreen("loadFileScreen");
     }
   }
 }
