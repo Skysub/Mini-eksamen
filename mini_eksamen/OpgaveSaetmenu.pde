@@ -38,7 +38,7 @@ class OpgaveSaetMenu extends GameState {
         }
 
         xmlHandler.WriteToXML(opgaveSaet); //Her bliver String arrayet sendt til xml klassen og lavet om til en xml fil.
-        parent.ChangeScreen("start");
+        //parent.ChangeScreen("start");
 
         //TINGENE HERUNDER SKAL SKE EFTER ALT XML-DIMS ER FÆRDIGGJORT :)
         for (int i = opgaveSaetAL.size() - 1; i >= 0; i--) {

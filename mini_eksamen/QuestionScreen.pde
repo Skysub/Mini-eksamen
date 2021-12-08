@@ -9,6 +9,7 @@ class QuestionScreen extends GameState {
   }
 
   void Update() {
+    
     exitButton.Run();
     if (exitButton.isClicked()) {
       ChangeScreen("start");
