@@ -18,10 +18,13 @@ class TextField {
     else textfield = cp5.addTextfield("StringTextField").setPosition(pos.x, pos.y).setSize(l, 50).setAutoClear(false).setText(s).setCaptionLabel("").keepFocus(false);
   }
 
-  void Update(boolean maxMin, int min, int max) {
+  void Update(boolean maxMin, int min, int max, boolean pause) {
     Draw();
-    Input(maxMin, min, max);
-    enteredString = cp5.get(Textfield.class, stringTextfield).getText();
+
+    if (!pause) {
+      Input(maxMin, min, max);
+      enteredString = cp5.get(Textfield.class, stringTextfield).getText();
+    } else textfield.clear();
   }
 
   void Draw() {
@@ -33,6 +36,7 @@ class TextField {
     if (enteredString.length() > max && maxMin) {
       tooLong = true;
       enteredString = enteredString.substring(0, max);
+      textfield.setText(enteredString);
     } else tooLong = false;
     if (enteredString.length() < min || enteredString.length() < 1) tooShort = true;
     else tooShort = false;
