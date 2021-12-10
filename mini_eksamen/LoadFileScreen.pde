@@ -49,7 +49,9 @@ class LoadFileScreen extends GameState {
       done = false;
       selectInput("Vælg XML opgavesæt fil:", "fileSelected");
       while (!done) {
+        println(millis());
         if (path != null && !fresh) {
+          println("inside____"+millis());
           fresh = true;
           mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
           ChangeScreen("map");
