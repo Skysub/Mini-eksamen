@@ -27,7 +27,7 @@ public class MainLogic {
     gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));   
     gameStateManager.AddGameState("map", new MapScreen());
     gameStateManager.AddGameState("questionScreen", new QuestionScreen());
-    gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen());
+    gameStateManager.AddGameState("LoadFileScreen", new LoadFileScreen());
 
     gameStateManager.SkiftGameState("start");
   }
