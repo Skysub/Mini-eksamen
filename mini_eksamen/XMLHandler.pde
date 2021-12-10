@@ -1,4 +1,4 @@
-class XMLHandler {
+class XMLHandler { //<>//
 
   String[][][] test = new String[1][2][7];
 
@@ -17,18 +17,23 @@ class XMLHandler {
     WriteToXML(test);
   }
 
+// get children virker åbenbart ikke uden noget argument
   String[][][] ReadFromXML(String path) {
-    XML input = loadXML(path); //<>//
+    XML input = loadXML(path).getChild(1);
     String [][][] output;
-  
-    //println(input.getContent().toString());
-    
+
+    println(loadXML(path).toString());
+    //println(input[0].toString());
+    println(input.toString());
+    //println(input[0].getContent().toString());
+
     output = new String[input.getChildCount()][99][7];
 
-    XML[] sets = input.getChildren();
+    XML[] sets = input.getChildren(); //<>//
+    println(sets[0].toString());
     for (int i = 0; i< input.getChildCount(); i++) {
-      XML[] info = sets[i].getChild("info").getChildren();
-      for (int j = 0; j < 4; j++) {
+      XML[] info = sets[i].getChild(1).getChildren();
+      for (int j = 1; j < 4; j = j + 2) {
         output[i][0][j] = info[j].getContent();
       }
       XML[] questions = sets[i].getChildren();

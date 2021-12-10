@@ -46,7 +46,15 @@ class LoadFileScreen extends GameState {
   void knapLoad() {
     if (fresh) {
       fresh = false;
+      done = false;
       selectInput("Vælg XML opgavesæt fil:", "fileSelected");
+      while (!done) {
+        if (path != null && !fresh) {
+          fresh = true; //<>//
+          mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
+          ChangeScreen("map");
+        }
+      }
     }
   }
 }

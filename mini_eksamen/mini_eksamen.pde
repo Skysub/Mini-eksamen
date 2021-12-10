@@ -20,13 +20,13 @@ void draw() {
 }
 
 void fileSelected(File selection) {
-  mainLogic.gameStateManager.GetGameState("loadFileScreen").fresh = true;
+
   if (selection == null) {
+    mainLogic.gameStateManager.GetGameState("loadFileScreen").fresh = true;
     println("Window was closed or the user hit cancel.");
   } else {
     println("User selected " + selection.getAbsolutePath());
     mainLogic.gameStateManager.GetGameState("loadFileScreen").path = selection.getAbsolutePath();
-    mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(selection.getAbsolutePath());
-    mainLogic.gameStateManager.SkiftGameState("map");
   }
+  mainLogic.gameStateManager.GetGameState("loadFileScreen").done = true;
 }
