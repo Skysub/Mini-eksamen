@@ -17,34 +17,40 @@ class XMLHandler { //<>//
     WriteToXML(test);
   }
 
-// get children virker åbenbart ikke uden noget argument
   String[][][] ReadFromXML(String path) {
-    XML input = loadXML(path).getChild(1);
+    XML input = loadXML(path);
     String [][][] output;
 
-    println(loadXML(path).toString());
-    //println(input[0].toString());
-    println(input.toString());
-    //println(input[0].getContent().toString());
+    output = new String[(input.getChildCount()-1)/2][99][7];
 
-    output = new String[input.getChildCount()][99][7];
-
-    XML[] sets = input.getChildren(); //<>//
-    println(sets[0].toString());
-    for (int i = 0; i< input.getChildCount(); i++) {
+    XML[] sets = input.getChildren();
+    //println("1: "+sets[1].toString());
+    for (int i = 1; i < input.getChildCount(); i = i + 2) {
       XML[] info = sets[i].getChild(1).getChildren();
-      for (int j = 1; j < 4; j = j + 2) {
-        output[i][0][j] = info[j].getContent();
+      for (int j = 1; j < 8; j = j + 2) {
+        output[(i-1)/2][0][(j-1)/2] = info[j].getContent();
       }
       XML[] questions = sets[i].getChildren();
-      for (int j = 1; j < int(output[i][0][0]); j++) {
-        XML[] stuff = questions[j].getChildren();
-        for (int s = 0; s < 7; s++) {
-          output[i][j][s] = stuff[s].getContent();
+      for (int j = 1; j < (int(output[(i-1)/2][0][0])*2)+1; j+=2) {
+        XML[] stuff = questions[(j*2)+1].getChildren();
+        for (int s = 1; s < 14; s+=2) {
+          output[(i-1)/2][((j-1)/2)+1][(s-1)/2] = stuff[s].getContent();
         }
       }
     }
-    println(output.toString());
+    /*
+    //output = test;
+    for (int i = 0; i < 1; i++) {
+      for (int j = 0; j < 2; j++) {
+        for (int s = 0; s < 7; s++) {
+          println("["+i+"]["+j+"]["+s+"]"+output[i][j][s]);
+        }
+        println("  _");
+      }
+    }
+    println("done");
+    WriteToXML(output);
+    */
     return output;
   }
 
@@ -55,7 +61,7 @@ class XMLHandler { //<>//
 
     output = parseXML("<data></data>");
 
-
+    //println(set.length);
     for (int s = 0; s < int(set.length); s++) {
       XML set1 = output.addChild("set"+str(s+1));
       XML info = set1.addChild("info");

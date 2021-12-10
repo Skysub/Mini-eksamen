@@ -1,4 +1,4 @@
-class Character { //<>// //<>// //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   Boolean frontScreen = false, assignment = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
