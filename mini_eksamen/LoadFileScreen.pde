@@ -1,6 +1,6 @@
 class LoadFileScreen extends GameState {
 
-  Boolean greetingMessageSaid = false, speakLine;
+  Boolean greetingMessageSaid = false, speakLine, going = false;
 
   ExitButton exitButton;
   Button load, fort;
@@ -43,14 +43,18 @@ class LoadFileScreen extends GameState {
     //text("Du har ikke en save file, load en opgave fil", 150, 20);
   }
 
+  //Spaghettikode, sorry
   void knapLoad() {
     if (fresh) {
-      fresh = false;
-      done = false;
-      selectInput("Vælg XML opgavesæt fil:", "fileSelected");
-      while (!done) {
-        println(fresh +"  "+ path);
-        if (path != null && !fresh) {
+      if (!going) {
+        //fresh = false;
+        done = false;
+        selectInput("Vælg XML opgavesæt fil:", "fileSelected");
+        going = true;
+      }
+      if (done) {
+        //println(fresh +"  "+ path);
+        if (path != null) {
           println("inside____"+millis());
           fresh = true;
           mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
