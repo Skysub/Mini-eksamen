@@ -1,6 +1,6 @@
-import java.io.File; //<>//
+import java.io.File; //<>// //<>// //<>// //<>//
 
-class CustomMenu { //<>//
+class CustomMenu {
 
   //for reading the data folder
   String dataPath = dataPath("");
@@ -8,8 +8,9 @@ class CustomMenu { //<>//
   File[] files = dir.listFiles();
 
   Boolean ItemsInitialized = false, purchaseState;
-  int itemCount, verticalItems, horizontalItems, menuWidth = 580, menuHeight = 696, seperation = 116, rows=6, row, column, itemsAdded = 0;
-  ArrayList<ItemButton> itemButtons = new ArrayList<ItemButton>();;
+  int itemCount, horizontalItems, menuWidth = 580, menuHeight = 696, seperation = 116, rows=7, row, column, itemsAdded = 0;
+  ArrayList<ItemButton> itemButtons = new ArrayList<ItemButton>();
+  ;
   ArrayList<String> itemTextures = new ArrayList<String>();
   ArrayList<String> ownedItems = new ArrayList<String>();
   String tempItemType;
@@ -19,12 +20,8 @@ class CustomMenu { //<>//
   ItemButton itemButton;
 
   CustomMenu() {
-    verticalItems = menuHeight/seperation;
     horizontalItems = menuWidth/seperation;
-    itemCount = verticalItems*horizontalItems;
-    rows = horizontalItems;
-
-    //itemButtons = 
+    itemCount = rows*horizontalItems;
   }
 
   void Update(Boolean Menu) {
@@ -33,20 +30,18 @@ class CustomMenu { //<>//
       //for creating the arraylist of itembuttons and reading SQL player data first time
       if (ItemsInitialized == false) {
         itemButtons.clear();
-        
+
         //reads through the data folder and loads images into itemTextures
         for (int h = 0; h < files.length; h++) {
           String path = files[h].getPath();
-          
-          println("checking");
+
           //checks file type
-          if(path.toLowerCase().endsWith(".png")) {
-            println("png checks out");
+          if (path.toLowerCase().endsWith(".png")) {
             itemTextures.add(files[h].getName());
           }
         }
-        
-        
+
+
         //load owned items from SQL into arraylist ownedItems
 
         initializeItemsBasic();
@@ -54,7 +49,7 @@ class CustomMenu { //<>//
         //character.currentHead = SQL currentHead
         //character.currentShoes = SQL currentShoes
         //character.currentShirt = SQL currentShirt
-        
+
 
         ItemsInitialized = true;
       }
@@ -74,6 +69,7 @@ class CustomMenu { //<>//
           }
 
           //equip new item
+          //Der er en fejl her et sted, der ikke lader en equippe et item efter at have taget det af
           if (itemButton.purchased == true && itemButton.wearing != true) {
             //unequips other items of this type
             tempItemType = itemButton.itemType;
@@ -101,7 +97,7 @@ class CustomMenu { //<>//
 
   void Draw(Boolean Menu) {
     if (Menu) {
-      fill(180, 200, 220);
+      fill(180, 180, 180);
       rect(round(width/2-menuWidth/2), 100, menuWidth, menuHeight+200, 10);
 
       fill(0, 0, 0);
@@ -117,21 +113,20 @@ class CustomMenu { //<>//
 
     translate((round(width/2-menuWidth/2)), 100);
 
-    println(itemTextures.get(0));
-    println(itemTextures.get(1));
+
     //iterates through itemCount, which is the number of itemButtons
     for (int a = 0; a < itemCount; a++) {
 
       //if there are already buttons for actual items
-      println(itemTextures.size());
+
       if (itemsAdded >= itemTextures.size()) {
 
         row = a % rows;
         column = a/rows;
         buttonPos = new PVector(seperation*column, seperation*row);
         //posX, posY, width, height, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem 
-        itemButton = new ItemButton(round(buttonPos.x), round(buttonPos.y), seperation, seperation, itemTextures.get(a), color(194, 194, 194), color(100, 100, 100), 20, color(0, 0, 0), color(220, 220, 220), 25, false, itemTextures.get(a), true); //<>//
-        itemButtons.add(itemButton); //<>//
+        itemButton = new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/2), seperation-5, seperation-5, " ", color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126,153,189), 25, false, " ", true);
+        itemButtons.add(itemButton);
         //itemButtons.add(new ItemButton(round(buttonPos.x), round(buttonPos.y), seperation, seperation, itemTextures.get(a), color(194, 194, 194), color(100, 100, 100), 20, color(0, 0, 0), color(220, 220, 220), 25, false, itemTextures.get(a), true));
         //the button doesn't have item
 
@@ -154,7 +149,7 @@ class CustomMenu { //<>//
         column = a/rows;
         buttonPos = new PVector(seperation*column, seperation*row);
         //posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem
-        itemButtons.add(new ItemButton(round(buttonPos.x), round(buttonPos.y), seperation, seperation, itemTextures.get(a), color(194, 194, 194), color(100, 100, 100), 20, color(0, 0, 0), color(220, 220, 220), 25, purchaseState, itemTextures.get(a), false));
+        itemButtons.add(new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/2), seperation-5, seperation-5, itemTextures.get(a), color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126,153,189), 25, purchaseState, itemTextures.get(a), false));
         //the button has item
 
         itemsAdded++;

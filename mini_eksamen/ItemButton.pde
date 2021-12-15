@@ -7,6 +7,7 @@ class ItemButton extends BaseButton {
   PImage itemTexture;
   String wItem1, wItem2, wItem3;
   String[] splitResults = new String[1];
+  String[] nameSplit = new String[1];
 
   ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem 
   ItemButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc, int p, Boolean pur, String tn, Boolean ni) {
@@ -14,7 +15,6 @@ class ItemButton extends BaseButton {
     y = posY;
     widthB = w;
     heightB = h;
-    buttonText = t;
     buttonColor = c;
     currentColor = c;
     clickColor = cc;
@@ -25,10 +25,20 @@ class ItemButton extends BaseButton {
     purchased = pur;
     textureName = tn;
     noItem = ni;
+    
+    //Remove once SQL is running
+    if (purchased == null) {
+      purchased = true;
+    }
+    if(wearing == null) {
+      wearing = true;
+    }
 
     if (noItem) {
       buttonText = "Item TBA";
     } else if (!noItem) {
+      nameSplit = split(t, '.');
+      buttonText = nameSplit[0];
       itemTexture = loadImage(textureName);
     }
     

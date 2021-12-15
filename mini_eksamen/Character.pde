@@ -123,7 +123,7 @@ class Character { //<>// //<>// //<>// //<>// //<>//
   void drawCosmetics() {
     imageMode(CENTER);
 
-    //current coords are innacurate
+    //current coords are innacurate //<>//
     if (head) {
       image(headTexture, 0, -50*sizeMod);
     }
