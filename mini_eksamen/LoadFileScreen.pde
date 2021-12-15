@@ -1,6 +1,6 @@
-class LoadFileScreen extends GameState {
+class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>//
 
-  Boolean greetingMessageSaid = false, speakLine, going = false;
+  Boolean greetingMessageSaid = false, speakLine, going = false, noSave = false;
 
   ExitButton exitButton;
   Button load, fort;
@@ -16,6 +16,7 @@ class LoadFileScreen extends GameState {
   }
 
   void Update() {
+    Draw();
     if (greetingMessageSaid == false) {
       speakLine = true;
       greetingMessageSaid = true;
@@ -25,6 +26,7 @@ class LoadFileScreen extends GameState {
     load.Run();
     if (load.isClicked()) {
       knapLoad();
+
       NewSave();
     }
 
@@ -34,6 +36,7 @@ class LoadFileScreen extends GameState {
         mainLogic.gameStateManager.SkiftGameState("map");
       } else {
         //kode hvor der står at der ikke er et save på skærmen
+        noSave = true;
       }
     }
 
@@ -57,18 +60,34 @@ class LoadFileScreen extends GameState {
     db.execute("DROP TABLE info");
     db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text)");
     db.execute("CREATE TABLE [progress] (bane id integer NOT NULL PRIMARY KEY UNIQUE,spm ialt integer NOT NULL,rigtige integer NOT NULL,point fået integer NOT NULL,tid brugt integer NOT NULL)");
-    
-    db.execute("INSERT INTO info VALUES(1,'path','"+path+"');");    
+
+    db.execute("INSERT INTO info VALUES(1,'path','"+FileHandler.GetFolder()+"\\opgaveMap.xml');");
   }
 
   void GemOpgaveMap() {
+    try {
+
+      Files.copy(Paths.get(path), Paths.get(FileHandler.GetFolder()+"\\opgaveMap.xml"));
+    }
+    catch(IOException e) {
+      println(e);
+    }
   }
 
   void SletOpgaveMap() {
+    try {
+      Files.delete(Paths.get(FileHandler.GetFolder()+"\\opgaveMap.xml"));
+    }
+    catch(IOException e) {
+      println(e);
+    }
   }
 
   boolean DoesSaveExist() {
-    return true;
+    if (Files.exists(Paths.get(FileHandler.GetFolder()+"\\opgaveMap.xml"))) {
+      return true;
+    }
+    return false;
   }
 
   //Spaghettikode, sorry
@@ -87,8 +106,20 @@ class LoadFileScreen extends GameState {
           fresh = true;
           mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
           ChangeScreen("map");
+          SletOpgaveMap();
+          GemOpgaveMap();
+          noSave = false;
         }
       }
+    }
+  }
+
+  void Draw() {
+    if (noSave) {
+      fill(255,50,50);
+      textAlign(CENTER, CENTER);
+      textSize(50);
+      text("Intet save existerer", width/2-150, 800);
     }
   }
 }
