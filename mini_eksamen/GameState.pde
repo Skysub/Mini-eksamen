@@ -1,6 +1,9 @@
 public class GameState
 {
-  String[][][] set;
+  String[][] set;
+  public String path = null;
+  public boolean fresh = true, done = true;
+  public String[][][] map = null;
 
   public void Update() {
   }
@@ -13,7 +16,7 @@ public class GameState
     mainLogic.gameStateManager.SkiftGameState(name);
   }
 
-  void InjectSet(String[][][] a) {
+  void InjectSet(String[][] a) {
     set = a;
   }
 }

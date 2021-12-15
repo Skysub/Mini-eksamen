@@ -1,0 +1,22 @@
+info table:
+CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,info type text NOT NULL,information text)
+
+0: elevens navn
+1: Path til opgaveSæts filen
+
+Hvert felt har følgende opbygning
+id(int), 
+info type(string), 
+information(string)
+
+
+---------------------------
+progress table:
+CREATE TABLE [progress] (bane id integer NOT NULL PRIMARY KEY UNIQUE,spm ialt integer NOT NULL,rigtige integer NOT NULL,point fået integer NOT NULL,tid brugt integer NOT NULL)
+
+Hvert felt har følgende opbygning:
+bane id(int),
+spm ialt(int) [spørgsmål i opgavesættet ialt],
+rigtige(int),
+point fået(int),
+tid brugt(int) [i sekunder rundet af]

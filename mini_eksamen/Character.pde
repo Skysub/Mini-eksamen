@@ -1,11 +1,15 @@
-class Character { //<>// //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
-  Boolean frontScreen = false, assignment = false, costumize = false, speaking = false, lineDetermined = false, characterOnScreen = false;
+  Boolean frontScreen = false, assignment = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
   int dialoguePick;
   float speakTimeSec, speakTimeMillis, speakTimeFrameStart, evaluateMillis, sizeMod = 2.5;
 
   String spokenLine;
+
+  String currentHead = "none", currentShoes = "none", currentShirt = "none";
+  PImage headTexture, shoeTexture, shirtTexture;
+  Boolean head = false, shoes = false, shirt = false;
 
   String[] fsLines = {"Jeg har glædet mig til matematik!", "Hej! Er du klar til at regne?", "Velkommen tilbage!", "Så skal der regnes!", "Heyo!", "Yes! du er tilbage", "Er du frisk på lidt matematik?", "Skal vi spare sammen til noget nyt?\nSå lad os regne!", "Lad os komme i gang!", "Hej! Så er det tid til matematik"};
   String[] asLines = {"Godt klaret!", "Den var lidt svær syntes jeg", "Wow, den var du god til!", "Nice! Godt gjort", "Alright, lad os tage den næste", "Det er godt med noget udfordring", "Vi skal nok tjene en masse mønter!", "Wow, den løste du hurtigt", "Ej, den var sjov", "Det tror jeg også er svaret"};
@@ -24,13 +28,11 @@ class Character { //<>// //<>// //<>// //<>//
     if (characterState == "map") {
       frontScreen = true;
       assignment = false;
-      costumize = false;
       pos = fsPos;
       characterOnScreen = true;
     } else if (characterState == "questionScreen") {
       frontScreen = false;
       assignment = true;
-      costumize = false;
       pos = asPos;
       characterOnScreen = true;
     } else {
@@ -58,12 +60,12 @@ class Character { //<>// //<>// //<>// //<>//
       //arme
       line(0, -30*sizeMod, 25*sizeMod, 30*sizeMod);
       line(0, -30*sizeMod, -25*sizeMod, 30*sizeMod);
-      
+
       drawCosmetics();
     }
 
     //println(speak);
-    if (speak) { //<>//
+    if (speak) {
       speak();
     }
   }
@@ -117,8 +119,83 @@ class Character { //<>// //<>// //<>// //<>//
     ellipse(230, -230, 430, 200);
     noStroke();
   }
-  
+
   void drawCosmetics() {
+    imageMode(CENTER);
+    translate(pos.x, pos.y);
+
+    //current coords are innacurate
+    if (head) {
+      image(headTexture, 0, -50*sizeMod);
+    }
+
+    if (shirt) {
+      image(shirtTexture, 0, 0);
+    }
+
+    if (shoes) {
+      image(shoeTexture, 20*sizeMod, 100*sizeMod);
+      image(shoeTexture, -20*sizeMod, 100*sizeMod);
+    }
+  }
+
+  //Metode, der lader en skifte hvad en karakter har på. Denne skifter alting
+  void loadWearingCosmetics(String wItem1, String wItem2, String wItem3) {
+    if (wItem1 != "none") {
+      currentHead = wItem1;
+      headTexture = loadImage(currentHead);
+      head = true;
+    } else if (wItem1 == "none") {
+      head = false;
+    }
+    if (wItem2 != "none") {
+      currentShoes = wItem2;
+      shoeTexture = loadImage(currentShoes);
+      shoes = true;
+    } else if (wItem2 == "none") {
+      shoes = false;
+    }
+    if (wItem3 != "none") {
+      currentShirt = wItem3;
+      shirtTexture = loadImage(currentShirt);
+      shirt = true;
+    } else if (wItem3 == "none") {
+      shirt = false;
+    }
+  }
+
+  //til at skifte enkelt cosmetic ad gangen
+  void changeSpecificCosmetic(String wItem, String itemType) {
+    if (itemType == "head") {
+      currentHead = wItem;
+      headTexture = loadImage(currentHead);
+      head = true;
+    } else if (itemType == "shoes") {
+      currentShoes = wItem;
+      shoeTexture = loadImage(currentShoes);
+      shoes = true;
+    } else if (itemType == "shirt") {
+      currentShirt = wItem;
+      shirtTexture = loadImage(currentShirt);
+      shirt = true;
+    }
+  }
+
+  //til at unequipe et enkelt item
+  void unequipItem(String itemType) {
+    if (itemType == "head") {
+      currentHead = "none";
+      headTexture = null;
+      head = false;
+    } else if (itemType == "shoes") {
+      currentShoes = "none";
+      shoeTexture = null;
+      shoes = false;
+    } else if (itemType == "shirt") {
+      currentShirt = "none";
+      shirtTexture = null;
+      shirt = false;
+    }
   }
 
   Boolean speakCheck() {

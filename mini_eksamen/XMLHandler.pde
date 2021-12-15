@@ -1,4 +1,4 @@
-class XMLHandler {
+class XMLHandler { //<>//
 
   String[][][] test = new String[1][2][7];
 
@@ -17,6 +17,43 @@ class XMLHandler {
     WriteToXML(test);
   }
 
+  String[][][] ReadFromXML(String path) {
+    XML input = loadXML(path);
+    String [][][] output;
+
+    output = new String[(input.getChildCount()-1)/2][99][7];
+
+    XML[] sets = input.getChildren();
+    //println("1: "+sets[1].toString());
+    for (int i = 1; i < input.getChildCount(); i = i + 2) {
+      XML[] info = sets[i].getChild(1).getChildren();
+      for (int j = 1; j < 8; j = j + 2) {
+        output[(i-1)/2][0][(j-1)/2] = info[j].getContent();
+      }
+      XML[] questions = sets[i].getChildren();
+      for (int j = 1; j < (int(output[(i-1)/2][0][0])*2)+1; j+=2) {
+        XML[] stuff = questions[(j*2)+1].getChildren();
+        for (int s = 1; s < 14; s+=2) {
+          output[(i-1)/2][((j-1)/2)+1][(s-1)/2] = stuff[s].getContent();
+        }
+      }
+    }
+    /*
+    //output = test;
+    for (int i = 0; i < 1; i++) {
+      for (int j = 0; j < 2; j++) {
+        for (int s = 0; s < 7; s++) {
+          println("["+i+"]["+j+"]["+s+"]"+output[i][j][s]);
+        }
+        println("  _");
+      }
+    }
+    println("done");
+    WriteToXML(output);
+    */
+    return output;
+  }
+
   ///Tager arrayet hvis layout er bestemt via skemaet fundet i repo'et og laver det til en xml fil.
   public void WriteToXML(String[][][] set) {
     XML output;
@@ -24,7 +61,7 @@ class XMLHandler {
 
     output = parseXML("<data></data>");
 
-
+    //println(set.length);
     for (int s = 0; s < int(set.length); s++) {
       XML set1 = output.addChild("set"+str(s+1));
       XML info = set1.addChild("info");
@@ -44,7 +81,6 @@ class XMLHandler {
         spm.addChild("answer2").setContent(set[s][1][4]);
         spm.addChild("answer3").setContent(set[s][1][5]);
         spm.addChild("answer4").setContent(set[s][1][6]);
-
       }
     }
     //println(output);
