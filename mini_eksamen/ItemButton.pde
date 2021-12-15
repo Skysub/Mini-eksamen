@@ -5,14 +5,15 @@ class ItemButton extends BaseButton {
   int price;
   Boolean purchased, noItem, wearing;
   PImage itemTexture;
+  String wItem1, wItem2, wItem3;
+  String[] nameSplit = new String[1];
 
-  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem, itemType 
-  ItemButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc, int p, Boolean pur, String tn, Boolean ni, Boolean we, String it) {
+  ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem 
+  ItemButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc, int p, Boolean pur, String tn, Boolean ni) {
     x = posX;
     y = posY;
     widthB = w;
     heightB = h;
-    buttonText = t;
     buttonColor = c;
     currentColor = c;
     clickColor = cc;
@@ -23,20 +24,29 @@ class ItemButton extends BaseButton {
     purchased = pur;
     textureName = tn;
     noItem = ni;
-    wearing = we;
-    itemType = it;
+    
+    //Remove once SQL is running
+    if (purchased == null) {
+      purchased = true;
+    }
+    if(wearing == null) {
+      wearing = false;
+    }
 
     if (noItem) {
       buttonText = "Item TBA";
     } else if (!noItem) {
+      nameSplit = split(t, '.');
+      buttonText = nameSplit[0];
       itemTexture = loadImage(textureName);
     }
+    
+    assignItemType(textureName);
   }
 
-  void Draw(String wItem1, String wItem2, String wItem3) {
-    //checks if the button corresponds to a purchased item
-    //read through SQL check against items purchased
-    //if (textureName == pItem) purchased = true;
+  void Draw() {
+    
+    updateWornItems();
     
     //checks if the button corresponds to a worn item
     if (textureName == wItem1 || textureName == wItem2 || textureName == wItem3) wearing = true;
@@ -63,15 +73,28 @@ class ItemButton extends BaseButton {
 
   void drawPurchased() {
     //draws a green checkmark of two lines
-    stroke(14, 135, 22);
-    line(x+(widthB/2)-46, y+(heightB/2)-50, x+(widthB/2)-50, y+(heightB/2)-54);
-    line(x+(widthB/2)-50, y+(heightB/2)-54, x+(widthB/2)-48, y+(heightB/2)-52);
+    fill(14, 135, 22);
+    //line(x+(widthB/2)-46, y+(heightB/2)-50, x+(widthB/2)-50, y+(heightB/2)-54);
+    rect(x+(widthB/2)-46, y+(heightB/2)-46,12,12);
+
   }
   
   void drawWearing() {
     //draws a small orange circle to indicate the item is equipped
     noStroke();
     fill(202,61,8);
-    circle(x+(widthB/2)-38, y+(heightB/2)-50,3);
+    circle(x+(widthB/2)-20, y+(heightB/2)-40,12);
+  }
+  
+  void updateWornItems() {
+    wItem1 = mainLogic.character.getwItem("hat");
+    wItem2 = mainLogic.character.getwItem("shirt");
+    wItem3 = mainLogic.character.getwItem("shoes");
+  }
+  
+  void assignItemType(String itemName) {
+    if(itemName.contains("hat.png")) itemType = "hat";
+    if(itemName.contains("shirt.png")) itemType = "shirt";
+    if(itemName.contains("shoes.png")) itemType = "shoes";
   }
 }

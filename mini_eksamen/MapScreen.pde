@@ -37,6 +37,7 @@ class MapScreen extends GameState {
 
 
     customMenu.Draw(Menu);
+    customMenu.Update(Menu);
 
     if (!Menu) {
       customMenuButton.Run();
@@ -50,5 +51,9 @@ class MapScreen extends GameState {
         Menu = false;
       }
     }
+  }
+  
+  Boolean getMenu() {
+    return Menu;
   }
 }
