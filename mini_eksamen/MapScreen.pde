@@ -1,8 +1,6 @@
 class MapScreen extends GameState {
 
   Boolean greetingMessageSaid = false, Menu = false;
-  
-
 
   ExitButton exitButton;
   Button spm1;

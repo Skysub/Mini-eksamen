@@ -24,11 +24,9 @@ class QuestionScreen extends GameState {
     if(i2 == 0){
       antalRigtige = 0;
       antalPoint = 0;
-      //opgaver = det array der fås her!!!!
+      opgaver = set;
     }
     i2++;
-      
-    OpretOpgaver(); //Dette skal fjernes når det er inkorporeret med resten af programet og dets metoder. 
 
     antalSPG = opgaver[0][0];
     pointIAlt = opgaver[0][1];
@@ -87,7 +85,8 @@ class QuestionScreen extends GameState {
       i = 0;
       i2 = 0;
       questionDoneScreen.done = false;
-      ChangeScreen("map"); //DETTE SKAL VÆRE DEN SPECIELLE SKIFTE-TILBAGE METODE!
+      
+      ChangeScreen("map");
     }
   }
 
@@ -103,7 +102,7 @@ class QuestionScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opgavesæt x", 20, 20);
+    text("Opgavesætbesvarer", 20, 20);
 
 
     textSize(25);
@@ -128,30 +127,5 @@ class QuestionScreen extends GameState {
     text(fSvar1, 710, 330 + 100 * intListeRandom.get(1));
     text(fSvar2, 710, 330 + 100 * intListeRandom.get(2));
     text(fSvar3, 710, 330 + 100 * intListeRandom.get(3));
-  }
-
-
-  //Bare midlertidig metode, indtil at samarbejde med at få hentet arrayet fra XML-filen implementeres, bare så alt på skærmen kan testes. h
-  void OpretOpgaver() {
-    opgaver[0][0] = "2";
-    opgaver[0][1] = "8";
-    opgaver[0][2] = "1";
-    opgaver[0][3] = "Ole";
-
-    opgaver[1][0] = "Hvad er den bedste serie?";
-    opgaver[1][1] = "Det kan du godt svare på, kom nu! Dette er den forklarende tekst h";
-    opgaver[1][2] = "2";
-    opgaver[1][3] = "Ingen af de nævnte serier";
-    opgaver[1][4] = "The Flash";
-    opgaver[1][5] = "Ninjago";
-    opgaver[1][6] = "JoJo";
-
-    opgaver[2][0] = "Hvem er den sejeste lærer på HCØ gymnasium?";
-    opgaver[2][1] = "HCØ Gymnasium i Lyngbu, der ligger på DTU";
-    opgaver[2][2] = "6";
-    opgaver[2][3] = "Espen";
-    opgaver[2][4] = "Nina";
-    opgaver[2][5] = "Ole";
-    opgaver[2][6] = "Tina :^(";
   }
 }
