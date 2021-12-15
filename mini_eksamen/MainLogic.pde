@@ -26,7 +26,7 @@ public class MainLogic {
 
     gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));   
     gameStateManager.AddGameState("map", new MapScreen());
-    gameStateManager.AddGameState("questionScreen", new QuestionScreen());
+    gameStateManager.AddGameState("questionScreen", new QuestionScreen(thePApplet));
     gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen(thePApplet));
     gameStateManager.AddGameState("name", new NameScreen(thePApplet));
 

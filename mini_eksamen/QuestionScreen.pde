@@ -2,13 +2,14 @@ class QuestionScreen extends GameState {
 
   ExitButton exitButton;
   String[][] opgaver = new String[99][7];
-  int opgaveNummer = 1, antalRigtige = 0, antalPoint = 0, i = 0, i2 = 0, opgaveNummerDisplay;
+  int opgaveNummer = 1, antalRigtige = 0, antalPoint = 0, i = 0, i2 = 0, opgaveNummerDisplay, opgaveSaetNummer, tidligereOpgaveSaetNummer;
   String antalSPG, pointIAlt, antalKorrekteSPG, laererNavn, SPG, fTekst, pointSPG, rSvar, fSvar1, fSvar2, fSvar3;
   IntList intListeRandom = IntList.fromRange(0, 4);
   ButtonWPauseMove rBTN, f1BTN, f2BTN, f3BTN;
   QuestionDoneScreen questionDoneScreen;
+  SQLite db;
 
-  QuestionScreen() {
+  QuestionScreen(PApplet thePApplet) {
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
@@ -18,10 +19,13 @@ class QuestionScreen extends GameState {
     f3BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     questionDoneScreen = new QuestionDoneScreen();
     intListeRandom.shuffle();
+    db = new SQLite(thePApplet, FileHandler.GetFolder()+"\\data.sqlite" );
+    db.connect();
   }
 
   void Update() {
-    if(i2 == 0){
+    GetOpgaveSaetNummer();
+    if (i2 == 0) {
       antalRigtige = 0;
       antalPoint = 0;
       opgaver = set;
@@ -57,7 +61,6 @@ class QuestionScreen extends GameState {
         } else {
           //Ting der skal ske når der svares forkert
         }
-
         //Ting der skal gøres selvom spørgsmålet er rigtigt eller ej.
         intListeRandom.shuffle();
         opgaveNummer++; 
@@ -85,7 +88,8 @@ class QuestionScreen extends GameState {
       i = 0;
       i2 = 0;
       questionDoneScreen.done = false;
-      
+      AddToDataBase();
+
       ChangeScreen("map");
     }
   }
@@ -127,5 +131,17 @@ class QuestionScreen extends GameState {
     text(fSvar1, 710, 330 + 100 * intListeRandom.get(1));
     text(fSvar2, 710, 330 + 100 * intListeRandom.get(2));
     text(fSvar3, 710, 330 + 100 * intListeRandom.get(3));
+  }
+
+  void AddToDataBase() {
+    db.execute("INSERT INTO progess VALUES('bane id','"+opgaveSaetNummer+"');");
+    db.execute("INSERT INTO progess VALUES('spm ialt','"+antalSPG+"');");
+    db.execute("INSERT INTO progess VALUES('rigtige','"+antalKorrekteSPG+"');");
+    db.execute("INSERT INTO progess VALUES('point fået','"+antalPoint+"');");
+  }
+
+  void GetOpgaveSaetNummer() {
+    db.query("SELECT MAX(bane id) as \"tidligereOpgaveSaetNummer\" FROM progress where type=\"int\"");
+    opgaveSaetNummer = tidligereOpgaveSaetNummer+1;
   }
 }
