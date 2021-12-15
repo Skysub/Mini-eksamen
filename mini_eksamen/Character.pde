@@ -122,7 +122,6 @@ class Character { //<>// //<>// //<>// //<>// //<>//
 
   void drawCosmetics() {
     imageMode(CENTER);
-    translate(pos.x, pos.y);
 
     //current coords are innacurate
     if (head) {
@@ -196,6 +195,13 @@ class Character { //<>// //<>// //<>// //<>// //<>//
       shirtTexture = null;
       shirt = false;
     }
+  }
+  
+  String getwItem(String itemSlot) {
+    if(itemSlot == "head") return currentHead;
+    if(itemSlot == "shirt") return currentShirt;
+    if(itemSlot == "shoes") return currentShoes;
+    else return "wrong call in getwItem, Character";
   }
 
   Boolean speakCheck() {
