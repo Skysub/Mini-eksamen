@@ -2,7 +2,7 @@ class QuestionScreen extends GameState {
 
   ExitButton exitButton;
   String[][] opgaver = new String[99][7];
-  int opgaveNummer = 1, antalRigtige = 0, antalPoint = 0, i = 0, i2 = 0;
+  int opgaveNummer = 1, antalRigtige = 0, antalPoint = 0, i = 0, i2 = 0, opgaveNummerDisplay;
   String antalSPG, pointIAlt, antalKorrekteSPG, laererNavn, SPG, fTekst, pointSPG, rSvar, fSvar1, fSvar2, fSvar3;
   IntList intListeRandom = IntList.fromRange(0, 4);
   ButtonWPauseMove rBTN, f1BTN, f2BTN, f3BTN;
@@ -68,7 +68,7 @@ class QuestionScreen extends GameState {
       }
     } 
     i++;
-
+    opgaveNummerDisplay = opgaveNummer;
 
     exitButton.Run();
     if (exitButton.isClicked()) {
@@ -78,6 +78,7 @@ class QuestionScreen extends GameState {
     if (opgaveNummer == int(antalSPG) + 1) {
       if (antalRigtige >= int(antalKorrekteSPG)) questionDoneScreen.Update(true, int(antalKorrekteSPG) - antalRigtige, antalPoint, antalRigtige, int(antalSPG));
       else questionDoneScreen.Update(false, int(antalKorrekteSPG) - antalRigtige, antalPoint, antalRigtige, int(antalSPG));
+      opgaveNummerDisplay = opgaveNummer - 1;
     }
 
     if (questionDoneScreen.done) {
@@ -106,7 +107,7 @@ class QuestionScreen extends GameState {
 
 
     textSize(25);
-    text("Spørgsmål: " + opgaveNummer + "/" + antalSPG, 20, 120);
+    text("Spørgsmål: " + opgaveNummerDisplay + "/" + antalSPG, 20, 120);
     text("Antal korrekte spørgsmål: " + antalRigtige + "/" + antalSPG, 20, 160);
     text("Antal spørgsmål korrekte for at klare sættet: "+ antalKorrekteSPG, 20, 200);
     text("Antal muligt optjænelige mønter: " + pointIAlt, 20, 240);
