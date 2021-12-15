@@ -105,7 +105,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>//
           //println("inside____"+millis());
           fresh = true;
           mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
-          ChangeScreen("map");
+          ChangeScreen("navn");
           SletOpgaveMap();
           GemOpgaveMap();
           noSave = false;
