@@ -1,4 +1,4 @@
-import java.io.File; //<>// //<>// //<>// //<>//
+import java.io.File; //<>// //<>// //<>// //<>// //<>//
 
 class CustomMenu {
 
@@ -6,6 +6,8 @@ class CustomMenu {
   String dataPath = dataPath("");
   File dir = new File(dataPath);
   File[] files = dir.listFiles();
+
+  String test;
 
   Boolean ItemsInitialized = false, purchaseState;
   int itemCount, horizontalItems, menuWidth = 580, menuHeight = 696, seperation = 116, rows=7, row, column, itemsAdded = 0;
@@ -17,15 +19,26 @@ class CustomMenu {
   PVector buttonPos;
   color c = color(194), click = color(100), mouseOver = color(220), textColor = color(0);
 
+  Button removeItemsButton;
+
   ItemButton itemButton;
 
   CustomMenu() {
     horizontalItems = menuWidth/seperation;
     itemCount = rows*horizontalItems;
+
+    //posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
+    removeItemsButton = new Button(round(width/2-menuWidth/2)+70, 110, 250, 60, "Remove items", color(200, 150, 150), color(100, 200, 100), 30, color(0));
   }
 
   void Update(Boolean Menu) {
     if (Menu) {
+
+      removeItemsButton.Run();
+      if (removeItemsButton.isClicked()) {
+        removeItems();
+      }
+
 
       //for creating the arraylist of itembuttons and reading SQL player data first time
       if (ItemsInitialized == false) {
@@ -82,14 +95,16 @@ class CustomMenu {
             //actually equips the new item
             itemButton = itemButtons.get(i);
             itemButton.wearing = true;
+
+            println(itemButton.textureName);
             mainLogic.character.changeSpecificCosmetic(itemButton.textureName, itemButton.itemType);
           }
 
           //unequip worn item
-          if (itemButton.purchased == true && itemButton.wearing == true) {
-            itemButton.wearing = false;
-            mainLogic.character.unequipItem(itemButton.itemType);
-          }
+          //if (itemButton.purchased == true && itemButton.wearing == true) {
+          //  itemButton.wearing = false;
+          //  mainLogic.character.unequipItem(itemButton.itemType);
+          //}
         }
       }
     }
@@ -125,7 +140,7 @@ class CustomMenu {
         column = a/rows;
         buttonPos = new PVector(seperation*column, seperation*row);
         //posX, posY, width, height, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem 
-        itemButton = new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/2), seperation-5, seperation-5, " ", color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126,153,189), 25, false, " ", true);
+        itemButton = new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/1.5), seperation-5, seperation-5, " ", color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126, 153, 189), 25, false, " ", true);
         itemButtons.add(itemButton);
         //itemButtons.add(new ItemButton(round(buttonPos.x), round(buttonPos.y), seperation, seperation, itemTextures.get(a), color(194, 194, 194), color(100, 100, 100), 20, color(0, 0, 0), color(220, 220, 220), 25, false, itemTextures.get(a), true));
         //the button doesn't have item
@@ -149,10 +164,20 @@ class CustomMenu {
         column = a/rows;
         buttonPos = new PVector(seperation*column, seperation*row);
         //posX, posY, width, heigh, text, color, clickColor, TextSize, textColor, mouseOverColor, price, purchased, textureName, noItem
-        itemButtons.add(new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/2), seperation-5, seperation-5, itemTextures.get(a), color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126,153,189), 25, purchaseState, itemTextures.get(a), false));
+        itemButtons.add(new ItemButton(round(buttonPos.x+width/2-menuWidth/2+2.5), round(buttonPos.y+100+seperation/1.5), seperation-5, seperation-5, itemTextures.get(a), color(45, 49, 74), color(100, 100, 100), 20, color(255), color(126, 153, 189), 25, purchaseState, itemTextures.get(a), false));
         //the button has item
 
         itemsAdded++;
+      }
+    }
+  }
+
+  void removeItems() {
+    for (int q = 0; q < itemButtons.size(); q++) {
+      itemButton = itemButtons.get(q);
+      if (itemButton.wearing == true) {
+        itemButton.wearing = false;
+        mainLogic.character.unequipItem(itemButton.itemType);
       }
     }
   }

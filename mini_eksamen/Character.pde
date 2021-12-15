@@ -123,6 +123,9 @@ class Character { //<>// //<>// //<>// //<>// //<>//
   void drawCosmetics() {
     imageMode(CENTER);
 
+    //println("Current head item: " + currentHead);
+    //println("Current shirt item: " + currentShirt);
+
     //current coords are innacurate //<>//
     if (head) {
       image(headTexture, 0, -50*sizeMod);
@@ -165,7 +168,8 @@ class Character { //<>// //<>// //<>// //<>// //<>//
 
   //til at skifte enkelt cosmetic ad gangen
   void changeSpecificCosmetic(String wItem, String itemType) {
-    if (itemType == "head") {
+    if (itemType == "hat") {
+      println("Hat runs!");
       currentHead = wItem;
       headTexture = loadImage(currentHead);
       head = true;
@@ -174,6 +178,7 @@ class Character { //<>// //<>// //<>// //<>// //<>//
       shoeTexture = loadImage(currentShoes);
       shoes = true;
     } else if (itemType == "shirt") {
+      println("shirt runs!");
       currentShirt = wItem;
       shirtTexture = loadImage(currentShirt);
       shirt = true;
@@ -182,7 +187,7 @@ class Character { //<>// //<>// //<>// //<>// //<>//
 
   //til at unequipe et enkelt item
   void unequipItem(String itemType) {
-    if (itemType == "head") {
+    if (itemType == "hat") {
       currentHead = "none";
       headTexture = null;
       head = false;
