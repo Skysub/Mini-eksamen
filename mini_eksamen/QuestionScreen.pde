@@ -131,7 +131,7 @@ class QuestionScreen extends GameState {
   }
 
 
-  //Bare midlertidig metode, indtil at samarbejde med at få hentet arrayet fra XML-filen implementeres, bare så alt på skærmen kan testes.
+  //Bare midlertidig metode, indtil at samarbejde med at få hentet arrayet fra XML-filen implementeres, bare så alt på skærmen kan testes. h
   void OpretOpgaver() {
     opgaver[0][0] = "2";
     opgaver[0][1] = "8";
