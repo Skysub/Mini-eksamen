@@ -86,8 +86,6 @@ class QuestionScreen extends GameState {
       i2 = 0;
       questionDoneScreen.done = false;
       
-      db.query();
-      
       ChangeScreen("map");
     }
   }
