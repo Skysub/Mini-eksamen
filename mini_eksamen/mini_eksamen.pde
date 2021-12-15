@@ -1,6 +1,7 @@
 import controlP5.*;
 import de.bezier.data.sql.*;
 import de.bezier.data.sql.mapper.*;
+import java.nio.file.*;
 
 MainLogic mainLogic;
 XMLHandler xmlHandler;
@@ -19,14 +20,18 @@ void draw() {
   mainLogic.Update();
 }
 
-void fileSelected(File selection) {
-  mainLogic.gameStateManager.GetGameState("loadFileScreen").fresh = true;
+void fileSelected(File selection) {  
   if (selection == null) {
+    mainLogic.gameStateManager.GetGameState("loadFileScreen").fresh = true;
     println("Window was closed or the user hit cancel.");
   } else {
     println("User selected " + selection.getAbsolutePath());
-    mainLogic.gameStateManager.GetGameState("loadFileScreen").path = selection.getAbsolutePath();
-    mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(selection.getAbsolutePath());
-    mainLogic.gameStateManager.SkiftGameState("map");
+    try {
+      mainLogic.gameStateManager.GetGameState("loadFileScreen").path = selection.getAbsolutePath();
+    }
+    catch(Exception e) {
+      println(e);
+    }
   }
+  mainLogic.gameStateManager.GetGameState("loadFileScreen").done = true;
 }
