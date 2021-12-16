@@ -1,7 +1,6 @@
-class MapScreen extends GameState {
+class MapScreen extends GameState { //<>//
 
   Boolean greetingMessageSaid = false, Menu = false;
-  int nextSet = -1;
   int onceAsecond = 0;
 
   ExitButton exitButton;
@@ -12,7 +11,7 @@ class MapScreen extends GameState {
   CustomMenu customMenu;
 
   MapScreen(PApplet thePApplet) {
-        super(thePApplet);
+    super(thePApplet);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     spm1 = new Button((round(width*3/4)), 300, 200, 50, "Spørgsmål 1", color(200, 150, 150), color(100, 200, 100), 30, color(0));
@@ -40,7 +39,7 @@ class MapScreen extends GameState {
 
     spm1.Run();
     if (spm1.isClicked()) {
-      mainLogic.gameStateManager.SkiftGameStateQuestion("questionScreen", map[0]);
+      mainLogic.gameStateManager.SkiftGameStateQuestion("questionScreen", map[nextSet-1], nextSet);
     }
 
 
@@ -63,13 +62,19 @@ class MapScreen extends GameState {
 
   int GetNextSet() {
     try {
-      //db.query( "SELECT username FROM PW WHERE username='"+a[1]+"';" );
+      db.query( "SELECT MAX(bane) FROM progress" ); //<>//
+      if (db.next()) {
+        int t = db.getInt(1);
+        println(t);
+        if (db.getInt(1) > -1) {
+          return t+1;
+        }
+      }
     }
     catch(Exception e) {
       println(e);
     }
-
-    return -1;
+    return 1;
   }
 
   Boolean getMenu() {

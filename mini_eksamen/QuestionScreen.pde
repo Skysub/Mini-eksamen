@@ -25,7 +25,7 @@ class QuestionScreen extends GameState {
   }
 
   void Update() {
-    GetOpgaveSaetNummer();
+    //GetOpgaveSaetNummer();
     if (i2 == 0) {
       antalRigtige = 0;
       antalPoint = 0;
