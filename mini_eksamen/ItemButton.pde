@@ -3,7 +3,7 @@ class ItemButton extends BaseButton {
   color mouseOverColor;
   String textureName, itemType;
   int price;
-  Boolean purchased, noItem, wearing;
+  Boolean purchased, noItem, wearing, showPrice = false;
   PImage itemTexture;
   String wItem1, wItem2, wItem3;
   String[] nameSplit = new String[1];
@@ -41,6 +41,10 @@ class ItemButton extends BaseButton {
       itemTexture = loadImage(textureName);
     }
     
+    if (!noItem && !purchased) {
+      showPrice = true;
+    }
+    
     assignItemType(textureName);
   }
 
@@ -69,6 +73,7 @@ class ItemButton extends BaseButton {
 
     if (purchased) drawPurchased();
     if (wearing) drawWearing();
+    if (showPrice) drawPrice();
   }
 
   void drawPurchased() {
@@ -84,6 +89,14 @@ class ItemButton extends BaseButton {
     noStroke();
     fill(202,61,8);
     circle(x+(widthB/2)-20, y+(heightB/2)-40,12);
+  }
+  
+  void drawPrice() {
+    //draws golden circle and price
+    noStroke();
+    fill(217,166,0);
+    text("25", x+(widthB/2)+20, y+(heightB/2)+37.5);
+    circle(x+(widthB/2)+40, y+(heightB/2)+40,12);
   }
   
   void updateWornItems() {
