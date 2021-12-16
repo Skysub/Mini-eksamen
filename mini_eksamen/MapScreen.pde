@@ -1,6 +1,8 @@
 class MapScreen extends GameState {
 
   Boolean greetingMessageSaid = false, Menu = false;
+  int nextSet = -1;
+  int onceAsecond = 0;
 
   ExitButton exitButton;
   Button spm1;
@@ -19,6 +21,11 @@ class MapScreen extends GameState {
   }
 
   void Update() {
+    if (onceAsecond < millis()-1000) {
+      onceAsecond = millis();
+      nextSet = GetNextSet();
+    }
+
 
     if (greetingMessageSaid == false) {
       mainLogic.speakLine = true;
@@ -52,7 +59,18 @@ class MapScreen extends GameState {
       }
     }
   }
-  
+
+  int GetNextSet() {
+    try {
+      
+    }
+    catch(Exception e) {
+      println(e);
+    }
+
+    return -1;
+  }
+
   Boolean getMenu() {
     return Menu;
   }
