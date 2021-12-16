@@ -47,6 +47,6 @@ class NameScreen extends GameState {
 
   void SetName(String name) {
     db.execute("INSERT INTO info VALUES(0,'name','"+name+"');");
-    ChangeScreen("map");
+    ChangeScreen("loadFileScreen");
   }
 }
