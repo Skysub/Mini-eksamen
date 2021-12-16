@@ -9,7 +9,8 @@ class OpgaveSaetMenu extends GameState {
   ArrayList<String[][]> opgaveSaetAL = new ArrayList<String[][]>();
   String[][][] opgaveSaet;
 
-  OpgaveSaetMenu() {
+  OpgaveSaetMenu(PApplet thePApplet) {
+        super(thePApplet);
     xmlHandler = new XMLHandler();
     doneKnap = new Button(width/2+100, height/2, 250, 50, "Afslut opretning", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nyKnap = new Button(width/2-355, height/2, 250, 50, "Nyt opgavesæt", color(200, 150, 150), color(100, 200, 100), 25, color(0));

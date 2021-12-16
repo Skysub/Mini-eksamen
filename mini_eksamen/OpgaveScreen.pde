@@ -12,7 +12,8 @@ class OpgaveScreen extends GameState {
   String[][] opgave;
 
   OpgaveScreen(PApplet thePApplet) {
-    opgaveSaetMenu = new OpgaveSaetMenu();
+        super(thePApplet);
+    opgaveSaetMenu = new OpgaveSaetMenu(thePApplet);
 
     //Knapper
     gemSpgKnap = new ButtonWPause(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));

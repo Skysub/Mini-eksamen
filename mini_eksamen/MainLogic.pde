@@ -22,10 +22,10 @@ public class MainLogic {
   }
 
   void InitializeScreens(PApplet thePApplet) {
-    gameStateManager.AddGameState("start", new StartScreen());
+    gameStateManager.AddGameState("start", new StartScreen(thePApplet));
 
     gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));   
-    gameStateManager.AddGameState("map", new MapScreen());
+    gameStateManager.AddGameState("map", new MapScreen(thePApplet));
     gameStateManager.AddGameState("questionScreen", new QuestionScreen(thePApplet));
     gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen(thePApplet));
     gameStateManager.AddGameState("name", new NameScreen(thePApplet));
