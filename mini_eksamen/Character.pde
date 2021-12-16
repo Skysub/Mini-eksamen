@@ -1,4 +1,4 @@
-class Character { //<>// //<>// //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   Boolean frontScreen = false, assignment = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
@@ -17,7 +17,7 @@ class Character { //<>// //<>// //<>// //<>// //<>//
   Character() {
     //hvor på skærmen karakteren tegnes
     fsPos = new PVector(round(width/6), round(height/2));
-    asPos = new PVector(500, 640);
+    asPos = new PVector(100, 670);
     speakTimeSec = 3;
     speakTimeMillis = speakTimeSec*1000;
   }

@@ -2,8 +2,9 @@ public class GameState
 {
   String[][] set;
   public String path = null;
-  public boolean fresh = true;
+  public boolean fresh = true, done = true;
   public String[][][] map = null;
+  
 
   public void Update() {
   }
