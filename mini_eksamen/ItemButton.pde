@@ -49,7 +49,8 @@ class ItemButton extends BaseButton {
   }
 
   void Draw() {
-
+    
+    //gets worn items and checks if the price should be displayed
     updateWornItems();
 
     //checks if the button corresponds to a worn item
@@ -91,17 +92,22 @@ class ItemButton extends BaseButton {
   }
 
   void drawPrice() {
-    //draws golden circle and price
+    //draws price and a small golden coin symbol
     noStroke();
-    fill(217, 166, 0);
-    text("25", x+(widthB/2)+20, y+(heightB/2)+37.5);
-    circle(x+(widthB/2)+40, y+(heightB/2)+40, 12);
+    fill(217,176,28);
+    textSize(20);
+    textMode(CENTER);
+    text(price, x+(widthB/2)+20, y+(heightB/2)+40,12);
+    circle(x+(widthB/2)+40, y+(heightB/2)+42.5,12);
   }
+  
 
   void updateWornItems() {
     wItem1 = mainLogic.character.getwItem("hat");
     wItem2 = mainLogic.character.getwItem("shirt");
     wItem3 = mainLogic.character.getwItem("shoes");
+    
+    if (!purchased && !noItem) showPrice = true; else showPrice = false;
   }
 
   void assignItemType(String itemName) {
