@@ -1,9 +1,10 @@
-public class MainLogic {
+public class MainLogic { //<>//
 
   Character character;
   public Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
   SQLite db;
   int coins;
+  String coinsS;
 
   public GameStateManager gameStateManager;
 
@@ -49,23 +50,46 @@ public class MainLogic {
 
   void saveCosmetics(boolean firstSave) {
     if (firstSave) {
-      db.execute("INSERT INTO info VALUES(2,'current head','"+character.currentHead+"');");
+      db.execute("INSERT INTO info VALUES(2,'currenthead','"+character.currentHead+"');");
       delay(10);
-      db.execute("INSERT INTO info VALUES(3,'current shoes','"+character.currentShoes+"');");
+      db.execute("INSERT INTO info VALUES(3,'currentshoes','"+character.currentShoes+"');");
       delay(10);
-      db.execute("INSERT INTO info VALUES(4,'current shirt','"+character.currentShirt+"');");
+      db.execute("INSERT INTO info VALUES(4,'currentshirt','"+character.currentShirt+"');");
       delay(10);
-      db.execute("INSERT INTO info VALUES(5,'total coins','"+coins+"');");
+      db.execute("INSERT INTO info VALUES(5,'totalcoins','"+coins+"');");
       delay(10);
     } else {
-      db.execute("UPDATE info SET current head = '"+character.currentHead+"' WHERE id = 2;");
+      db.execute("UPDATE info SET information='"+character.currentHead+"' WHERE id = 2;");
       delay(10);
-      db.execute("UPDATE info SET current shoes = '"+character.currentShoes+"' WHERE id = 3;");
+      db.execute("UPDATE info SET information='"+character.currentShoes+"' WHERE id = 3;");
       delay(10);
-      db.execute("UPDATE info SET current shirt = '"+character.currentShirt+"' WHERE id = 4;");
+      db.execute("UPDATE info SET information='"+character.currentShirt+"' WHERE id = 4;");
       delay(10);
-      db.execute("UPDATE info SET total coins = '"+coins+"' WHERE id = 5;");
+      db.execute("UPDATE info SET information="+coins+" WHERE id = 5;");
       delay(10);
     }
+  }
+
+  void HentCosmetics() {
+    db.query("SELECT information FROM info WHERE id = 2");
+    delay(10);
+    if (db.next()) character.currentHead = db.getString(1);
+
+    db.query("SELECT information FROM info WHERE id = 3");
+    delay(10);
+    if (db.next()) character.currentShoes = db.getString(1);
+
+    db.query("SELECT information FROM info WHERE id = 4");
+    delay(10);
+    if (db.next()) character.currentShirt = db.getString(1);
+
+    db.query("SELECT information FROM info WHERE id = 5");
+    delay(10);
+    if (db.next()) { 
+      coinsS = db.getString(1);
+      coins = int(coinsS);
+    }
+    
+    print("cosmetics er hentet!");
   }
 }
