@@ -10,9 +10,9 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     super(thePApplet);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
-    name = new ExitButton(1000, 200, 75, 75, "name test", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
-    load = new Button((width/2)-(width/4)+100, 300, 560, 65, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
-    fort  = new Button((width/2)-(width/4)+100, 500, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    name = new ExitButton(width/2-150, 280, 300, 60, "Angiv dit navn", color(200, 150, 150), color(255, 200, 200), 30, color(25, 25, 25), color(230, 150, 150));
+    load = new Button(width/2-280, 560, 560, 60, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    fort  = new Button(width/2-150, 800, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
   }
 
   void Update() {
