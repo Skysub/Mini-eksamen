@@ -2,8 +2,8 @@ public class QuestionDoneScreen extends GameState {
   Button backBTN;
   boolean done = false;
 
-  QuestionDoneScreen(PApplet thePApplet) {
-        super(thePApplet);
+  QuestionDoneScreen(PApplet thePApplet, SQLite database) {
+        super(thePApplet, database);
     backBTN = new Button(width/2-125, height/2+130, 250, 50, "Tilbage til kortet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
   }
 

@@ -6,8 +6,8 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
   Button load, fort;
 
 
-  LoadFileScreen(PApplet thePApplet) {
-    super(thePApplet);
+  LoadFileScreen(PApplet thePApplet, SQLite database) {
+    super(thePApplet, database);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     name = new ExitButton(1000, 200, 75, 75, "name test", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
@@ -34,6 +34,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     if (fort.isClicked()) {
       if (DoesSaveExist()) {
         db.query( "SELECT information FROM info WHERE id=1;" );
+        delay(50);
         path = db.getString(1);
         println(path);
         mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
@@ -75,11 +76,16 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
   void NewSave() {
     //Sletter og genopretter tabellerne
     db.execute("DROP TABLE progress;");
+    delay(50);
     db.execute("DROP TABLE info");
+    delay(50);
     db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text)");
+    delay(50);
     db.execute("CREATE TABLE [progress] (bane id integer NOT NULL PRIMARY KEY UNIQUE,spm ialt integer NOT NULL,rigtige integer NOT NULL,point fået integer NOT NULL,tid brugt integer NOT NULL)");
+    delay(50);
 
     db.execute("INSERT INTO info VALUES(1,'path','"+FileHandler.GetFolder()+"\\opgaveMap.xml');");
+    delay(50);
   }
 
   void GemOpgaveMap() {

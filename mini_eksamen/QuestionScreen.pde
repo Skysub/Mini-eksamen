@@ -9,8 +9,8 @@ class QuestionScreen extends GameState {
   ButtonWPauseMove rBTN, f1BTN, f2BTN, f3BTN;
   QuestionDoneScreen questionDoneScreen;
 
-  QuestionScreen(PApplet thePApplet) {
-    super(thePApplet);
+  QuestionScreen(PApplet thePApplet, SQLite database) {
+    super(thePApplet, database);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
@@ -18,7 +18,7 @@ class QuestionScreen extends GameState {
     f1BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     f2BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     f3BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    questionDoneScreen = new QuestionDoneScreen(thePApplet);
+    questionDoneScreen = new QuestionDoneScreen(thePApplet, database);
     intListeRandom.shuffle();
   }
 
@@ -141,6 +141,7 @@ class QuestionScreen extends GameState {
   void AddToDataBase() {
     db.execute("INSERT INTO progress VALUES("+nextSet+","+antalSPG+","+antalKorrekteSPG+","+antalPoint+","+opgaveTid+");");
     opgaveTid = -1;
+    delay(50);
   }
 
   //Bruges ikke, skal ikke bruges
@@ -148,5 +149,6 @@ class QuestionScreen extends GameState {
     //Virker ikke
     db.query("SELECT MAX(bane id) as \"tidligereOpgaveSaetNummer\" FROM progress where type=\"int\"");
     opgaveSaetNummer = tidligereOpgaveSaetNummer+1;
+    //delay(50);
   }
 }
