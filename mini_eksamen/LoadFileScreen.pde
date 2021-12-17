@@ -13,8 +13,6 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     name = new ExitButton(1000, 200, 75, 75, "name test", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     load = new Button((width/2)-(width/4)+100, 300, 560, 65, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
     fort  = new Button((width/2)-(width/4)+100, 500, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
-    
-
   }
 
   void Update() {
@@ -35,6 +33,10 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     fort.Run();
     if (fort.isClicked()) {
       if (DoesSaveExist()) {
+        db.query( "SELECT information FROM info WHERE id=1;" );
+        path = db.getString(1);
+        println(path);
+        mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
         mainLogic.gameStateManager.SkiftGameState("map");
       } else {
         //kode hvor der står at der ikke er et save på skærmen
@@ -64,7 +66,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     textSize(30);
     text("Angive dit navn, hvis det er første gang du spiller på den", width/2-410, 200);
     text("fil, din lærer har givet til dig:", width/2-410, 233);
-    
+
     text("Loade filen din lærer har givet dig, hvis det er første gang", width/2-410, 430);
     text("du spiller på den. Hvis du loader en fil og det ikke er første", width/2-410, 463);
     text("gang, så overskrives dit gamle save:", width/2-410, 496);

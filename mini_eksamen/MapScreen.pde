@@ -39,6 +39,7 @@ class MapScreen extends GameState { //<>//
 
     spm1.Run();
     if (spm1.isClicked()) {
+      println(nextSet);
       mainLogic.gameStateManager.SkiftGameStateQuestion("questionScreen", map[nextSet-1], nextSet);
     }
 
@@ -62,7 +63,7 @@ class MapScreen extends GameState { //<>//
 
   int GetNextSet() {
     try {
-      db.query( "SELECT MAX(bane) FROM progress" ); //<>//
+      db.query( "SELECT MAX(bane) FROM progress" );
       if (db.next()) {
         int t = db.getInt(1);
         println(t);
