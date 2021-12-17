@@ -38,6 +38,10 @@ public class MainLogic {
   void addCoins(int change) {
     coins = coins + change;
   }
+  
+  void UpdateCoins(int newCoins){
+    coins += newCoins;
+  }
 
   int coinAmount() {
     return coins;

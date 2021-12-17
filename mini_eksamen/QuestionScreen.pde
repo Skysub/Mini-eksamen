@@ -93,8 +93,8 @@ class QuestionScreen extends GameState {
       i = 0;
       i2 = 0;
       questionDoneScreen.done = false;
+      if (antalRigtige >= int(antalKorrekteSPG)) mainLogic.UpdateCoins(antalPoint);
       AddToDataBase();
-
       ChangeScreen("map");
     }
   }
@@ -111,7 +111,7 @@ class QuestionScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opgavesætbesvarer", 20, 20);
+    text("Opgavesæt " + nextSet, 20, 20);
 
 
     textSize(25);
@@ -142,13 +142,5 @@ class QuestionScreen extends GameState {
     db.execute("INSERT INTO progress VALUES("+nextSet+","+antalSPG+","+antalKorrekteSPG+","+antalPoint+","+opgaveTid+");");
     opgaveTid = -1;
     delay(50);
-  }
-
-  //Bruges ikke, skal ikke bruges
-  void GetOpgaveSaetNummer() {
-    //Virker ikke
-    db.query("SELECT MAX(bane id) as \"tidligereOpgaveSaetNummer\" FROM progress where type=\"int\"");
-    opgaveSaetNummer = tidligereOpgaveSaetNummer+1;
-    //delay(50);
   }
 }
