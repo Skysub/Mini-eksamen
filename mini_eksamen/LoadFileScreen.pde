@@ -33,7 +33,7 @@ class LoadFileScreen extends GameState { //<>//
     if (fort.isClicked()) {
       if (DoesSaveExist()) {
         db.query( "SELECT information FROM info WHERE id=1;" );
-        delay(50);
+        delay(10);
         path = db.getString(1);
         println(path);
         mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
