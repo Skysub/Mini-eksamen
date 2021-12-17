@@ -5,7 +5,7 @@ class MapScreen extends GameState { //<>//
 
   ExitButton exitButton;
   ButtonSpm spm1;
-  Button customMenuButton;
+  Button customMenuButton, saveData;
   ExitButton closeMenuButton;
 
   CustomMenu customMenu;
@@ -15,6 +15,7 @@ class MapScreen extends GameState { //<>//
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     spm1 = new ButtonSpm((round(width*3/4)), 300, 200, 50, "Spørgsmål 1", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    saveData = new Button((round(width*2/4)), 500, 200, 50, "gem data", color(200, 150, 150), color(100, 200, 100), 30, color(0));
     customMenuButton = new Button((round(width/6)-100), round(height/2)+275, 200, 50, "Karakter", color(200, 150, 150), color(100, 200, 100), 30, color(0));
     customMenu = new CustomMenu();
     closeMenuButton = new ExitButton(round(width/2+customMenu.menuWidth/2-50), 110, 40, 40, "X", color(180, 180, 180), color(255, 200, 200), 30, color(25, 25, 25), color(230, 150, 150));
@@ -32,12 +33,14 @@ class MapScreen extends GameState { //<>//
       greetingMessageSaid = true;
     }
 
+    saveData.Run();
+    if (saveData.isClicked()) {
+    }
+
     exitButton.Run();
     if (exitButton.isClicked()) {
       ChangeScreen("loadFileScreen");
     }
-
-
 
     spm1.Run(nextSet, nextSet > map.length);
     if (spm1.isClicked()) {
@@ -83,5 +86,12 @@ class MapScreen extends GameState { //<>//
 
   Boolean getMenu() {
     return Menu;
+  }
+
+  void DrawCSVDone(boolean d) {
+  }
+
+  boolean MakeCSV() {
+    return true;
   }
 }
