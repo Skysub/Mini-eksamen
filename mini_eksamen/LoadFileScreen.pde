@@ -51,7 +51,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
       ChangeScreen("start");
     }
 
-    name.Run();
+    //name.Run();
     if (name.isClicked()) {
       ChangeScreen("name");
     }
@@ -129,7 +129,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
           //println("inside____"+millis());
           fresh = true;
           mainLogic.gameStateManager.GetGameState("map").map = xmlHandler.ReadFromXML(path);
-          ChangeScreen("map"); //ændr det her når name screen er færdiggjort
+          ChangeScreen("name"); //ændr det her når name screen er færdiggjort
           SletOpgaveMap();
           GemOpgaveMap();
           noSave = false;

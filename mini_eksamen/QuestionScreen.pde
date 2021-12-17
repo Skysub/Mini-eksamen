@@ -77,7 +77,7 @@ class QuestionScreen extends GameState {
 
     exitButton.Run();
     if (exitButton.isClicked()) {
-      ChangeScreen("start");
+      ChangeScreen("map");
     }
 
     if (opgaveNummer == int(antalSPG) + 1) {
