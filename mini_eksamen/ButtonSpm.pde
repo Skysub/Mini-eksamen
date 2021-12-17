@@ -21,11 +21,11 @@ class ButtonSpm extends BaseButton {
 
   void Draw(int nS, boolean d) {
     fill(currentColor);
-    if(d) fill(200);
+    if (d) fill(200);
     if (mouseOver)fill(color(red(currentColor)*0.8f, green(currentColor)*0.8f, blue(currentColor)*0.8f)); 
 
     noStroke();
-    if(!d)rect(x, y, widthB, heightB, 15);
+    if (!d)rect(x, y, widthB, heightB, 15);
     else rect(x-40, y, widthB+80, heightB, 15);
 
     fill(textColor);

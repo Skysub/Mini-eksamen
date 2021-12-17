@@ -1,4 +1,4 @@
-class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
+class LoadFileScreen extends GameState { //<>//
 
   Boolean greetingMessageSaid = false, speakLine, going = false, noSave = false;
 
@@ -26,7 +26,6 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     load.Run();
     if (load.isClicked()) {
       knapLoad();
-
       NewSave();
     }
 

@@ -10,7 +10,7 @@ class OpgaveSaetMenu extends GameState {
   String[][][] opgaveSaet;
 
   OpgaveSaetMenu(PApplet thePApplet, SQLite database) {
-        super(thePApplet, database);
+    super(thePApplet, database);
     xmlHandler = new XMLHandler();
     doneKnap = new Button(width/2+100, height/2, 250, 50, "Afslut opretning", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     nyKnap = new Button(width/2-355, height/2, 250, 50, "Nyt opgavesæt", color(200, 150, 150), color(100, 200, 100), 25, color(0));

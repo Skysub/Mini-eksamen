@@ -12,7 +12,7 @@ class ButtonWPauseMove extends BaseButton {
     textColor = tc;
   }
 
-//Så man kan pause knappen, så den stadig tegnes men ikke opdateres når den ikke er i brug
+  //Så man kan pause knappen, så den stadig tegnes men ikke opdateres når den ikke er i brug
   void Run(boolean pause, int posX, int posY) {
     x = posX;
     y = posY;
@@ -22,8 +22,8 @@ class ButtonWPauseMove extends BaseButton {
       currentColor = buttonColor;
     }
   }
-  
-    void Draw(int x, int y) {
+
+  void Draw(int x, int y) {
     fill(currentColor);
     if (mouseOver)fill(color(red(currentColor)*0.8f, green(currentColor)*0.8f, blue(currentColor)*0.8f)); 
 
