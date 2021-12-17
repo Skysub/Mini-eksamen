@@ -38,12 +38,34 @@ public class MainLogic {
   void addCoins(int change) {
     coins = coins + change;
   }
-  
-  void UpdateCoins(int newCoins){
+
+  void UpdateCoins(int newCoins) {
     coins += newCoins;
   }
 
   int coinAmount() {
     return coins;
+  }
+
+  void saveCosmetics(boolean firstSave) {
+    if (firstSave) {
+      db.execute("INSERT INTO info VALUES(2,'current head','"+character.currentHead+"');");
+      delay(10);
+      db.execute("INSERT INTO info VALUES(3,'current shoes','"+character.currentShoes+"');");
+      delay(10);
+      db.execute("INSERT INTO info VALUES(4,'current shirt','"+character.currentShirt+"');");
+      delay(10);
+      db.execute("INSERT INTO info VALUES(5,'total coins','"+coins+"');");
+      delay(10);
+    } else {
+      db.execute("UPDATE info SET current head = '"+character.currentHead+"' WHERE id = 2;");
+      delay(10);
+      db.execute("UPDATE info SET current shoes = '"+character.currentShoes+"' WHERE id = 3;");
+      delay(10);
+      db.execute("UPDATE info SET current shirt = '"+character.currentShirt+"' WHERE id = 4;");
+      delay(10);
+      db.execute("UPDATE info SET total coins = '"+coins+"' WHERE id = 5;");
+      delay(10);
+    }
   }
 }

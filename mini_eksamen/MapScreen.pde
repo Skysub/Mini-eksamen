@@ -1,6 +1,6 @@
 class MapScreen extends GameState { //<>//
 
-  Boolean greetingMessageSaid = false, Menu = false;
+  Boolean greetingMessageSaid = false, Menu = false, firstSave = true;
   int onceAsecond = 0;
 
   ExitButton exitButton;
@@ -36,6 +36,8 @@ class MapScreen extends GameState { //<>//
 
     saveData.Run();
     if (saveData.isClicked()) {
+      mainLogic.saveCosmetics(firstSave);
+      firstSave = false;
     }
 
     exitButton.Run();
