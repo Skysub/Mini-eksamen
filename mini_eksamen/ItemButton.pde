@@ -3,7 +3,7 @@ class ItemButton extends BaseButton {
   color mouseOverColor;
   String textureName, itemType;
   int price;
-  Boolean purchased, noItem, wearing;
+  Boolean purchased, noItem, wearing, showPrice = false;
   PImage itemTexture;
   String wItem1, wItem2, wItem3;
   String[] nameSplit = new String[1];
@@ -46,6 +46,7 @@ class ItemButton extends BaseButton {
 
   void Draw() {
     
+    //gets worn items and checks if the price should be displayed
     updateWornItems();
     
     //checks if the button corresponds to a worn item
@@ -69,6 +70,7 @@ class ItemButton extends BaseButton {
 
     if (purchased) drawPurchased();
     if (wearing) drawWearing();
+    if (showPrice) drawPrice();
   }
 
   void drawPurchased() {
@@ -86,10 +88,22 @@ class ItemButton extends BaseButton {
     circle(x+(widthB/2)-20, y+(heightB/2)-40,12);
   }
   
+  void drawPrice() {
+    //draws price and a small golden coin symbol
+    noStroke();
+    fill(217,176,28);
+    textSize(20);
+    textMode(CENTER);
+    text(price, x+(widthB/2)+20, y+(heightB/2)+40,12);
+    circle(x+(widthB/2)+40, y+(heightB/2)+42.5,12);
+  }
+  
   void updateWornItems() {
     wItem1 = mainLogic.character.getwItem("hat");
     wItem2 = mainLogic.character.getwItem("shirt");
     wItem3 = mainLogic.character.getwItem("shoes");
+    
+    if (!purchased && !noItem) showPrice = true; else showPrice = false;
   }
   
   void assignItemType(String itemName) {
