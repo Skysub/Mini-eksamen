@@ -1,7 +1,7 @@
 class ExitButton extends BaseButton {
 
   color mouseOverColor;
-  
+
   ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
   ExitButton(int posX, int posY, int w, int h, String t, color c, color cc, int ts, color tc, color moc) {
     x = posX;
@@ -16,8 +16,8 @@ class ExitButton extends BaseButton {
     textColor = tc;
     mouseOverColor = moc;
   }
-  
-    void Draw() {
+
+  void Draw() {
     fill(currentColor);
     if (mouseOver)fill(mouseOverColor); 
 
@@ -29,5 +29,4 @@ class ExitButton extends BaseButton {
     textAlign(CENTER, CENTER);
     text(buttonText, x+(widthB/2), y+(heightB/2));
   }
-  
 }

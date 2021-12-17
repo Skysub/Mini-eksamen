@@ -24,12 +24,12 @@ class ItemButton extends BaseButton {
     purchased = pur;
     textureName = tn;
     noItem = ni;
-    
+
     //Remove once SQL is running
     if (purchased == null) {
       purchased = true;
     }
-    if(wearing == null) {
+    if (wearing == null) {
       wearing = false;
     }
 
@@ -40,7 +40,11 @@ class ItemButton extends BaseButton {
       buttonText = nameSplit[0];
       itemTexture = loadImage(textureName);
     }
-    
+
+    if (!noItem && !purchased) {
+      showPrice = true;
+    }
+
     assignItemType(textureName);
   }
 
@@ -48,10 +52,10 @@ class ItemButton extends BaseButton {
     
     //gets worn items and checks if the price should be displayed
     updateWornItems();
-    
+
     //checks if the button corresponds to a worn item
     if (textureName == wItem1 || textureName == wItem2 || textureName == wItem3) wearing = true;
-    
+
     fill(currentColor);
     if (mouseOver)fill(mouseOverColor); 
 
@@ -77,17 +81,16 @@ class ItemButton extends BaseButton {
     //draws a green checkmark of two lines
     fill(14, 135, 22);
     //line(x+(widthB/2)-46, y+(heightB/2)-50, x+(widthB/2)-50, y+(heightB/2)-54);
-    rect(x+(widthB/2)-46, y+(heightB/2)-46,12,12);
-
+    rect(x+(widthB/2)-46, y+(heightB/2)-46, 12, 12);
   }
-  
+
   void drawWearing() {
     //draws a small orange circle to indicate the item is equipped
     noStroke();
-    fill(202,61,8);
-    circle(x+(widthB/2)-20, y+(heightB/2)-40,12);
+    fill(202, 61, 8);
+    circle(x+(widthB/2)-20, y+(heightB/2)-40, 12);
   }
-  
+
   void drawPrice() {
     //draws price and a small golden coin symbol
     noStroke();
@@ -98,6 +101,7 @@ class ItemButton extends BaseButton {
     circle(x+(widthB/2)+40, y+(heightB/2)+42.5,12);
   }
   
+
   void updateWornItems() {
     wItem1 = mainLogic.character.getwItem("hat");
     wItem2 = mainLogic.character.getwItem("shirt");
@@ -105,10 +109,10 @@ class ItemButton extends BaseButton {
     
     if (!purchased && !noItem) showPrice = true; else showPrice = false;
   }
-  
+
   void assignItemType(String itemName) {
-    if(itemName.contains("hat.png")) itemType = "hat";
-    if(itemName.contains("shirt.png")) itemType = "shirt";
-    if(itemName.contains("shoes.png")) itemType = "shoes";
+    if (itemName.contains("hat.png")) itemType = "hat";
+    if (itemName.contains("shirt.png")) itemType = "shirt";
+    if (itemName.contains("shoes.png")) itemType = "shoes";
   }
 }

@@ -1,4 +1,4 @@
-public static class GameStateManager  //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+public static class GameStateManager  //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
 {
   GameState currentGameState;
@@ -33,7 +33,7 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>// //<>// 
     }
   }
 
-  public void SkiftGameStateQuestion(String name, String[][] set) {
+  public void SkiftGameStateQuestion(String name, String[][] set, int nextSet) {
     if (currentGameState != null)
 
       currentGameState.Reset();
@@ -41,7 +41,7 @@ public static class GameStateManager  //<>// //<>// //<>// //<>// //<>// //<>// 
     if (gameStates.containsKey(name))
     {
       currentGameState = gameStates.get(name);
-      currentGameState.InjectSet(set);
+      currentGameState.InjectSet(set, nextSet);
     }
   }
 

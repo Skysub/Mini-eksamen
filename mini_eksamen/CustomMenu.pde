@@ -1,4 +1,4 @@
-import java.io.File; //<>// //<>// //<>// //<>// //<>//
+import java.io.File; //<>// //<>// //<>// //<>// //<>// //<>//
 
 class CustomMenu {
 
@@ -118,7 +118,7 @@ class CustomMenu {
       fill(0, 0, 0);
       textSize(50);
       textAlign(CENTER);
-      text("KOOL MATH RPG", round(width/2), 80);
+      text("KOOL SKOOL RPG", round(width/2), 80);
     }
   }
 

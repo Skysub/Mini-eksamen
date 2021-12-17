@@ -4,7 +4,12 @@ public class GameState
   public String path = null;
   public boolean fresh = true, done = true;
   public String[][][] map = null;
-  
+  public int nextSet = 1;
+  SQLite db;
+
+  GameState(PApplet thePApplet, SQLite database) {
+    db = database;
+  }
 
   public void Update() {
   }
@@ -17,7 +22,8 @@ public class GameState
     mainLogic.gameStateManager.SkiftGameState(name);
   }
 
-  void InjectSet(String[][] a) {
+  void InjectSet(String[][] a, int b) {
     set = a;
+    nextSet = b;
   }
 }

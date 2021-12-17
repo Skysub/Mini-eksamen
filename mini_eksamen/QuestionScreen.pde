@@ -3,13 +3,14 @@ class QuestionScreen extends GameState {
   ExitButton exitButton;
   String[][] opgaver = new String[99][7];
   int opgaveNummer = 1, antalRigtige = 0, antalPoint = 0, i = 0, i2 = 0, opgaveNummerDisplay, opgaveSaetNummer, tidligereOpgaveSaetNummer;
+  int opgaveTid = -1, opgaveTidTemp, setBefore = -1;
   String antalSPG, pointIAlt, antalKorrekteSPG, laererNavn, SPG, fTekst, pointSPG, rSvar, fSvar1, fSvar2, fSvar3;
   IntList intListeRandom = IntList.fromRange(0, 4);
   ButtonWPauseMove rBTN, f1BTN, f2BTN, f3BTN;
   QuestionDoneScreen questionDoneScreen;
-  SQLite db;
 
-  QuestionScreen(PApplet thePApplet) {
+  QuestionScreen(PApplet thePApplet, SQLite database) {
+    super(thePApplet, database);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
@@ -17,14 +18,17 @@ class QuestionScreen extends GameState {
     f1BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     f2BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     f3BTN = new ButtonWPauseMove(250, 50, "Svar!", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    questionDoneScreen = new QuestionDoneScreen();
+    questionDoneScreen = new QuestionDoneScreen(thePApplet, database);
     intListeRandom.shuffle();
-    db = new SQLite(thePApplet, FileHandler.GetFolder()+"\\data.sqlite" );
-    db.connect();
   }
 
   void Update() {
-    GetOpgaveSaetNummer();
+    //GetOpgaveSaetNummer();
+    if (nextSet > setBefore) {
+      setBefore = nextSet;
+      opgaveTidTemp = millis();
+    }
+
     if (i2 == 0) {
       antalRigtige = 0;
       antalPoint = 0;
@@ -73,23 +77,24 @@ class QuestionScreen extends GameState {
 
     exitButton.Run();
     if (exitButton.isClicked()) {
-      ChangeScreen("start");
+      ChangeScreen("map");
     }
 
     if (opgaveNummer == int(antalSPG) + 1) {
+      if (opgaveTid == -1) opgaveTid = millis() - opgaveTidTemp;
       if (antalRigtige >= int(antalKorrekteSPG)) questionDoneScreen.Update(true, int(antalKorrekteSPG) - antalRigtige, antalPoint, antalRigtige, int(antalSPG));
       else questionDoneScreen.Update(false, int(antalKorrekteSPG) - antalRigtige, antalPoint, antalRigtige, int(antalSPG));
       opgaveNummerDisplay = opgaveNummer - 1;
     }
 
     if (questionDoneScreen.done) {
-      print("hahah færdig ");
+      //print("hahah færdig ");
       opgaveNummer = 1;
       i = 0;
       i2 = 0;
       questionDoneScreen.done = false;
+      if (antalRigtige >= int(antalKorrekteSPG)) mainLogic.UpdateCoins(antalPoint);
       AddToDataBase();
-
       ChangeScreen("map");
     }
   }
@@ -106,7 +111,7 @@ class QuestionScreen extends GameState {
     fill(0);
     textAlign(CORNER, TOP);
     textSize(50);
-    text("Opgavesætbesvarer", 20, 20);
+    text("Opgavesæt " + nextSet, 20, 20);
 
 
     textSize(25);
@@ -134,14 +139,8 @@ class QuestionScreen extends GameState {
   }
 
   void AddToDataBase() {
-    db.execute("INSERT INTO progess VALUES('bane id','"+opgaveSaetNummer+"');");
-    db.execute("INSERT INTO progess VALUES('spm ialt','"+antalSPG+"');");
-    db.execute("INSERT INTO progess VALUES('rigtige','"+antalKorrekteSPG+"');");
-    db.execute("INSERT INTO progess VALUES('point fået','"+antalPoint+"');");
-  }
-
-  void GetOpgaveSaetNummer() {
-    db.query("SELECT MAX(bane id) as \"tidligereOpgaveSaetNummer\" FROM progress where type=\"int\"");
-    opgaveSaetNummer = tidligereOpgaveSaetNummer+1;
+    db.execute("INSERT INTO progress VALUES("+nextSet+","+antalSPG+","+antalKorrekteSPG+","+antalPoint+","+int(opgaveTid/1000f)+");");
+    opgaveTid = -1;
+    delay(10);
   }
 }

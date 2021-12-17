@@ -3,6 +3,9 @@ CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,info t
 
 0: elevens navn
 1: Path til opgaveSæts filen
+2: Current headwear
+3: Currunt shoes
+4: Current Shirt
 
 Hvert felt har følgende opbygning
 id(int), 

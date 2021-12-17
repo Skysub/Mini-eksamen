@@ -40,17 +40,17 @@ class XMLHandler { //<>//
     }
     /*
     //output = test;
-    for (int i = 0; i < 1; i++) {
-      for (int j = 0; j < 2; j++) {
-        for (int s = 0; s < 7; s++) {
-          println("["+i+"]["+j+"]["+s+"]"+output[i][j][s]);
-        }
-        println("  _");
-      }
-    }
-    println("done");
-    WriteToXML(output);
-    */
+     for (int i = 0; i < 1; i++) {
+     for (int j = 0; j < 2; j++) {
+     for (int s = 0; s < 7; s++) {
+     println("["+i+"]["+j+"]["+s+"]"+output[i][j][s]);
+     }
+     println("  _");
+     }
+     }
+     println("done");
+     WriteToXML(output);
+     */
     return output;
   }
 
