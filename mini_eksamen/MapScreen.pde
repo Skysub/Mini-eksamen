@@ -21,6 +21,7 @@ class MapScreen extends GameState { //<>//
   }
 
   void Update() {
+    Draw();
     if (onceAsecond < millis()-1000) {
       onceAsecond = millis();
       nextSet = GetNextSet();
@@ -59,6 +60,13 @@ class MapScreen extends GameState { //<>//
         Menu = false;
       }
     }
+  }
+
+  void Draw() {
+    fill(0);
+    textAlign(CORNER, TOP);
+    textSize(30);
+    text("Antal mønter:" + mainLogic.coins, 20, 120);
   }
 
   int GetNextSet() {

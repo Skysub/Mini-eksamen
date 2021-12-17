@@ -76,7 +76,8 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>// //<>// //<>//
     //Sletter og genopretter tabellerne
     db.execute("DROP TABLE progress;");
     db.execute("DROP TABLE info");
-    db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text, currentHead text, cuurentShoes text, currentShort text)");
+    //db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text, currentHead text, cuurentShoes text, currentShort text)");
+    db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text)");
     db.execute("CREATE TABLE [progress] (bane id integer NOT NULL PRIMARY KEY UNIQUE,spm ialt integer NOT NULL,rigtige integer NOT NULL,point fået integer NOT NULL,tid brugt integer NOT NULL)");
 
     db.execute("INSERT INTO info VALUES(1,'path','"+FileHandler.GetFolder()+"\\opgaveMap.xml');");
