@@ -1,6 +1,6 @@
-class LoadFileScreen extends GameState { //<>//
+class LoadFileScreen extends GameState { //<>// //<>//
 
-  Boolean greetingMessageSaid = false, speakLine, going = false, noSave = false;
+  Boolean greetingMessageSaid = false, speakLine, noSave = false;
 
   ExitButton exitButton, name;
   Button load, fort;
@@ -11,8 +11,8 @@ class LoadFileScreen extends GameState { //<>//
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     name = new ExitButton(width/2-150, 280, 300, 60, "Angiv dit navn", color(200, 150, 150), color(255, 200, 200), 30, color(25, 25, 25), color(230, 150, 150));
-    load = new Button(width/2-280, 560, 560, 60, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
-    fort  = new Button(width/2-150, 800, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    load = new Button(width/2-280, 300, 560, 60, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    fort  = new Button(width/2-180, 600, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
   }
 
   void Update() {
@@ -25,8 +25,7 @@ class LoadFileScreen extends GameState { //<>//
 
     load.Run();
     if (load.isClicked()) {
-      knapLoad();
-      NewSave();
+      if (knapLoad())  NewSave();
     }
 
     fort.Run();
@@ -75,21 +74,20 @@ class LoadFileScreen extends GameState { //<>//
   void NewSave() {
     //Sletter og genopretter tabellerne
     db.execute("DROP TABLE progress;");
-    delay(50);
+    delay(10);
     db.execute("DROP TABLE info");
-    delay(50);
+    delay(10);
     db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text)");
-    delay(50);
+    delay(10);
     db.execute("CREATE TABLE [progress] (bane id integer NOT NULL PRIMARY KEY UNIQUE,spm ialt integer NOT NULL,rigtige integer NOT NULL,point fået integer NOT NULL,tid brugt integer NOT NULL)");
-    delay(50);
+    delay(10);
 
     db.execute("INSERT INTO info VALUES(1,'path','"+FileHandler.GetFolder()+"\\opgaveMap.xml');");
-    delay(50);
+    delay(10);
   }
 
   void GemOpgaveMap() {
     try {
-
       Files.copy(Paths.get(path), Paths.get(FileHandler.GetFolder()+"\\opgaveMap.xml"));
     }
     catch(IOException e) {
@@ -114,11 +112,11 @@ class LoadFileScreen extends GameState { //<>//
   }
 
   //Spaghettikode, sorry
-  void knapLoad() {
+  boolean knapLoad() {
     if (fresh) {
       if (!going) {
-        //fresh = false;
-        done = false;
+        println(fresh+", "+going+", "+done);
+        done = false; //<>//
         selectInput("Vælg XML opgavesæt fil:", "fileSelected");
         going = true;
       }
@@ -132,9 +130,13 @@ class LoadFileScreen extends GameState { //<>//
           SletOpgaveMap();
           GemOpgaveMap();
           noSave = false;
+          done = false;
+          going = false;
+          return true;
         }
       }
     }
+    return false;
   }
 
   void Draw() {

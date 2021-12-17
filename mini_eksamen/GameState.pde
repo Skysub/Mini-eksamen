@@ -2,7 +2,7 @@ public class GameState
 {
   String[][] set;
   public String path = null;
-  public boolean fresh = true, done = true;
+  public boolean fresh = true, done = true, going = false;
   public String[][][] map = null;
   public int nextSet = 1;
   SQLite db;

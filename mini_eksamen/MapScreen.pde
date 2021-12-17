@@ -1,4 +1,4 @@
-class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   Boolean greetingMessageSaid = false, Menu = false, firstSave = true;
   int onceAsecond = 0;
@@ -200,7 +200,7 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
       textAlign(CENTER, CENTER);
       textSize(30);
       if (saved == 1) {
-        text("Data gemt i samme folder programmet ligger", width/2+200, 705);
+        text("Data gemt i en .csv fil i samme folder programmet ligger", width/2, 705);
       } else if (saved == 0) {
         text("Fejl. Data ikke gemt.", width/2+300, 705);
       }

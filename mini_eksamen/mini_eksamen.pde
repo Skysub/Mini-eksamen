@@ -26,8 +26,10 @@ void fileSelected(File selection) {
   if (selection == null) {
     mainLogic.gameStateManager.GetGameState("loadFileScreen").fresh = true;
     println("Window was closed or the user hit cancel.");
+    mainLogic.gameStateManager.GetGameState("loadFileScreen").going = false;
   } else {
     println("User selected " + selection.getAbsolutePath());
+
     try {
       mainLogic.gameStateManager.GetGameState("loadFileScreen").path = selection.getAbsolutePath();
     }
