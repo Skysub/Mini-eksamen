@@ -88,7 +88,7 @@ class QuestionScreen extends GameState {
     }
 
     if (questionDoneScreen.done) {
-      print("hahah færdig ");
+      //print("hahah færdig ");
       opgaveNummer = 1;
       i = 0;
       i2 = 0;
@@ -139,8 +139,8 @@ class QuestionScreen extends GameState {
   }
 
   void AddToDataBase() {
-    db.execute("INSERT INTO progress VALUES("+nextSet+","+antalSPG+","+antalKorrekteSPG+","+antalPoint+","+opgaveTid+");");
+    db.execute("INSERT INTO progress VALUES("+nextSet+","+antalSPG+","+antalKorrekteSPG+","+antalPoint+","+int(opgaveTid/1000f)+");");
     opgaveTid = -1;
-    delay(50);
+    delay(10);
   }
 }

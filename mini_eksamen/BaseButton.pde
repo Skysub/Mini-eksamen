@@ -25,8 +25,9 @@ class BaseButton {
       clicked = false;
       currentColor = buttonColor;
     }
-
-    if (!mousePressed) pressed = false;
+    //if (!mousePressed) pressed = false;
+    pressed = mousePressed;
+    //Nu aktiveres knapper ikke hvis man ikke klikker når musen er direkte over dem
   }
 
   void Draw() {

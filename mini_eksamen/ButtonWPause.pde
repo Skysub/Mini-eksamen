@@ -14,7 +14,7 @@ class ButtonWPause extends BaseButton {
     textColor = tc;
   }
 
-//Så man kan pause knappen, så den stadig tegnes men ikke opdateres når den ikke er i brug
+  //Så man kan pause knappen, så den stadig tegnes men ikke opdateres når den ikke er i brug
   void Run(boolean pause) {
     Draw();
     if (!pause) {

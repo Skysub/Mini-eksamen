@@ -1,4 +1,4 @@
-class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
+class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
   Boolean frontScreen = false, assignment = false, speaking = false, lineDetermined = false, characterOnScreen = false;
   PVector fsPos, asPos, pos;
@@ -126,7 +126,7 @@ class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
     //println("Current head item: " + currentHead);
     //println("Current shirt item: " + currentShirt);
 
-    //current coords are innacurate //<>//
+    //current coords are innacurate
     if (head) {
       image(headTexture, 0, -50*sizeMod);
     }
@@ -201,11 +201,11 @@ class Character { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
       shirt = false;
     }
   }
-  
+
   String getwItem(String itemSlot) {
-    if(itemSlot == "head") return currentHead;
-    if(itemSlot == "shirt") return currentShirt;
-    if(itemSlot == "shoes") return currentShoes;
+    if (itemSlot == "head") return currentHead;
+    if (itemSlot == "shirt") return currentShirt;
+    if (itemSlot == "shoes") return currentShoes;
     else return "wrong call in getwItem, Character";
   }
 

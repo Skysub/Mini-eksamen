@@ -3,7 +3,7 @@ class OpgaveScreen extends GameState {
 
   OpgaveSaetMenu opgaveSaetMenu;
   ExitButton exitButton;
-  ButtonWPause gemSpgKnap, nytSpgKnap, startSaetKnap;
+  ButtonPauseNy gemSpgKnap, nytSpgKnap, startSaetKnap;
   TextField spgTF, rTF, f1TF, f2TF, f3TF, fTekst, pointPerSpg, antalSpgTF, antalSpgKlareTF, navnTF;
   String spg, r, f1, f2, f3, fT, pPS, antalSpg, antalSpgKlare, navn;
   boolean canSave, clickedGem, clickedgemTrue = false, nyOpgaveKlar = true, nySpg = false, opretOpgave = false, saetIgang = true, opgIgang = false, startSaetKnapClicked = false, array = true, add = true, ny = true, gemTekst = false, openSaetSkaerm = true;
@@ -12,13 +12,13 @@ class OpgaveScreen extends GameState {
   String[][] opgave;
 
   OpgaveScreen(PApplet thePApplet, SQLite database) {
-        super(thePApplet, database);
+    super(thePApplet, database);
     opgaveSaetMenu = new OpgaveSaetMenu(thePApplet, database);
 
     //Knapper
-    gemSpgKnap = new ButtonWPause(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    nytSpgKnap = new ButtonWPause(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
-    startSaetKnap = new ButtonWPause(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    gemSpgKnap = new ButtonPauseNy(520, 920, 250, 50, "Gem opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    nytSpgKnap = new ButtonPauseNy(820, 920, 250, 50, "Næste opgave", color(200, 150, 150), color(100, 200, 100), 25, color(0));
+    startSaetKnap = new ButtonPauseNy(20, 580, 250, 50, "Start sættet", color(200, 150, 150), color(100, 200, 100), 25, color(0));
     exitButton = new ExitButton(25, height - 125, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
 
 
@@ -51,8 +51,8 @@ class OpgaveScreen extends GameState {
         opgave[0][1] = "Placeholder";
         opgave[0][2] = antalSpgKlare; //Tjek skemaet i repositoriet, nogle ting er ændrede
         opgave[0][3] = navn;
-        
-        if(opgave[0][0] == null || opgave[0][0] == "0") antalSpg = "1";
+
+        if (opgave[0][0] == null || opgave[0][0] == "0") antalSpg = "1";
         openSaetSkaerm = true;
       }
 
@@ -67,7 +67,7 @@ class OpgaveScreen extends GameState {
 
       if (spgTF.tooShort || rTF.tooShort || f1TF.tooShort || f2TF.tooShort || f3TF.tooShort || pointPerSpg.tooShort) {
         canSave = false;
-      } else{
+      } else {
         canSave = true;
         gemTekst = false;
       }
@@ -178,8 +178,8 @@ class OpgaveScreen extends GameState {
       maxPoint = 0;
     }
     ny = false;
-    
-    if(opgaveSaetMenu.reset && openSaetSkaerm){
+
+    if (opgaveSaetMenu.reset && openSaetSkaerm) {
       opgaveSaetNummer = 0;
       array = true;
       opgaveSaetMenu.ResetNow();
@@ -187,10 +187,9 @@ class OpgaveScreen extends GameState {
       openSaetSkaerm = false;
       saetIgang = true;
       opgIgang = false;
-      
+
       ChangeScreen("start");
     }
-    
   }
 
   void Draw() {
@@ -262,5 +261,4 @@ class OpgaveScreen extends GameState {
     antalSpgKlare = antalSpgKlareTF.Input(true, 0, 2);
     navn = navnTF.Input(false, 0, 0);
   }
-  
 }
