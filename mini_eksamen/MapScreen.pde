@@ -1,6 +1,6 @@
 class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //<>//
 
-  Boolean greetingMessageSaid = false, Menu = false;
+  Boolean greetingMessageSaid = false, Menu = false, firstSave = true;
   int onceAsecond = 0;
   int saved = -1, savedTime = 0;
   String name = null;
@@ -32,6 +32,8 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
     if (onceAsecond < millis()-1000) {
       onceAsecond = millis();
       nextSet = GetNextSet();
+      mainLogic.saveCosmetics(firstSave);
+      firstSave = false;
     }
 
 
@@ -40,12 +42,14 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
       greetingMessageSaid = true;
     }
 
+
     saveData.Run(saved != -1);
-    if (saveData.isClicked() && saved == -1) {
+    if (saveData.isClicked() && saved == -1) {    
       if (MakeCSV()) saved = 1;
       else saved = 0;
       //MakeHtml();
       savedTime = millis();
+
     }
     DrawCSVDone();
 

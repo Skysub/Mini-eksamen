@@ -24,7 +24,6 @@ class ItemButton extends BaseButton {
     purchased = pur;
     textureName = tn;
     noItem = ni;
-
     //Remove once SQL is running
     if (purchased == null) {
       purchased = true;
@@ -32,6 +31,7 @@ class ItemButton extends BaseButton {
     if (wearing == null) {
       wearing = false;
     }
+    
 
     if (noItem) {
       buttonText = "Item TBA";

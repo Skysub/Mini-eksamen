@@ -62,7 +62,7 @@ class CustomMenu {
         //character.currentHead = SQL currentHead
         //character.currentShoes = SQL currentShoes
         //character.currentShirt = SQL currentShirt
-
+        mainLogic.HentCosmetics();
 
         ItemsInitialized = true;
       }

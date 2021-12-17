@@ -77,7 +77,6 @@ class LoadFileScreen extends GameState { //<>//
     db.execute("DROP TABLE progress;");
     delay(50);
     db.execute("DROP TABLE info");
-    //db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text, currentHead text, cuurentShoes text, currentShort text)");
     delay(50);
     db.execute("CREATE TABLE [info] (id integer NOT NULL PRIMARY KEY UNIQUE,info type text NOT NULL,information text)");
     delay(50);
