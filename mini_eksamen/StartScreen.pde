@@ -6,10 +6,11 @@ class StartScreen extends GameState {
   int r = 100, g = 203, b = 151;
   boolean rR = false, gR = false, bR = true;
 
-  StartScreen(PApplet thePApplet) {
-    super(thePApplet);
+  StartScreen(PApplet thePApplet, SQLite database) {
+    super(thePApplet, database);
     laererKnap = new Button((width/2)-450, 550, 300, 150, "Lærer", color(200, 150, 150), color(100, 200, 100), 50, color(0));
     elevKnap = new Button((width/2)+150, 550, 300, 150, "Elev", color(200, 150, 150), color(100, 200, 100), 50, color(0));
+
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
   }
 

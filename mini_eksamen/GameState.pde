@@ -7,9 +7,8 @@ public class GameState
   public int nextSet = 1;
   SQLite db;
 
-  GameState(PApplet thePApplet) {
-    db = new SQLite( thePApplet, FileHandler.GetFolder()+"\\data.sqlite" );
-    db.connect();
+  GameState(PApplet thePApplet, SQLite database) {
+    db = database;
   }
 
   public void Update() {

@@ -2,12 +2,14 @@ public class MainLogic {
 
   Character character;
   public Boolean speakLine = false; //denne int afgør, om karakteren taler eller ej. Sæt den true for at få karakteren til at tale, den revereter selv til false
-
+  SQLite db;
   int coins;
 
   public GameStateManager gameStateManager;
 
   MainLogic(PApplet thePApplet) {
+    db = new SQLite( thePApplet, FileHandler.GetFolder()+"\\data.sqlite" );
+    db.connect();
     gameStateManager = new GameStateManager();
     character = new Character();
     InitializeScreens(thePApplet);
@@ -22,13 +24,13 @@ public class MainLogic {
   }
 
   void InitializeScreens(PApplet thePApplet) {
-    gameStateManager.AddGameState("start", new StartScreen(thePApplet));
+    gameStateManager.AddGameState("start", new StartScreen(thePApplet, db));
 
-    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet));   
-    gameStateManager.AddGameState("map", new MapScreen(thePApplet));
-    gameStateManager.AddGameState("questionScreen", new QuestionScreen(thePApplet));
-    gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen(thePApplet));
-    gameStateManager.AddGameState("name", new NameScreen(thePApplet));
+    gameStateManager.AddGameState("opretOpgave", new OpgaveScreen(thePApplet, db));   
+    gameStateManager.AddGameState("map", new MapScreen(thePApplet, db));
+    gameStateManager.AddGameState("questionScreen", new QuestionScreen(thePApplet, db));
+    gameStateManager.AddGameState("loadFileScreen", new LoadFileScreen(thePApplet, db));
+    gameStateManager.AddGameState("name", new NameScreen(thePApplet, db));
 
     gameStateManager.SkiftGameState("start");
   }
