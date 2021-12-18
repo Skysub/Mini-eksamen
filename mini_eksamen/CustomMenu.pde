@@ -53,15 +53,9 @@ class CustomMenu {
             itemTextures.add(files[h].getName());
           }
         }
-
-
-        //load owned items from SQL into arraylist ownedItems
-
         initializeItemsBasic();
-        //from SQL get the owned and wearing items
-        //character.currentHead = SQL currentHead
-        //character.currentShoes = SQL currentShoes
-        //character.currentShirt = SQL currentShirt
+
+        //Henter de items man ejer fra databasen 
         mainLogic.HentCosmetics();
 
         ItemsInitialized = true;
