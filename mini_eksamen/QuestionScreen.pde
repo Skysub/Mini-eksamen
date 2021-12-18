@@ -93,8 +93,10 @@ class QuestionScreen extends GameState {
       i = 0;
       i2 = 0;
       questionDoneScreen.done = false;
-      if (antalRigtige >= int(antalKorrekteSPG)) mainLogic.UpdateCoins(antalPoint);
-      AddToDataBase();
+      if (antalRigtige >= int(antalKorrekteSPG)) { 
+        mainLogic.UpdateCoins(antalPoint);
+        AddToDataBase();
+      }
       ChangeScreen("map");
     }
   }
