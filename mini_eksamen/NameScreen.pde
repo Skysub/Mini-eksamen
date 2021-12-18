@@ -30,7 +30,7 @@ class NameScreen extends GameState {
       } else SetName(name);
     }
 
-    exitButton.Run();
+    //exitButton.Run();
     if (exitButton.isClicked()) {
       fresh = true;
       ChangeScreen("loadFileScreen");

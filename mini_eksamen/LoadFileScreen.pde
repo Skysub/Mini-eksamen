@@ -4,6 +4,8 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>//
 
   ExitButton exitButton, name;
   Button load, fort;
+  boolean goingBefore = false;
+  ;
 
 
   LoadFileScreen(PApplet thePApplet, SQLite database) {
@@ -119,7 +121,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>//
   //Spaghettikode, sorry
   boolean knapLoad() {
     if (fresh) {
-      if (!going) {
+      if (!going && !goingBefore) {
         done = false;
         selectInput("Vælg XML opgavesæt fil:", "fileSelected");
         going = true;
@@ -140,6 +142,7 @@ class LoadFileScreen extends GameState { //<>// //<>// //<>//
         }
       }
     }
+    goingBefore = going;
     return false;
   }
 

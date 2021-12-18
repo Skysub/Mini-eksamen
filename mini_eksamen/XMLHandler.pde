@@ -65,7 +65,7 @@ class XMLHandler { //<>//
     XML output;
     //println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
 
-    println(" _");
+    /*println(" _");
     for (int i = 0; i < 1; i++) {
       for (int j = 0; j < int(set[0][0][0])+1; j++) {
         //println(j < int(set[0][0][0])+1);
@@ -76,7 +76,7 @@ class XMLHandler { //<>//
         println("  _");
       }
     }
-    println("done");
+    println("done");*/
 
     output = parseXML("<data></data>");
 

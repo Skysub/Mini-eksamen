@@ -54,7 +54,7 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
 
     exitButton.Run(); 
     if (exitButton.isClicked()) {
-      print(customMenu.ownedItems.size());
+      //print(customMenu.ownedItems.size());
       mainLogic.coins += 25 * customMenu.ownedItems.size();
       for (int i = customMenu.ownedItems.size() - 1; i >= 0; i--) {
         String item = customMenu.ownedItems.get(i);
