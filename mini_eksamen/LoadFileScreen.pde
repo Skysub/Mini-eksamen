@@ -73,11 +73,11 @@ class LoadFileScreen extends GameState { //<>// //<>//
 
   void NewSave() {
     //Sletter og genopretter tabellerne, samt fjerner coins og cosmetics i selve porgrammet 
-    /*
     mainLogic.coins = 0;
-    mainLogic.character.currentHead = null;
-    mainLogic.character.currentShoes = null;
-    mainLogic.character.currentShirt = null; */
+    mainLogic.character.currentHead = "none";
+    mainLogic.character.currentShoes = "none";
+    mainLogic.character.currentShirt = "none";
+    print("Dette skal ske til sidst");
     
     db.execute("DROP TABLE progress;");
     delay(10);
