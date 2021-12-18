@@ -79,6 +79,7 @@ class CustomMenu {
           if (itemButton.purchased != true && itemButton.price < mainLogic.coinAmount()) {
             itemButton.purchased = true;
             mainLogic.addCoins(itemButton.price*-1);
+            ownedItems.add(itemButton.textureName);
           }
 
           //equip new item

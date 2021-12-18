@@ -24,13 +24,16 @@ class ItemButton extends BaseButton {
     purchased = pur;
     textureName = tn;
     noItem = ni;
+    
     //Remove once SQL is running
     if (purchased == null) {
       purchased = true;
     }
-    if (wearing == null) {
-      wearing = false;
-    }
+    
+    //checks if the item is worn
+    if (textureName == mainLogic.character.currentHead || textureName == mainLogic.character.currentShirt || textureName == mainLogic.character.currentShoes) {
+      wearing = true;
+    } else wearing = false;
     
 
     if (noItem) {
