@@ -53,4 +53,9 @@ class TextField {
     textfield.setText("");
     enteredString = "";
   }
+
+  void NotZero() {
+    enteredString = "1";
+    textfield.setText("1");
+  }
 }
