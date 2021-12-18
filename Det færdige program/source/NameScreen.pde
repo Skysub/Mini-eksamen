@@ -10,7 +10,7 @@ class NameScreen extends GameState {
     super(thePApplet, database);
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(width/2-200, 400, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
-    gemNavn = new Button(width/2+125, 400, 75, 75, "Gem navn", color(180, 180, 180), color(255, 200, 200), 20, color(0));
+    gemNavn = new Button(width/2-90, 400, 150, 75, "Gem navn", color(180, 180, 180), color(255, 200, 200), 20, color(0));
     nameTF = new TextField(thePApplet, "", new PVector(width/2-250, 280), 500, false);
   }
 

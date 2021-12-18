@@ -14,7 +14,7 @@ class XMLHandler { //<>//
     test[0][1][4] = "JoJo";
     test[0][1][5] = "Ninjago";
     test[0][1][6] = "The Flash";
-    WriteToXML(test);
+    //WriteToXML(test);
   }
 
   String[][][] ReadFromXML(String path) {
