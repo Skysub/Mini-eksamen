@@ -1,4 +1,4 @@
-class LoadFileScreen extends GameState { //<>// //<>//
+class LoadFileScreen extends GameState { //<>// //<>// //<>//
 
   Boolean greetingMessageSaid = false, speakLine, noSave = false;
 
@@ -11,8 +11,8 @@ class LoadFileScreen extends GameState { //<>// //<>//
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     name = new ExitButton(width/2-150, 280, 300, 60, "Angiv dit navn", color(200, 150, 150), color(255, 200, 200), 30, color(25, 25, 25), color(230, 150, 150));
-    load = new Button(width/2-280, 300, 560, 60, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
-    fort  = new Button(width/2-180, 600, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    load = new Button(width/2-280, 330, 560, 60, "Load opgave fil og slet gammelt save", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    fort  = new Button(width/2-180, 530, 300, 60, "Fortsæt", color(200, 150, 150), color(100, 200, 100), 30, color(0));
   }
 
   void Update() {
@@ -63,16 +63,21 @@ class LoadFileScreen extends GameState { //<>// //<>//
 
     textAlign(CORNER, TOP);
     textSize(30);
-    text("Angive dit navn, hvis det er første gang du spiller på den", width/2-410, 200);
-    text("fil, din lærer har givet til dig:", width/2-410, 233);
+    text("Loade filen din lærer har givet dig, hvis det er første gang", width/2-410, 200);
+    text("du spiller på den. Hvis du loader en fil og det ikke er første", width/2-410, 233);
+    text("gang, så overskrives dit gamle save:", width/2-410, 266);
 
-    text("Loade filen din lærer har givet dig, hvis det er første gang", width/2-410, 430);
-    text("du spiller på den. Hvis du loader en fil og det ikke er første", width/2-410, 463);
-    text("gang, så overskrives dit gamle save:", width/2-410, 496);
+    text("Fortsætte, hvis du allerede har loadet en fil, og gerne vil ", width/2-410, 433);
+    text("spille videre på dit save:", width/2-410, 466);
   }
 
   void NewSave() {
-    //Sletter og genopretter tabellerne
+    //Sletter og genopretter tabellerne, samt fjerner coins og cosmetics i selve porgrammet 
+    mainLogic.coins = 0;
+    mainLogic.character.currentHead = "none";
+    mainLogic.character.currentShoes = "none";
+    mainLogic.character.currentShirt = "none";
+
     db.execute("DROP TABLE progress;");
     delay(10);
     db.execute("DROP TABLE info");
