@@ -115,8 +115,7 @@ class LoadFileScreen extends GameState { //<>// //<>//
   boolean knapLoad() {
     if (fresh) {
       if (!going) {
-        println(fresh+", "+going+", "+done);
-        done = false; //<>//
+        done = false;
         selectInput("Vælg XML opgavesæt fil:", "fileSelected");
         going = true;
       }
