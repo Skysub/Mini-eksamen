@@ -4,6 +4,8 @@ import de.bezier.data.sql.mapper.*;
 import java.nio.file.*;
 import java.io.FileWriter;
 import java.io.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 MainLogic mainLogic;
 XMLHandler xmlHandler;

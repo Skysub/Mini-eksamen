@@ -50,7 +50,7 @@ public class MainLogic { //<>//
 
   void saveCosmetics(boolean firstSave) {
     db.query("SELECT information FROM info WHERE id=2");
-    if (firstSave || !db.next()) {
+    if (firstSave && !db.next()) {
       db.execute("INSERT INTO info VALUES(2,'currenthead','"+character.currentHead+"');");
       delay(10);
       db.execute("INSERT INTO info VALUES(3,'currentshoes','"+character.currentShoes+"');");

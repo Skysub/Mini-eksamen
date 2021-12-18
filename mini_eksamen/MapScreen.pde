@@ -21,7 +21,7 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
     ///posX, posY, width, heigh, text, color, clickColor, TextSize, textColor
     exitButton = new ExitButton(25, 20, 75, 75, "Back", color(180, 180, 180), color(255, 200, 200), 20, color(25, 25, 25), color(230, 150, 150));
     spm1 = new ButtonSpm((round(width*3/4)), height*1/3-50, 400, 100, "Spørgsmål 1", color(200, 150, 150), color(100, 200, 100), 30, color(0));
-    saveData = new ButtonPauseNy((round(width*3/4)), height*2/3-50, 400, 100, "Gem data", color(200, 150, 150), color(100, 200, 100), 30, color(0));
+    saveData = new ButtonPauseNy((round(width*3/4)), height*2/3-30, 250, 60, "Gem data", color(200, 150, 150), color(100, 200, 100), 30, color(0));
     customMenuButton = new Button((round(width/6)-100), round(height/2)+275, 200, 50, "Karakter", color(200, 150, 150), color(100, 200, 100), 30, color(0));
     customMenu = new CustomMenu();
     closeMenuButton = new ExitButton(round(width/2+customMenu.menuWidth/2-50), 110, 40, 40, "X", color(180, 180, 180), color(255, 200, 200), 30, color(25, 25, 25), color(230, 150, 150));
@@ -99,7 +99,7 @@ class MapScreen extends GameState { //<>// //<>// //<>// //<>// //<>// //<>// //
     textSize(30); 
     text("Antal mønter:" + mainLogic.coins, 20, 120);
     text("Kom videre med at løse opgaver. Næste opgavesæt:", width*1/3+20, height*1/3-20);
-    text("Husk at gemme, så du ikke mister alle dine ting:", width*1/3+50, height*2/3-20);
+    text("Eksporter svardata:", width/2+175, height*2/3-20);
   }
 
   boolean MakeCSV() {

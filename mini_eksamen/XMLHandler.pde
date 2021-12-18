@@ -28,29 +28,35 @@ class XMLHandler { //<>//
     for (int i = 1; i < input.getChildCount(); i = i + 2) {
       XML[] info = sets[i].getChild(1).getChildren();
       for (int j = 1; j < 8; j = j + 2) {
+        //println("["+(i-1)/2+"][0]["+(j-1)/2+"]"+info[j].getContent());
         output[(i-1)/2][0][(j-1)/2] = info[j].getContent();
       }
       XML[] questions = sets[i].getChildren();
-      for (int j = 1; j < (int(output[(i-1)/2][0][0])*2)+1; j+=2) {
-        XML[] stuff = questions[(j*2)+1].getChildren();
+      //println((int(output[(i-1)/2][0][0])*2)+1);
+      //println((int(output[(i-1)/2][0][0])*2)+1);
+      for (int j = 1; j < (int(output[(i-1)/2][0][0])*2)+1; j=j+2) {
+        XML[] stuff = questions[j+2].getChildren(); //7?
         for (int s = 1; s < 14; s+=2) {
-          output[(i-1)/2][((j-1)/2)+1][(s-1)/2] = stuff[s].getContent();
+          output[(i-1)/2][(((j-1)/2)+1)][(s-1)/2] = stuff[s].getContent();
+          //print("["+(i-1)/2+"]["+(((j-1)/2)+1)+"]["+(s-1)/2+"]");
+          //println(output[(i-1)/2][(((j-1)/2)+1)][(s-1)/2]);
         }
       }
     }
     /*
     //output = test;
+     println(" _");
      for (int i = 0; i < 1; i++) {
-     for (int j = 0; j < 2; j++) {
+     for (int j = 0; j < int(output[0][0][0])+1; j++) {
      for (int s = 0; s < 7; s++) {
      println("["+i+"]["+j+"]["+s+"]"+output[i][j][s]);
      }
      println("  _");
      }
      }
-     println("done");
-     WriteToXML(output);
-     */
+     println("done");*/
+    WriteToXML(output);
+
     return output;
   }
 
@@ -58,6 +64,19 @@ class XMLHandler { //<>//
   public void WriteToXML(String[][][] set) {
     XML output;
     //println("Filen 'opgavesæt_"+set[0][0][3]+".xml' konstrueres");
+
+    println(" _");
+    for (int i = 0; i < 1; i++) {
+      for (int j = 0; j < int(set[0][0][0])+1; j++) {
+        //println(j < int(set[0][0][0])+1);
+        //println(int(set[0][0][0])+1);
+        for (int s = 0; s < 7; s++) {
+          println("["+i+"]["+j+"]["+s+"]"+set[i][j][s]);
+        }
+        println("  _");
+      }
+    }
+    println("done");
 
     output = parseXML("<data></data>");
 
@@ -74,17 +93,21 @@ class XMLHandler { //<>//
 
       for (int i = 0; i < int(set[s][0][0]); i++) {
         XML spm = set1.addChild("question"+str(i));
-        spm.addChild("question").setContent(set[s][1][0]);
-        spm.addChild("extra_text").setContent(set[s][1][1]);
-        spm.addChild("points").setContent(set[s][1][2]);
-        spm.addChild("answer1_correct").setContent(set[s][1][3]);
-        spm.addChild("answer2").setContent(set[s][1][4]);
-        spm.addChild("answer3").setContent(set[s][1][5]);
-        spm.addChild("answer4").setContent(set[s][1][6]);
+        spm.addChild("question").setContent(set[s][i+1][0]);
+        spm.addChild("extra_text").setContent(set[s][i+1][1]);
+        spm.addChild("points").setContent(set[s][i+1][2]);
+        spm.addChild("answer1_correct").setContent(set[s][i+1][3]);
+        spm.addChild("answer2").setContent(set[s][i+1][4]);
+        spm.addChild("answer3").setContent(set[s][i+1][5]);
+        spm.addChild("answer4").setContent(set[s][i+1][6]);
       }
     }
     //println(output);
-    saveXML(output, "opgavesæt_"+set[0][0][3]+".xml");
+    Pattern p = Pattern.compile("[^a-z0-9æøåÆØÅA-Z ]", Pattern.CASE_INSENSITIVE);
+    Matcher m = p.matcher(set[0][0][3]);
+    boolean b = m.find();
+    if (!b)saveXML(output, "opgavesæt_"+set[0][0][3]+".xml");
+    else saveXML(output, "opgavesæt_.xml");
     //println("done");
   }
 }
